@@ -1,0 +1,29 @@
+{{set . "title" "Home"}}
+{{append . "moreScripts" "js/bootstrap.min.js"}}
+{{append . "moreStyles" "css/bootstrap.min.css"}}
+{{append . "moreStyles" "css/main.css"}}
+{{template "header.html" .}}
+
+<header class="hero-unit" style="background-color:#A9F16C">
+  <div class="container">
+    <div class="row">
+      <div class="hero-text">
+        <h1>It works!</h1>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="apply-form">
+  
+<form method="POST" action="/apply">
+  <div><span class="">name:</span><input type="text" value="" name="name"/></div>
+  <div><span>phone:</span><input type="text" value="" name="phone"/></div>
+  <div><span>address:</span><input type="text" value="" name="address"/></div>
+  <div><span>email:</span><input type="text" value="" name="email"/></div>
+  <input type="submit" value="submit" />
+</form>
+</div>
+
+{{template "footer.html" .}}

@@ -1,0 +1,11 @@
+{{set . "title" "Home"}}
+{{append . "moreScripts" "js/bootstrap.min.js"}}
+{{append . "moreStyles" "css/bootstrap.min.css"}}
+{{append . "moreStyles" "css/main.css"}}
+{{template "header.html" .}}
+
+{{range $index,$element:=.table}}
+<div>{{$index}}</div>
+<div>{{$element}}</div>
+{{end}}
+{{template "footer.html" .}}

@@ -1,0 +1,22 @@
+#contact .contact-title h2{
+  text-align: center;
+}
+#contact .contact-title{
+  margin-bottom: 50px;
+}
+#contact .container{
+  max-width: 600px;
+}
+#contact row{}
+#contact label{
+  width: 100%;
+  border-top: thin solid #eee;
+  margin: 13px auto;
+  padding-top:10px;
+}
+#contact input[type="checkbox"]{
+	/*margin-left:10px; */
+}
+#contact .required{
+	color:red;
+}

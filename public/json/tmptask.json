@@ -1,0 +1,47 @@
+[{
+    "label": "请输入您的尊姓大名",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"name",
+    "placeholder":"姓名",
+    "cid": "c6"
+},{
+    "label": "请输入您的邮箱",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"email",
+    "placeholder":"邮箱",
+    "cid": "c6"
+},{
+    "label": "请输入您的电话",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"phone",
+    "placeholder":"电话",
+    "cid": "c6"
+},{
+    "label": "您是先生/女士",
+    "field_type": "select",
+    "required": true,
+    "name":"sex",
+    "field_options": {
+        "options": [{
+            "label": "男"
+        }, {
+            "label": "女"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "您的联系地址",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"address",
+    "placeholder":"联系地址",
+    "cid": "c6"
+}]

@@ -1,0 +1,103 @@
+[{
+    "label": "请输入您的尊姓大名",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"name",
+    "placeholder":"姓名",
+    "cid": "c6"
+},{
+    "label": "请输入您的邮箱",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"email",
+    "placeholder":"邮箱",
+    "cid": "c6"
+},{
+    "label": "请输入您的电话",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"phone",
+    "placeholder":"电话",
+    "cid": "c6"
+},{
+    "label": "您是先生/女士",
+    "field_type": "select",
+    "required": true,
+    "name":"sex",
+    "field_options": {
+        "options": [{
+            "label": "男"
+        }, {
+            "label": "女"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "您的联系地址",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"address",
+    "placeholder":"联系地址",
+    "cid": "c6"
+},{
+    "label": "Please choose your answer ",
+    "field_type": "radio",
+    "required": true,
+    "name":"answer",
+    "field_options": {
+        "options": [{
+            "label": "a"
+        }, {
+            "label": "b"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "Security personnel #82?",
+    "field_type": "radio",
+    "required": true,
+    "name":"personal",
+    "field_options": {
+        "options": [{
+            "label": "Yes",
+            "checked": false
+        }, {
+            "label": "No",
+            "checked": false
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "Select what you like most",
+    "field_type": "checkbox",
+    "required": true,
+    "name":"persionner",
+    "field_options": {
+        "options": [{
+            "label": "apple",
+            "checked": true
+        }, {
+            "label": "banana",
+            "checked": false
+        },{
+            "label": "car",
+            "checked": false
+            }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+}, {
+    "label": "Medical history",
+    "field_type": "file",
+    "name":"modical-history",
+    "required": true,
+    "field_options": {},
+    "cid": "c14"
+}]

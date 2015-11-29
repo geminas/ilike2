@@ -1,0 +1,24 @@
+{
+  "name": "ilike2",
+  "version": "0.1.0",
+  "description": "The Conference Attendence Framework",
+  
+  "devDependencies": {
+    "css-loader": "^0.15.4",
+    "html-loader": "^0.3.0", 
+    "node-libs-browser": "^0.5.2",
+    "style-loader": "^0.12.3",
+    "stylus-loader": "^1.2.1",
+    "sass-loader":"*",
+    "webpack": "^1.11.0",
+    "vue": "^1.0.6",
+    "vue-loader": "^2.0.1"
+  }, 
+  "scripts": {
+    "dev": "webpack --watch",
+    "build": "webpack -p"
+  },
+  "dependencies": {
+    "vue": "^1.0.6"
+  }
+}
