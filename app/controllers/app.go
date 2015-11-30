@@ -44,6 +44,7 @@ func (c App) Thanks(info string) revel.Result {
 ///Page for backend to view all the data
 func (c App) ViewTable() revel.Result {
 	var table = c.viewall()
+	log.Println(table)
 	return c.Render(table)
 }
 
@@ -101,13 +102,13 @@ func (c App) check(key string) []byte {
 	return result
 }
 
-func (c App) viewall() map[string]interface{} {
-	m := make(map[string]interface{})
+func (c App) viewall() map[string]string {
+	m := make(map[string]string)
 	app.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(app.DBNAME))
 		c := b.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
-			m[string(k)] = v
+			m[string(k)] = string(v)
 			fmt.Printf("key=%s, value=%s\n", k, v)
 		}
 		return nil
