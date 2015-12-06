@@ -1,5 +1,29 @@
 [{
-    "label": "请输入您的尊姓大名",
+    "label": "参会类别",
+    "field_type": "select",
+    "required": true,
+    "name":"category",
+    "field_options": {
+        "options": [{
+            "label": "免费"
+        }, {
+            "label": "VIP参会¥2880"
+        }, {
+            "label": "VIP参会¥1880"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "参会机构来源",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"origin",
+    "placeholder":"来源",
+    "cid": "c6"
+},{
+    "label": "您的姓名",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -7,20 +31,20 @@
     "placeholder":"姓名",
     "cid": "c6"
 },{
-    "label": "请输入您的邮箱",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"email",
-    "placeholder":"邮箱",
-    "cid": "c6"
-},{
-    "label": "请输入您的电话",
+    "label": "联系电话",
     "field_type": "text",
     "required": true,
     "field_options": {},
     "name":"phone",
     "placeholder":"电话",
+    "cid": "c6"
+},{
+    "label": "电子邮箱",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"email",
+    "placeholder":"邮箱",
     "cid": "c6"
 },{
     "label": "您是先生/女士",
@@ -37,67 +61,35 @@
     },
     "cid": "c10"
 },{
-    "label": "您的联系地址",
+    "label": "公司名称",
     "field_type": "text",
     "required": true,
     "field_options": {},
-    "name":"address",
-    "placeholder":"联系地址",
+    "name":"company",
+    "placeholder":"公司名字",
     "cid": "c6"
 },{
-    "label": "Please choose your answer ",
-    "field_type": "radio",
-    "required": true,
-    "name":"answer",
-    "field_options": {
-        "options": [{
-            "label": "a"
-        }, {
-            "label": "b"
-        }],
-        "include_other_option": true
-    },
-    "cid": "c10"
-},{
-    "label": "Security personnel #82?",
-    "field_type": "radio",
-    "required": true,
-    "name":"personal",
-    "field_options": {
-        "options": [{
-            "label": "Yes",
-            "checked": false
-        }, {
-            "label": "No",
-            "checked": false
-        }],
-        "include_other_option": true
-    },
-    "cid": "c10"
-},{
-    "label": "Select what you like most",
-    "field_type": "checkbox",
-    "required": true,
-    "name":"persionner",
-    "field_options": {
-        "options": [{
-            "label": "apple",
-            "checked": true
-        }, {
-            "label": "banana",
-            "checked": false
-        },{
-            "label": "car",
-            "checked": false
-            }],
-        "include_other_option": true
-    },
-    "cid": "c10"
-}, {
-    "label": "Medical history",
-    "field_type": "file",
-    "name":"modical-history",
+    "label": "职务",
+    "field_type": "text",
     "required": true,
     "field_options": {},
-    "cid": "c14"
+    "name":"position",
+    "placeholder":"职务",
+    "cid": "c6"
+},{
+    "label": "紧急联系人姓名",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"emergency_contact",
+    "placeholder":"姓名",
+    "cid": "c6"
+},{
+    "label": "紧急联系人电话",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"emergency_contact_phone",
+    "placeholder":"电话",
+    "cid": "c6"
 }]

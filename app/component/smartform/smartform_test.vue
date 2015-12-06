@@ -57,7 +57,17 @@ module.exports={
 				</form>
 			</div>
 		</div>
-		
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<p style="color:gray;font-size:13px;padding:0 15px;"> 
+					1.报名截止日期：2015年12月31日 <br>
+					2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>
+					3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>
+					4.参会咨询：刘女士  18511296094  010-58751635 
+				</p>
+			</div>
+		</div>
+			
 	</div>
 </section>
 </template>
