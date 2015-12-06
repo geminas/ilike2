@@ -19,7 +19,7 @@ module.exports={
             success:function(data){
               	self.$data.scheme=data
             },
-            error:function(data){
+            error:function(data){\
                 console.log("error");
                 //console.log(data);
                alert("error: "+data)
@@ -39,9 +39,10 @@ module.exports={
 
 <section id="contact">
 	<div class="container">
+		
 		<div class="row contact-title">
 			<div class="col-lg-12 text-center">
-				<h2>我要报名</h2>
+				<h2>参会注册表</h2>
 			</div>
 		</div>
 		<div class="row">

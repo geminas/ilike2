@@ -45,192 +45,29 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
-	var Vue = __webpack_require__(9)
+	var app=__webpack_require__(2)
+	var Vue = __webpack_require__(5)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(2)
-	module.exports.template = __webpack_require__(8)
-
-
-/***/ },
+/* 1 */,
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports={
-		el:"#show",
-		data:{
-		target:"app",
-		scheme:{}
-		},
-		created:function(){
-			console.log("app has been created");
-			var self=this;
-			$.ajax({
-				type:'GET',
-				url:"/public/json/tmptask.json",
-				cache:false,
-				//data:JSON.stringify(data),
-				contentType:"application/json",
-				processData: false,
-	            success:function(data){
-	              	self.$data.scheme=data
-	            },
-	            error:function(data){
-	                console.log("error");
-	                //console.log(data);
-	               alert("error: "+data)
-	            }
-			});	
-		},
-		ready:function(){
-		console.log("The smartform test main is loaded")
-		},
-		components:{
-		'smartformvue':__webpack_require__(3)
-		}
-	}
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(4)
-	module.exports.template = __webpack_require__(7)
+	module.exports = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"-!./../../node_modules/vue-loader/lib/selector.js?type=script&index=0!./app.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
+	module.exports.template = __webpack_require__(4)
 
 
 /***/ },
+/* 3 */,
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports={
-			data:function(){
-				return {
-					//hello:"world"
-					scheme:{}
-				}
-			},
-			props:["scheme"],
-			/////////////Life Span/////////////////////
-			
-			// beforeCompile:function(){
-			// 	console.log("smartform beforeCompiled");
-			// },
-			// compiled:function(){
-			// 	console.log("smartform has been compiled");
-			// },
-			created:function(){
-			console.log("app has been created");
-			var self=this;
-			// $.ajax({
-			// 	type:'GET',
-			// 	url:"/getjson",
-			// 	cache:false,
-			// 	//data:JSON.stringify(data),
-			// 	contentType:"application/json",
-			// 	processData: false,
-	  //           success:function(data){
-	  //               //console.log(data)
-	  //             	//alert(data)
-	  //             	//var d=JSON.parse(data)
-	  //             	//console.log(d)
-	  //             	//self.$data.scheme=d
-	  //           },
-	  //           error:function(data){
-	  //               console.log("error");
-	  //               //console.log(data);
-	  //              alert("error: "+data)
-	  //           }
-			// });	
-		},
-			ready:function(){
-				//console.log("smartform has been ready");
-				//console.log(this.scheme)
-			},
-			// attached:function(){
-			// 	console.log("smartform has been attached");
-			// },
-			// detached:function(){
-			// 	console.log("smartform has been detached");
-			// },
-			// beforeDestory:function(){
-			// 	console.log("before smartform destoryed");
-			// },
-			// destoryed:function(){
-			// 	console.log("smartform has been destoryed");
-			// },
-			methods:{
-				// sayHello:function(){
-				// 	console.log("Hello,This is the smartform component");
-				// }
-				sendurl:function(){
-					var data={hello:"world"}
-					$.ajax({
-						type:'POST',
-						url:"testsmartform",
-						cache:false,
-						data:JSON.stringify(data),
-						contentType:"application/json",
-						processData: false,
-			            success:function(data){
-			                console.log(data)
-			              	alert(data)
-			            },
-			            error:function(data){
-			                console.log("error");
-			                console.log(data);
-			               alert("error: "+data)
-			            }
-					});			
-				}
-			},
-			computed:{
-				// foo:function(){
-				// 	return "bar"
-				// }
-			},
-			events:{
-				//////////Events 
-				// 'hook:created':function(){
-				// 	console.log('smartform has created again');
-				// },
-				// greeting:function(msg){
-				// 	console.log(msg);
-				// },
-				// hello:'sayHello'
-				///////////Can be Triggered by
-				//////vm.$emit('hello')
-			},
-			watch:{
-				//////////Data Watcher
-				// 'a':function(val,oldval){
-				// 	console.log('new: %s, old: %s', val, oldVal);
-				// }
-			}
-
-		}
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h2>参会注册表</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
 
 /***/ },
-/* 5 */,
-/* 6 */,
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}</label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"name\" required data-validation-required-message=\"Please enter your name.\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<select name=\"{{item.name}}\">\n\t\t\t<option v-for=\"op in item.field_options.options\">\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h2>我要报名</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
-
-/***/ },
-/* 9 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9535,11 +9372,11 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/* 6 */
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -9573,7 +9410,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9625,7 +9464,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');

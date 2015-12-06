@@ -45,7 +45,9 @@ module.exports={
 	<div class="container">
 		<div class="row contact-title">
 			<div class="col-lg-12 text-center">
-				<h2>我要报名</h2>
+				<h3>未来论坛2016年会报名</h3>
+				<h2>人类认知新百年</h2>
+				<h6>2016年1月17日   中国·北京·国贸三期</h6>	
 			</div>
 		</div>
 		<div class="row">
