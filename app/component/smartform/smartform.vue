@@ -127,7 +127,7 @@
 	<div v-if="item.field_type=='radio-inline'" class="col-xs-12 ">
 		<label>{{item.label}}</label>
 		<div v-for="op in item.field_options.options" class="radio-inline">
-			<input type="radio" name="{{item.name}}">
+			<input type="radio" name="{{item.name}}" checked>
 			<span>{{op.label}}</span>
 		</div>
 	</div>
