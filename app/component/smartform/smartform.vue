@@ -111,7 +111,7 @@
 
 <div v-for="item in scheme" class="row">
 	<div v-if="item.field_type=='text'" class="col-xs-12 ">
-	<label>{{item.label}}</label>
+	<label>{{item.label}}<span v-if="item.required==true" style="color:red;">*</span></label>
 	<input type="text" class="form-control" name="{{item.name}}" placeholder="{{item.placeholder}}" id="name" required data-validation-required-message="Please enter your name.">
     <p class="help-block text-danger"></p>
 	</div>
@@ -124,9 +124,17 @@
 			</option>
 		</select>
 	</div>
+	<div v-if="item.field_type=='radio-inline'" class="col-xs-12 ">
+		<label>{{item.label}}</label>
+		<div v-for="op in item.field_options.options" class="radio-inline">
+			<input type="radio" name="{{item.name}}">
+			<span>{{op.label}}</span>
+		</div>
+	</div>
+
 	<div v-if="item.field_type=='radio'" class="col-xs-12 ">
 		<label>{{item.label}}</label>
-		<div v-for="op in item.field_options.options">
+		<div v-for="op in item.field_options.options" class="">
 			<input type="radio" name="{{item.name}}">
 			<span>{{op.label}}</span>
 		</div>
