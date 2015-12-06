@@ -50,6 +50,9 @@ module.exports={
 			<div class="col-lg-8 col-lg-offset-2">
 				<form method="POST" action="/apply" id="contactForm" novalidate>
 					<component is="smartformvue" :scheme="scheme"/>
+					<div class="col-lg-12 text-center">
+						<button type="submit" class="btn btn-success btn-lg">点我报名</button>
+					</div>
 				</form>
 			</div>
 		</div>
