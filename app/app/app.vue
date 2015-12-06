@@ -29,7 +29,7 @@ module.exports={
 	ready:function(){
 	console.log("The smartform test main is loaded")
 	},
-	components:{return err
+	components:{
 	'smartformvue':require('../component/smartform/smartform.vue')
 	}
 }
@@ -53,7 +53,7 @@ module.exports={
 					<component is="smartformvue" :scheme="scheme"/>
 					</div>
 					<div class="col-lg-12 text-center">
-						<button type="submit" class="btn btn-success btn-lg">点我报名</button>
+						<button type="submit" style="margin:15px 0;" class="btn btn-success btn-lg">点我报名</button>
 					</div>
 
 				</form>

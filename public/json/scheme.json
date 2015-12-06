@@ -48,7 +48,7 @@
     "cid": "c6"
 },{
     "label": "您是先生/女士",
-    "field_type": "select",
+    "field_type": "radio",
     "required": true,
     "name":"sex",
     "field_options": {
