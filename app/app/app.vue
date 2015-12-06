@@ -17,7 +17,12 @@ module.exports={
 			contentType:"application/json",
 			processData: false,
             success:function(data){
+            	for(var i in data){
+            		data[i].data="",
+            		data[i].error=""
+            	}
               	self.$data.scheme=data
+              	console.log(JSON.stringify(data))
             },
             error:function(data){
                 console.log("error");
@@ -25,6 +30,27 @@ module.exports={
                alert("error: "+data)
             }
 		});	
+	},
+	methods:{
+		onsubmit:function(a,b,c){
+			console.log(a,b,c)
+			console.log(this.$)
+			console.log(this.scheme)
+			var errnum=0;
+			for(var i in this.scheme){
+				if(this.scheme[i].required==true&&this.scheme[i].data==""){
+					this.scheme[i].error="  此项不可以为空"
+					errnum++;
+				}
+				console.log(this.scheme[i].validator)
+				if(this.scheme[i].validator==="email"){
+					var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+					console.log("email validator")
+    				console.log(re.test(this.scheme[i].data))
+    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+				}
+			}
+		}
 	},
 	ready:function(){
 	console.log("The smartform test main is loaded")
@@ -50,10 +76,10 @@ module.exports={
 			<div class="col-lg-8 col-lg-offset-2">
 				<form method="POST" action="/apply" id="contactForm" novalidate>
 					<div>
-					<component is="smartformvue" :scheme="scheme"/>
+					<component is="smartformvue" :scheme="scheme" v-ref="smarttable"/>
 					</div>
 					<div class="col-lg-12 text-center">
-						<button type="submit" class="btn btn-success btn-lg">点我报名</button>
+						<button type="submit" class="btn btn-success btn-lg" @click.prevent="onsubmit">点我报名</button>
 					</div>
 
 				</form>

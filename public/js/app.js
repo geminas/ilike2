@@ -79,7 +79,12 @@
 				contentType:"application/json",
 				processData: false,
 	            success:function(data){
+	            	for(var i in data){
+	            		data[i].data="",
+	            		data[i].error=""
+	            	}
 	              	self.$data.scheme=data
+	              	console.log(JSON.stringify(data))
 	            },
 	            error:function(data){
 	                console.log("error");
@@ -88,24 +93,47 @@
 	            }
 			});	
 		},
+		methods:{
+			onsubmit:function(a,b,c){
+				console.log(a,b,c)
+				console.log(this.$)
+				console.log(this.scheme)
+				var errnum=0;
+				for(var i in this.scheme){
+					if(this.scheme[i].required==true&&this.scheme[i].data==""){
+						this.scheme[i].error="  此项不可以为空"
+						errnum++;
+					}
+					console.log(this.scheme[i].validator)
+					if(this.scheme[i].validator==="email"){
+						var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+						console.log("email validator")
+	    				console.log(re.test(this.scheme[i].data))
+	    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+					}
+				}
+			}
+		},
 		ready:function(){
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(3)
+		'smartformvue':__webpack_require__(4)
 		}
 	}
 
 /***/ },
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
+	module.exports = __webpack_require__(6)
 	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
-/* 4 */
+/* 5 */,
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -216,18 +244,16 @@
 		}
 
 /***/ },
-/* 5 */,
-/* 6 */,
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"name\" required data-validation-required-message=\"Please enter your name.\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<select name=\"{{item.name}}\">\n\t\t\t<option v-for=\"op in item.field_options.options\">\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
+	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"name\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click.prevent=\"onsubmit\">点我报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
 
 /***/ },
 /* 9 */
