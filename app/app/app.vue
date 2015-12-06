@@ -29,7 +29,7 @@ module.exports={
 	ready:function(){
 	console.log("The smartform test main is loaded")
 	},
-	components:{
+	components:{return err
 	'smartformvue':require('../component/smartform/smartform.vue')
 	}
 }

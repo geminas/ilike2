@@ -7,6 +7,7 @@ import (
 	"github.com/geminas/ilike2/app"
 	"github.com/revel/revel"
 	//"io/ioutil"
+	"errors"
 	"log"
 	//"strings"
 )
@@ -16,11 +17,17 @@ import (
 // )
 
 type Info struct {
-	Name    string `json:"name"`
-	Phone   string `json:"phone"`
-	Company string `json:"company"`
-	Email   string `json:"email"`
-	Address string `json:"address"`
+	Name                  string `json:"name"`
+	Phone                 string `json:"phone"`
+	Company               string `json:"company"`
+	Email                 string `json:"email"`
+	Address               string `json:"address"`
+	Category              string `josn:"category"`
+	Origin                string `json:"origin"`
+	Sex                   string `json:"sex"`
+	Position              string `json:"position"`
+	EmergencyContact      string `json:"emergency_contact"`
+	EmergencyContactPhone string `json:"emergency_contact_phone"`
 }
 
 var db *bolt.DB
@@ -64,32 +71,86 @@ func (c App) Apply() revel.Result {
 	var phone = c.Request.PostForm.Get("phone")
 	var address = c.Request.PostForm.Get("address")
 	var email = c.Request.PostForm.Get("email")
+	var category = c.Request.PostForm.Get("category")
+	var origin = c.Request.PostForm.Get("origin")
+	var sex = c.Request.PostForm.Get("sex")
+	var company = c.Request.PostForm.Get("company")
+	var position = c.Request.PostForm.Get("position")
+	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
+	var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
+	//log.Println(c.Request.PostForm)
+	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info{
-		Name:    name,
-		Phone:   phone,
-		Address: address,
-		Email:   email,
+		Name:                  name,
+		Phone:                 phone,
+		Address:               address,
+		Email:                 email,
+		Category:              category,
+		Origin:                origin,
+		Sex:                   sex,
+		Company:               company,
+		Position:              position,
+		EmergencyContact:      emergencycontact,
+		EmergencyContactPhone: emergencyphone,
 	}
 	var id = name + "-" + phone
+	if b := c.check(id); len(b) != 0 {
+		return c.RenderError(errors.New("用户被重复申请"))
+	}
+	if b := c.check(email); len(b) != 0 {
+		return c.RenderError(errors.New("邮箱被重复使用"))
+	}
+	if b := c.check(phone); len(b) != 0 {
+		return c.RenderError(errors.New("电话被重复使用"))
+	}
+
 	var j []byte
 	var err error
 	if j, err = json.Marshal(info); err != nil {
-		return c.RenderText(err.Error())
+		return c.RenderError(err)
 	}
-	if err := c.save(id, j); err != nil {
-		return c.RenderText(err.Error())
+	if err := c.update(id, j); err != nil {
+		c.update(id, []byte{})
+		return c.RenderError(err)
 	}
+	if err := c.update(email, j); err != nil {
+		c.update(id, []byte{})
+		c.update(email, []byte{})
+		return c.RenderError(err)
+	}
+	if err := c.update(phone, j); err != nil {
+		c.update(id, []byte{})
+		c.update(email, []byte{})
+		c.update(phone, []byte{})
+		return c.RenderError(err)
+	}
+
 	return c.Redirect("/thanks/" + name)
 }
 
-func (c App) save(key string, val []byte) error {
+func (c App) update(key string, val []byte) error {
 	err := app.DB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(app.DBNAME))
+
 		err := b.Put([]byte(key), val)
 		return err
 	})
 	return err
 }
+
+// func (c App) save(key string, val []byte) error {
+// 	err := app.DB.Update(func(tx *bolt.Tx) error {
+// 		b := tx.Bucket([]byte(app.DBNAME))
+// 		c := b.Get([]byte(key))
+// 		log.Println(c)
+// 		if len(c) != 0 {
+// 			return errors.New("无法提交,因为已经被提交过")
+// 		}
+// 		err := b.Put([]byte(key), val)
+// 		return err
+// 	})
+// 	return err
+// }
 
 func (c App) check(key string) []byte {
 	var result []byte

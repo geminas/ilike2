@@ -101,7 +101,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(4)
-	module.exports.template = __webpack_require__(6)
+	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
@@ -217,17 +217,17 @@
 
 /***/ },
 /* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}</label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"name\" required data-validation-required-message=\"Please enter your name.\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<select name=\"{{item.name}}\">\n\t\t\t<option v-for=\"op in item.field_options.options\">\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
-/* 7 */,
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t</div>\n\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
 
 /***/ },
 /* 9 */
