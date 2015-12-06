@@ -48,7 +48,7 @@
     "cid": "c6"
 },{
     "label": "您是先生/女士",
-    "field_type": "select",
+    "field_type": "radio-inline",
     "required": true,
     "name":"sex",
     "field_options": {
@@ -71,7 +71,7 @@
 },{
     "label": "职务",
     "field_type": "text",
-    "required": true,
+    "required": false,
     "field_options": {},
     "name":"position",
     "placeholder":"职务",
@@ -79,7 +79,7 @@
 },{
     "label": "紧急联系人姓名",
     "field_type": "text",
-    "required": true,
+    "required": false,
     "field_options": {},
     "name":"emergency_contact",
     "placeholder":"姓名",
@@ -87,7 +87,7 @@
 },{
     "label": "紧急联系人电话",
     "field_type": "text",
-    "required": true,
+    "required": false,
     "field_options": {},
     "name":"emergency_contact_phone",
     "placeholder":"电话",
