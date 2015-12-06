@@ -19,9 +19,9 @@ func (c Scheme) Index() revel.Result {
 
 // var db *bolt.DB
 
-func NewScheme(name string) (*Scheme, error) {
+func NewScheme(name string) *Scheme {
 	var s = new(Scheme)
-	err := app.DB.View(func(tx *bolt.Tx) error {
+	app.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("aabb"))
 		if b == nil {
 			log.Println("The bucket is not exists")
