@@ -86,7 +86,7 @@
 	            		data[i].error=""
 	            	}
 	              	self.$data.scheme=data
-	              	console.log(JSON.stringify(data))
+	              	//console.log(JSON.stringify(data))
 	            },
 	            error:function(data){
 	                console.log("error");
@@ -96,23 +96,49 @@
 			});	
 		},
 		methods:{
-			onsubmit:function(a,b,c){
-				console.log(a,b,c)
-				console.log(this.$)
-				console.log(this.scheme)
+			onsubmit:function(e){
+				console.log(e)
+				//console.log(a,b,c)
+				//console.log(this.$)
+				//console.log(this.scheme)
 				var errnum=0;
 				for(var i in this.scheme){
 					if(this.scheme[i].required==true&&this.scheme[i].data==""){
 						this.scheme[i].error="  此项不可以为空"
 						errnum++;
+						continue
+					}else{
+						this.scheme[i].error=""
 					}
-					console.log(this.scheme[i].validator)
+					//console.log(this.scheme[i].validator)
 					if(this.scheme[i].validator==="email"){
 						var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-						console.log("email validator")
-	    				console.log(re.test(this.scheme[i].data))
-	    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+						//console.log("email validator")
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+		    				errnum++
+		    				continue
+		    			}else{
+		    				this.scheme[i].error=""
+		    			}
 					}
+					if(this.scheme[i].validator==="phone"){
+						var re = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="电话输入有误,请按照+8612345678901"
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+						}
+					}
+				}
+				if(errnum==0){
+					console.log("ok to submit")
+					//return true
+					$(e.target).trigger(e);
+				}else{
+					return false
 				}
 			}
 		},

@@ -36,6 +36,7 @@
     "required": true,
     "field_options": {},
     "name":"phone",
+    "validator":"phone",
     "placeholder":"电话",
     "cid": "c6"
 },{
