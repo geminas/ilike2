@@ -1,3 +1,4 @@
+
 module.exports = {
   entry: "./app.js",
   output: {
@@ -7,7 +8,6 @@ module.exports = {
 
   module: {
     loaders: [
-    
       { test: /\.vue$/, loader: "vue-loader" }
     ]
   }

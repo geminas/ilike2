@@ -55,19 +55,189 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
 	module.exports = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"-!./../../node_modules/vue-loader/lib/selector.js?type=script&index=0!./app.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
 	module.exports.template = __webpack_require__(4)
+=======
+	module.exports={
+		el:"#show",
+		data:{
+		target:"app",
+		scheme:{}
+		},
+		created:function(){
+			console.log("app has been created");
+			var self=this;
+			$.ajax({
+				type:'GET',
+				url:"/public/json/tmptask.json",
+				cache:false,
+				//data:JSON.stringify(data),
+				contentType:"application/json",
+				processData: false,
+	            success:function(data){
+	              	self.$data.scheme=data
+	            },
+	            error:function(data){
+	                console.log("error");
+	                //console.log(data);
+	               alert("error: "+data)
+	            }
+			});	
+		},
+		ready:function(){
+		console.log("The smartform test main is loaded")
+		},
+		components:{
+		'smartformvue':__webpack_require__(3)
+		}
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(4)
+	module.exports.template = __webpack_require__(6)
+>>>>>>> Stashed changes
 
 
 /***/ },
 /* 3 */,
 /* 4 */
+<<<<<<< Updated upstream
 /***/ function(module, exports) {
+=======
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={
+			data:function(){
+				return {
+					//hello:"world"
+					scheme:{}
+				}
+			},
+			props:["scheme"],
+			/////////////Life Span/////////////////////
+			
+			// beforeCompile:function(){
+			// 	console.log("smartform beforeCompiled");
+			// },
+			// compiled:function(){
+			// 	console.log("smartform has been compiled");
+			// },
+			created:function(){
+			console.log("app has been created");
+			var self=this;
+			// $.ajax({
+			// 	type:'GET',
+			// 	url:"/getjson",
+			// 	cache:false,
+			// 	//data:JSON.stringify(data),
+			// 	contentType:"application/json",
+			// 	processData: false,
+	  //           success:function(data){
+	  //               //console.log(data)
+	  //             	//alert(data)
+	  //             	//var d=JSON.parse(data)
+	  //             	//console.log(d)
+	  //             	//self.$data.scheme=d
+	  //           },
+	  //           error:function(data){
+	  //               console.log("error");
+	  //               //console.log(data);
+	  //              alert("error: "+data)
+	  //           }
+			// });	
+		},
+			ready:function(){
+				//console.log("smartform has been ready");
+				//console.log(this.scheme)
+			},
+			// attached:function(){
+			// 	console.log("smartform has been attached");
+			// },
+			// detached:function(){
+			// 	console.log("smartform has been detached");
+			// },
+			// beforeDestory:function(){
+			// 	console.log("before smartform destoryed");
+			// },
+			// destoryed:function(){
+			// 	console.log("smartform has been destoryed");
+			// },
+			methods:{
+				// sayHello:function(){
+				// 	console.log("Hello,This is the smartform component");
+				// }
+				sendurl:function(){
+					var data={hello:"world"}
+					$.ajax({
+						type:'POST',
+						url:"testsmartform",
+						cache:false,
+						data:JSON.stringify(data),
+						contentType:"application/json",
+						processData: false,
+			            success:function(data){
+			                console.log(data)
+			              	alert(data)
+			            },
+			            error:function(data){
+			                console.log("error");
+			                console.log(data);
+			               alert("error: "+data)
+			            }
+					});			
+				}
+			},
+			computed:{
+				// foo:function(){
+				// 	return "bar"
+				// }
+			},
+			events:{
+				//////////Events 
+				// 'hook:created':function(){
+				// 	console.log('smartform has created again');
+				// },
+				// greeting:function(msg){
+				// 	console.log(msg);
+				// },
+				// hello:'sayHello'
+				///////////Can be Triggered by
+				//////vm.$emit('hello')
+			},
+			watch:{
+				//////////Data Watcher
+				// 'a':function(val,oldval){
+				// 	console.log('new: %s, old: %s', val, oldVal);
+				// }
+			}
+
+		}
+
+/***/ },
+/* 5 */,
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+>>>>>>> Stashed changes
 
 	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h2>参会注册表</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
 
 /***/ },
+<<<<<<< Updated upstream
 /* 5 */
+=======
+/* 7 */,
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h2>我要报名</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\">点我报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
+
+/***/ },
+/* 9 */
+>>>>>>> Stashed changes
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!

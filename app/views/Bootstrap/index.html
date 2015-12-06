@@ -1,0 +1,204 @@
+{{set . "title" "Bootstrap"}} {{template "header.html" .}}
+<a href="#" class="btn btn-default" role="button">HelloWorld</a>
+<button class="btn btn-default" type="submit">Button</button>
+<input type="button" class="btn btn-default" value="Input">
+<input type="submit" class="btn btn-default" value="Submit">
+<br>
+----------------------Form-----------------
+<form>
+    <div class="form-group hass-success has-feedback">
+        <label for="inputSuccess2" class="control-label">Input with success</label>
+        <input type="text" class="form-control input-sm" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+    </div>
+    <div class="form-group">
+        <label for="">Readonly</label>
+        <input type="text" placeholder="This is Readonly" class="form-control" readonly>
+    </div>
+    <fieldset disabled>
+        <div class="form-group">
+            <label for="disabledTextInput">Disable input</label>
+            <input type="text" class="form-control" placeholder="Disabledd input" id="disabledTextInput">
+        </div>
+        <div class="form-group">
+            <label for="disabledSelect">Diabled select menu</label>
+            <select name="" id="disabledSelect" class="form-control">
+                <option value="">Disabled select</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label for="">
+                <input type="checkbox"> Can't check this
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+    <div class="form-group">
+        <label for="" class="sr-only">Email</label>
+        <p class="form-control-static">email@example.com</p>
+    </div>
+    <div class="form-group ">
+        <label for="inputPassword2" class="sr-only">Password</label>
+        <input type="password" class="form-control " id="inputPassword2" placeholder="password">
+    </div>
+    <div class="form-group">
+        <label>The Select demo</label>
+        <select class="form-control" multiple>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value=""> Option 1
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value=""> Option 2
+            </label>
+        </div>
+        <div class="checkbox disabled">
+            <label>
+                <input type="checkbox" value="" disabled> Option two is disabled
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>The text area</label>
+        <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <label class="sr-only" for="exampleInputEmail3">Amount (in dollers)</label>
+            <div class="">
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+            </div>
+            <div class="input-group-addon">.00</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email Address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox"> Check me out
+        </label>
+    </div>
+</form>
+------------------------------------Table------------------
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <th>*</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </thead>
+        <tbody class="table-striped ">
+            <tr class="active">
+                <td>1</td>
+                <td>Mark</td>
+                <td class="warning">Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr class="success">
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-----------------------------------------------------------------
+<h1>Hello World<small>Hello World</small><i>I am H-Young</i></h1>
+<p class="text-left">This is a content</p>
+<p class="text-center">This is a content</p>
+<p class="text-right text-lowercase">This is a content</p>
+<p class="text-justify text-uppercase">This is a content</p>
+<p class="text-nowrap text-capitalize">This is a content
+    <abbr title="attribute">attr</abbr>
+</p>
+<blockquote class="blockquote-reverse">
+    <p>This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content This is a content </p>
+    <footer> some one famous in
+        <cite title="Source Title">Source Title</cite>
+    </footer>
+</blockquote>
+<ul class="list-unstyled">
+    <li>hello</li>
+    <li>world</li>
+</ul>
+<ul class="list-inline">
+    <li>hello</li>
+    <li>world</li>
+</ul>
+<dl class="dl-horizontal">
+    <dt>Description lists</dt>
+    <dd>A description list is perfect for defining terms.</dd>
+    <dt>Euismod</dt>
+    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+</dl>
+<p>
+    For example,<code>var i =20;</code> should be wrapped as inline.
+</p>
+<p>
+    To switch directories, type
+    <kbd>cd</kbd> followed by the name of the directory.
+    <br> To edit settings ,press
+    <kbd>
+        <kbd>ctro</kbd>+
+        <kbd>,</kbd>
+    </kbd>
+</p>
+<p>
+    <pre> hellow lkjfsoiejoifjosf josidfjoisdf 
+  sdfjsoidfjosfdj
+  jsldkfjlsdfjsoifl
+  sjfldsjkdfsoidf</pre>
+</p>
+<p>
+    <var>y</var>=
+    <var>m</var>
+    <var>x</var>+
+    <var>b</var>
+</p>
+<p>
+    <samp>This text is meant to be treated as asmple output from a computer</samp>
+</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+        <div class="col-md-1">.col-md-1</div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">.col-md-8</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">.col-md-6</div>
+        <div class="col-md-6">.col-md-6</div>
+    </div>
+</div>
+{{template "footer.html" .}}
