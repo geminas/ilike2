@@ -99,6 +99,7 @@
 				//console.log(a,b,c)
 				//console.log(this.$)
 				//console.log(this.scheme)
+
 				var errnum=0;
 				for(var i in this.scheme){
 					if(this.scheme[i].required==true&&this.scheme[i].data==""){
@@ -121,9 +122,9 @@
 		    			}
 					}
 					if(this.scheme[i].validator==="phone"){
-						var re = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 	    				if(re.test(this.scheme[i].data)==false){
-		    				this.scheme[i].error="电话输入有误,请按照+8612345678901"
+		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
 							errnum++
 							continue
 						}else{
@@ -136,6 +137,7 @@
 					//return true
 					$(e.target).trigger(e);
 				}else{
+					e.preventDefault()
 					return false
 				}
 			}
@@ -279,7 +281,7 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click.prevent=\"onsubmit\">点我报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
 
 /***/ },
 /* 9 */

@@ -5,7 +5,9 @@
     "name":"category",
     "field_options": {
         "options": [{
-            "label": "免费"
+            "label": "免费申请"
+        },{
+            "label":"媒体参会"
         }, {
             "label": "VIP参会¥2880"
         }, {

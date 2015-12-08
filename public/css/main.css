@@ -20,3 +20,7 @@
 #contact .required{
 	color:red;
 }
+
+#contact .submit-button{
+	margin:15px 0px 45px 0px;
+}

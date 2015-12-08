@@ -37,6 +37,7 @@ module.exports={
 			//console.log(a,b,c)
 			//console.log(this.$)
 			//console.log(this.scheme)
+
 			var errnum=0;
 			for(var i in this.scheme){
 				if(this.scheme[i].required==true&&this.scheme[i].data==""){
@@ -59,9 +60,9 @@ module.exports={
 	    			}
 				}
 				if(this.scheme[i].validator==="phone"){
-					var re = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+					var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
     				if(re.test(this.scheme[i].data)==false){
-	    				this.scheme[i].error="电话输入有误,请按照+8612345678901"
+	    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
 						errnum++
 						continue
 					}else{
@@ -74,6 +75,7 @@ module.exports={
 				//return true
 				$(e.target).trigger(e);
 			}else{
+				e.preventDefault()
 				return false
 			}
 		}
@@ -104,8 +106,8 @@ module.exports={
 					<div>
 					<component is="smartformvue" :scheme="scheme" v-ref="smarttable"/>
 					</div>
-					<div class="col-lg-12 text-center">
-						<button type="submit" class="btn btn-success btn-lg" @click.prevent="onsubmit">点我报名</button>
+					<div class="col-lg-12 text-center submit-button">
+						<button type="submit" class="btn btn-success btn-lg" @click="onsubmit">点击报名</button>
 					</div>
 
 				</form>
