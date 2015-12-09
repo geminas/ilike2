@@ -47,6 +47,14 @@
     "placeholder":"邮箱",
     "cid": "c6"
 },{
+    "label": "身份证号码",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"idcard",
+    "placeholder":"身份证号码",
+    "cid": "c6"
+},{
     "label": "您是先生/女士",
     "field_type": "select",
     "required": true,
