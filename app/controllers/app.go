@@ -25,6 +25,7 @@ type Info struct {
 	Category              string `josn:"category"`
 	Origin                string `json:"origin"`
 	Sex                   string `json:"sex"`
+	Idcard                string `json:"idcard"`
 	Position              string `json:"position"`
 	EmergencyContact      string `json:"emergency_contact"`
 	EmergencyContactPhone string `json:"emergency_contact_phone"`
@@ -80,6 +81,7 @@ func (c App) Apply() revel.Result {
 	var category = c.Request.PostForm.Get("category")
 	var origin = c.Request.PostForm.Get("origin")
 	var sex = c.Request.PostForm.Get("sex")
+	var idcard = c.Request.PostForm.Get("idcard")
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
 	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
@@ -94,6 +96,7 @@ func (c App) Apply() revel.Result {
 		Category:              category,
 		Origin:                origin,
 		Sex:                   sex,
+		Idcard:                idcard,
 		Company:               company,
 		Position:              position,
 		EmergencyContact:      emergencycontact,
