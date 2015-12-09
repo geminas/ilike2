@@ -50,9 +50,15 @@ func (c App) Thanks(info string) revel.Result {
 
 ///Page for backend to view all the data
 func (c App) ViewTable() revel.Result {
-	var table = c.viewall()
-	log.Println(table)
-	return c.Render(table)
+	var infomap = c.viewarray()
+	//log.Println(table)
+	// b, err := json.Marshal(table)
+	// if err != nil {
+	// 	return c.RenderError(err)
+	// }
+	// log.Println(string(b))
+	// var infomap = string(b)
+	return c.Render(infomap)
 }
 
 ///API
@@ -61,7 +67,7 @@ func (c App) Query() revel.Result {
 	if a.Get("key") == "" {
 		return c.RenderText("The key not found")
 	} else {
-		return c.RenderText(string(c.check(a.Get("key"))))
+		return c.RenderText("ok")
 	}
 }
 
@@ -94,13 +100,13 @@ func (c App) Apply() revel.Result {
 		EmergencyContactPhone: emergencyphone,
 	}
 	var id = name + "-" + phone
-	if b := c.check(id); len(b) != 0 {
+	if b := c.check(id, "info"); len(b) != 0 {
 		return c.RenderError(errors.New("用户被重复申请"))
 	}
-	if b := c.check(email); len(b) != 0 {
+	if b := c.check(email, "email"); len(b) != 0 {
 		return c.RenderError(errors.New("邮箱被重复使用"))
 	}
-	if b := c.check(phone); len(b) != 0 {
+	if b := c.check(phone, "phone"); len(b) != 0 {
 		return c.RenderError(errors.New("电话被重复使用"))
 	}
 
@@ -109,30 +115,34 @@ func (c App) Apply() revel.Result {
 	if j, err = json.Marshal(info); err != nil {
 		return c.RenderError(err)
 	}
-	if err := c.update(id, j); err != nil {
-		c.update(id, []byte{})
+	if err := c.update(id, j, "info"); err != nil {
+		c.update(id, []byte{}, "info")
 		return c.RenderError(err)
 	}
-	if err := c.update(email, j); err != nil {
-		c.update(id, []byte{})
-		c.update(email, []byte{})
+	if err := c.update(email, j, "email"); err != nil {
+		c.update(id, []byte{}, "info")
+		c.update(email, []byte{}, "email")
 		return c.RenderError(err)
 	}
-	if err := c.update(phone, j); err != nil {
-		c.update(id, []byte{})
-		c.update(email, []byte{})
-		c.update(phone, []byte{})
+	if err := c.update(phone, j, "phone"); err != nil {
+		c.update(id, []byte{}, "info")
+		c.update(email, []byte{}, "email")
+		c.update(phone, []byte{}, "phone")
 		return c.RenderError(err)
 	}
 
 	return c.Redirect("/thanks/" + name)
 }
 
-func (c App) update(key string, val []byte) error {
+func (c App) update(key string, val []byte, table string) error {
+	log.Println("updating ", table)
 	err := app.DB.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(app.DBNAME))
-
-		err := b.Put([]byte(key), val)
+		b, err := tx.CreateBucketIfNotExists([]byte(table))
+		if err != nil {
+			log.Println(err)
+			return nil
+		}
+		err = b.Put([]byte(key), val)
 		return err
 	})
 	return err
@@ -152,10 +162,13 @@ func (c App) update(key string, val []byte) error {
 // 	return err
 // }
 
-func (c App) check(key string) []byte {
+func (c App) check(key string, table string) []byte {
 	var result []byte
 	app.DB.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(app.DBNAME))
+		b := tx.Bucket([]byte(table))
+		if b == nil {
+			return nil
+		}
 		result = b.Get([]byte(key))
 		fmt.Printf("The answer is: %s\n", result)
 		return nil
@@ -170,12 +183,34 @@ func (c App) viewall() map[string]string {
 		c := b.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
 			m[string(k)] = string(v)
-			fmt.Printf("key=%s, value=%s\n", k, v)
+			//fmt.Printf("key=%s, value=%s\n", k, v)
 		}
 		return nil
 	})
-	log.Println(m)
+	//log.Println(m)
 	return m
+}
+
+func (c App) viewarray() string {
+	m := "["
+	app.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("info"))
+		if b == nil {
+			return nil
+		}
+		c := b.Cursor()
+
+		for k, v := c.First(); k != nil; k, v = c.Next() {
+			m += string(v)
+			m += ","
+			//fmt.Printf("key=%s, value=%s\n", k, v)
+		}
+
+		return nil
+	})
+	var bm = []byte(m)
+	bm[len(bm)-1] = ']'
+	return string(bm)
 }
 
 func (c App) apply(data []byte) error {

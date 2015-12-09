@@ -11,6 +11,7 @@ import (
 var (
 	DB     *bolt.DB
 	DBNAME = "AttendeeInfo"
+	DBPATH = ""
 )
 
 func init() {
@@ -51,7 +52,9 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 
 func InitDB() {
 	var err error
-	DB, err = bolt.Open("my.db", 0600, nil)
+	DBPATH = revel.Config.StringDefault("db.path", "./my.db")
+	println("db in:" + DBPATH)
+	DB, err = bolt.Open(DBPATH, 0600, nil)
 	if err != nil {
 		println(err)
 	}
