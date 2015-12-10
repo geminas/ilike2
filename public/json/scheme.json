@@ -84,7 +84,7 @@
 },{
     "label": "职务",
     "field_type": "text",
-    "required": false,
+    "required": true,
     "field_options": {},
     "name":"position",
     "placeholder":"职务",

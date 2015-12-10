@@ -133,8 +133,13 @@ func (c App) Apply() revel.Result {
 		c.update(phone, []byte{}, "phone")
 		return c.RenderError(err)
 	}
-
-	return c.Redirect("/thanks/" + name)
+	var r = name
+	if sex == "男" {
+		r += "先生"
+	} else {
+		r += "女士"
+	}
+	return c.Redirect("/thanks/" + r)
 }
 
 func (c App) update(key string, val []byte, table string) error {
