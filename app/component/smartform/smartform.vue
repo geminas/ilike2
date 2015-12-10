@@ -112,7 +112,7 @@
 <div v-for="item in scheme" class="row">
 	<div v-if="item.field_type=='text'" class="col-xs-12 ">
 	<label>{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
-	<input type="text" class="form-control" name="{{item.name}}" placeholder="{{item.placeholder}}" id="name" required data-validation-required-message="Please enter your name." v-model="item.data">
+	<input type="text" class="form-control" name="{{item.name}}" placeholder="{{item.placeholder}}" id="{{item.name}}" required data-validation-required-message="Please enter your name." v-model="item.data">
     <p class="help-block text-danger"></p>
 	</div>
 
@@ -133,14 +133,14 @@
 		</div>
 	</div>
 
-	<div v-if="item.field_type=='radio'" class="col-xs-12 ">
+	<div v-if="item.field_type=='radio'" class="col-xs-12 " id="{{item.name}}">
 		<label>{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
 		<div v-for="op in item.field_options.options" class="">
 			<input type="radio" name="{{item.name}}"  v-model="item.data" :value="op.label" checked>
 			<span>{{op.label}}</span>
 		</div>
 	</div>
-	<div v-if="item.field_type=='checkbox'" class="col-xs-12 ">
+	<div v-if="item.field_type=='checkbox'" class="col-xs-12 " id="{{item.name}}">
 		<label>{{item.label}}</label>
 		<label for="">{{item.data}}</label>
 		<div v-for="op in item.field_options.options">
