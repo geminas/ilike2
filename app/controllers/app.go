@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/boltdb/bolt"
@@ -9,12 +10,14 @@ import (
 	//"io/ioutil"
 	"errors"
 	"log"
-	//"strings"
+	"net/http"
+	"strings"
 )
 
-// var (
-// 	DBNAME = "Info"
-// )
+var (
+	correctUsername string = "admin"
+	correctPassword string = "alliance"
+)
 
 type Info struct {
 	Name                  string `json:"name"`
@@ -25,6 +28,7 @@ type Info struct {
 	Category              string `josn:"category"`
 	Origin                string `json:"origin"`
 	Sex                   string `json:"sex"`
+	Idcard                string `json:"idcard"`
 	Position              string `json:"position"`
 	EmergencyContact      string `json:"emergency_contact"`
 	EmergencyContactPhone string `json:"emergency_contact_phone"`
@@ -45,20 +49,63 @@ func (c App) Index() revel.Result {
 
 ///Page for people success apply
 func (c App) Thanks(info string) revel.Result {
+
 	return c.Render(info)
 }
 
 ///Page for backend to view all the data
 func (c App) ViewTable() revel.Result {
 	var infomap = c.viewarray()
-	//log.Println(table)
-	// b, err := json.Marshal(table)
-	// if err != nil {
-	// 	return c.RenderError(err)
-	// }
-	// log.Println(string(b))
-	// var infomap = string(b)
-	return c.Render(infomap)
+	if auth := c.Request.Header.Get("Authorization"); auth != "" {
+		// Split up the string to get just the data, then get the credentials
+		username, password, err := getCredentials(strings.Split(auth, " ")[1])
+		if err != nil {
+			return c.RenderError(err)
+		}
+		if username != correctUsername || password != correctPassword {
+			c.Response.Status = http.StatusUnauthorized
+			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
+			return c.RenderError(errors.New("401: Not authorized"))
+		}
+		return c.Render(infomap)
+	} else {
+		c.Response.Status = http.StatusUnauthorized
+		c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="新盟"`)
+		return c.RenderError(errors.New("401: Not authorized"))
+	}
+
+}
+
+// func (c App) BasicAuth() revel.Result {
+// 	//c.Response.ContentType = "Application/text"
+// 	if auth := c.Request.Header.Get("Authorization"); auth != "" {
+// 		// Split up the string to get just the data, then get the credentials
+// 		username, password, err := getCredentials(strings.Split(auth, " ")[1])
+// 		if err != nil {
+// 			return c.RenderError(err)
+// 		}
+// 		if username != correctUsername || password != correctPassword {
+// 			c.Response.Status = http.StatusUnauthorized
+// 			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
+// 			return c.RenderError(errors.New("401: Not authorized"))
+// 		}
+// 		return c.RenderText("username: %s\npassword: %s", username, password)
+// 	} else {
+// 		c.Response.Status = http.StatusUnauthorized
+// 		c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
+// 		return c.RenderError(errors.New("401: Not authorized"))
+// 	}
+// }
+
+func getCredentials(data string) (username, password string, err error) {
+	decodedData, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return "", "", err
+	}
+	strData := strings.Split(string(decodedData), ":")
+	username = strData[0]
+	password = strData[1]
+	return
 }
 
 ///API
@@ -80,6 +127,7 @@ func (c App) Apply() revel.Result {
 	var category = c.Request.PostForm.Get("category")
 	var origin = c.Request.PostForm.Get("origin")
 	var sex = c.Request.PostForm.Get("sex")
+	var idcard = c.Request.PostForm.Get("idcard")
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
 	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
@@ -94,6 +142,7 @@ func (c App) Apply() revel.Result {
 		Category:              category,
 		Origin:                origin,
 		Sex:                   sex,
+		Idcard:                idcard,
 		Company:               company,
 		Position:              position,
 		EmergencyContact:      emergencycontact,
@@ -130,8 +179,13 @@ func (c App) Apply() revel.Result {
 		c.update(phone, []byte{}, "phone")
 		return c.RenderError(err)
 	}
-
-	return c.Redirect("/thanks/" + name)
+	var r = name
+	if sex == "男" {
+		r += "先生"
+	} else {
+		r += "女士"
+	}
+	return c.Redirect("/thanks/" + r)
 }
 
 func (c App) update(key string, val []byte, table string) error {

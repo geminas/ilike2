@@ -6,6 +6,7 @@ import (
 	"github.com/revel/revel"
 	//"log"
 	"fmt"
+	"time"
 )
 
 var (
@@ -54,7 +55,7 @@ func InitDB() {
 	var err error
 	DBPATH = revel.Config.StringDefault("db.path", "./my.db")
 	println("db in:" + DBPATH)
-	DB, err = bolt.Open(DBPATH, 0600, nil)
+	DB, err = bolt.Open(DBPATH, 0600, &bolt.Options{Timeout: 1 * time.Second})
 	if err != nil {
 		println(err)
 	}

@@ -101,9 +101,13 @@
 				//console.log(this.scheme)
 
 				var errnum=0;
+				var errid=""
 				for(var i in this.scheme){
 					if(this.scheme[i].required==true&&this.scheme[i].data==""){
 						this.scheme[i].error="  此项不可以为空"
+						if(errid==""){
+							errid="#"+this.scheme[i].name;
+						}
 						errnum++;
 						continue
 					}else{
@@ -115,6 +119,9 @@
 						//console.log("email validator")
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
 		    				errnum++
 		    				continue
 		    			}else{
@@ -125,6 +132,23 @@
 						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+						}
+					}
+
+					if(this.scheme[i].validator==="idcard"){
+						var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="身份证号码输入有误"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
 							errnum++
 							continue
 						}else{
@@ -138,6 +162,10 @@
 					$(e.target).trigger(e);
 				}else{
 					e.preventDefault()
+					console.log(errid)
+					$('html, body').animate({
+	                    scrollTop:($(errid).offset().top-50)
+	                }, 200);
 					return false
 				}
 			}
@@ -146,22 +174,20 @@
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(4)
+		'smartformvue':__webpack_require__(3)
 		}
 	}
 
 /***/ },
-/* 3 */,
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6)
-	module.exports.template = __webpack_require__(7)
+	module.exports = __webpack_require__(4)
+	module.exports.template = __webpack_require__(6)
 
 
 /***/ },
-/* 5 */,
-/* 6 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -272,16 +298,18 @@
 		}
 
 /***/ },
-/* 7 */
+/* 5 */,
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"name\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
+	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 \">\n\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label>{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label>{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
+/* 7 */,
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t1.报名截止日期：2015年12月31日 <br>\n\t\t\t\t\t2.付费嘉宾请将《付费参会注册表》于2015年12月25日前发至组委会邮箱candy.liu@futureforum.org.cn；<br>\n\t\t\t\t\t3.申请免费参会的嘉宾请将《免费参会申请表》于2015年12月31日前发至组委会邮箱candy.liu@futureforum.org.cn <br>\n\t\t\t\t\t4.参会咨询：刘女士  18511296094  010-58751635 \n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>未来论坛2016年会报名</h3>\n\t\t\t\t<h2>人类认知新百年</h2>\n\t\t\t\t<h6>2016年1月17日   中国·北京·国贸三期</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div>\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2\">\n\t\t\t\t<p style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t\t<strong>一、购票来宾权益说明：</strong>\t<br><br>\n\t\t\t\t\t1、\t贵宾坐席A级（2880元/人）<br>\n\t\t\t\t\t\t享受1月17日全天会议专属坐席区域（购票贵宾区1-2排）<br>\n\t\t\t\t\t\t享受1月17日午间商务自助餐（国贸酒店餐厅）<br>\n\t\t\t\t\t\t享受1月17日全天会间茶歇服务（国贸酒店精品服务）<br>\n\t\t\t\t\t\t获得年会定制限量版资料及纪念品（全套，如：刊物、书籍、礼券、精美礼品等）<br>\n\t\t\t\t\t\t贵宾坐席B级（1880元/人）<br>\n\t\t\t\t\t\t享受1月17日全天会议专属坐席区域（购票贵宾区3-4排）<br>\n\t\t\t\t\t\t享受1月17日午间商务自助餐午餐（国贸酒店餐厅）<br>\n\t\t\t\t\t\t享受1月17日全天会间茶歇服务（国贸酒店精品服务）<br>\n\t\t\t\t\t\t获得年会定制限量版资料及纪念品（两份，如：刊物、书籍、礼券、精美礼品等）<br><br>\n\n\t\t\t\t\t<strong>二、免费参会申请：</strong><br><br>\n\t\t\t\t\t本次年会同时开放免费入场机会，请在2015年12月31日前仔细填写《免费参会申请表》并发送到官方邮箱。组委会将于五个工作日内进行资格审核，通过后将以邮件回复发出“通关门票“。免费座位处于主会场后区，限制400席，火热抢票进行中！<br>\n\t\t\t\t\t备注：申请免费人员，请务必满足以下几个条件中任意一项<br>\n\t\t\t\t\t1、在校大学生，本科以上类别，所在学校属于全国前十位名优秀大学且成绩优异。<br>\n\t\t\t\t\t2、企业管理者，涉及科学及科技领域的各行业企业高级领导，CTO以上级别。<br>\n\t\t\t\t\t3、职场精英，对于科学、人文、生命、宇宙等未来话题深感兴趣的跨龄职场人士。<br><br>\n\n\t\t\t\t\t<strong>三、购票报名截止日期：</strong>\n\t\t\t\t\t2015年12月31日 (周四)，请在此日期之前完成购票报名。<br><br>\n\n\t\t\t\t\t<strong>四、联系方式：<strong/><br><br>\n\t\t\t\t\t邮箱:  FF2016@futureforum.org.cn<br>\n\t\t\t\t\t联系人：<br>\n\t\t\t\t\tTel：010-58751635<br>\n\t\t\t\t\t刘女士： 18511296094<br>\n\t\t\t\t\t徐女士： 18301029183<br>\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</section>\n</template>";
 
 /***/ },
 /* 9 */

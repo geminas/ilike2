@@ -33,6 +33,15 @@
     "placeholder":"姓名",
     "cid": "c6"
 },{
+    "label": "您的身份证号",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"idcard",
+    "validator":"idcard",
+    "placeholder":"身份证号",
+    "cid": "c6"
+},{
     "label": "联系电话",
     "field_type": "text",
     "required": true,
@@ -75,7 +84,7 @@
 },{
     "label": "职务",
     "field_type": "text",
-    "required": false,
+    "required": true,
     "field_options": {},
     "name":"position",
     "placeholder":"职务",
