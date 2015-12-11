@@ -16,7 +16,7 @@ body{
 }
 
 #contact .contact-title h2{
-  font-size: 6em;
+  font-size: 5em;
 }
 
 #contact .contact-title h6{
@@ -31,6 +31,9 @@ body{
   max-width: 600px;
 }*/
 #contact row{}
+#contact .btn{
+  margin-bottom: 20px;
+}
 #contact label{
   width: 100%;
   border-top: thin solid #eee;
