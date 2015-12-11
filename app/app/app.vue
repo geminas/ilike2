@@ -129,7 +129,7 @@ module.exports={
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2">
+			<div class="col-lg-8 col-lg-offset-2 conference-form">
 				<form method="POST" action="/apply" id="contactForm" novalidate>
 					<div>
 					<component is="smartformvue" :scheme="scheme" v-ref="smarttable"/>
@@ -144,7 +144,7 @@ module.exports={
 		</div>
 	
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2">
+			<div class="col-lg-8 col-lg-offset-2 contents">
 				<p style="color:gray;font-size:13px;padding:0 15px;"> 
 					<strong>一、购票来宾权益说明：</strong>	<br><br>
 					1、	贵宾坐席A级（2880元/人）<br>

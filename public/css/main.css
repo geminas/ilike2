@@ -3,6 +3,29 @@
 }
 #contact .contact-title{
   margin-bottom: 50px;
+  color:white;
+}
+
+body{
+  background-color:#35939B;
+}
+
+#contact .contact-title h3{
+  font-size: 3em;
+  margin-bottom: 30px;
+}
+
+#contact .contact-title h2{
+  font-size: 6em;
+}
+
+#contact .contact-title h6{
+  margin-top: 56px;
+}
+
+#contact .conference-form,#contact .contents{
+  background-color: white;
+  color:black;
 }
 /*#contact .container{
   max-width: 600px;
