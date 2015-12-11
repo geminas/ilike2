@@ -1,5 +1,35 @@
-[{
-    "label": "请输入您的尊姓大名",
+{
+    "id":"12341",
+    "name":"111",
+    "describe":"2222",
+    "items":[{
+    "label": "参会类别",
+    "field_type": "select",
+    "required": true,
+    "name":"category",
+    "field_options": {
+        "options": [{
+            "label": "免费申请"
+        },{
+            "label":"媒体参会"
+        }, {
+            "label": "VIP参会¥2880"
+        }, {
+            "label": "VIP参会¥1880"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
+    "label": "参会机构来源",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"origin",
+    "placeholder":"来源",
+    "cid": "c6"
+},{
+    "label": "您的姓名",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -7,24 +37,35 @@
     "placeholder":"姓名",
     "cid": "c6"
 },{
-    "label": "请输入您的邮箱",
+    "label": "您的身份证号",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"idcard",
+    "validator":"idcard",
+    "placeholder":"身份证号",
+    "cid": "c6"
+},{
+    "label": "联系电话",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"phone",
+    "validator":"phone",
+    "placeholder":"电话",
+    "cid": "c6"
+},{
+    "label": "电子邮箱",
     "field_type": "text",
     "required": true,
     "field_options": {},
     "name":"email",
     "placeholder":"邮箱",
-    "cid": "c6"
-},{
-    "label": "请输入您的电话",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"phone",
-    "placeholder":"电话",
+    "validator":"email",
     "cid": "c6"
 },{
     "label": "您是先生/女士",
-    "field_type": "select",
+    "field_type": "radio-inline",
     "required": true,
     "name":"sex",
     "field_options": {
@@ -37,11 +78,36 @@
     },
     "cid": "c10"
 },{
-    "label": "您的联系地址",
+    "label": "公司名称",
     "field_type": "text",
     "required": true,
     "field_options": {},
-    "name":"address",
-    "placeholder":"联系地址",
+    "name":"company",
+    "placeholder":"公司名字",
+    "cid": "c6"
+},{
+    "label": "职务",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"position",
+    "placeholder":"职务",
+    "cid": "c6"
+},{
+    "label": "紧急联系人姓名",
+    "field_type": "text",
+    "required": false,
+    "field_options": {},
+    "name":"emergency_contact",
+    "placeholder":"姓名",
+    "cid": "c6"
+},{
+    "label": "紧急联系人电话",
+    "field_type": "text",
+    "required": false,
+    "field_options": {},
+    "name":"emergency_contact_phone",
+    "placeholder":"电话",
     "cid": "c6"
 }]
+}
