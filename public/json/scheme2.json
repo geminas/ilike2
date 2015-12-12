@@ -1,5 +1,5 @@
 [{
-    "label": "",
+    "label": "您的姓名",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -7,7 +7,7 @@
     "placeholder":"姓名",
     "cid": "c6"
 },{
-    "label": "",
+    "label": "您的手机",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -16,7 +16,7 @@
     "placeholder":"手机",
     "cid": "c6"
 },{
-    "label": "",
+    "label": "您的邮箱",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -25,7 +25,7 @@
     "validator":"email",
     "cid": "c6"
 },{
-    "label": "",
+    "label": "您的公司",
     "field_type": "text",
     "required": true,
     "field_options": {},
@@ -33,7 +33,7 @@
     "placeholder":"公司",
     "cid": "c6"
 },{
-    "label": "",
+    "label": "您的职务",
     "field_type": "text",
     "required": true,
     "field_options": {},

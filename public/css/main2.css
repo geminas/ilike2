@@ -39,6 +39,7 @@ body{
   border-top: thin solid #eee;
   margin: 13px auto;
   padding-top:10px;
+  color: white;
 }
 #contact input[type="checkbox"]{
 	/*margin-left:10px; */
@@ -52,7 +53,8 @@ body{
 }
 
 #contact .submit-button .btn {
-  background:#FF0000;
+    background: #F52B2B;
+    width: 250px;
 }
 
 #contact .logo {
