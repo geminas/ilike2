@@ -62,12 +62,4 @@
     "name":"position",
     "placeholder":"职务",
     "cid": "c6"
-},{
-    "label": "参会原因",
-    "field_type": "textarea",
-    "required": true,
-    "field_options": {},
-    "name":"reason",
-    "placeholder":"参会原因",
-    "cid": "c6"
 }]

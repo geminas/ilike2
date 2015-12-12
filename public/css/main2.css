@@ -59,7 +59,7 @@ body{
 }
 
 #contact .submit-button{
-	margin:15px 0px 45px 0px;
+	margin:15px 0px 18px 0px;
 }
 
 #contact .submit-button .btn {
@@ -69,6 +69,7 @@ body{
 
 #contact .logo {
   width: 200px;
+  margin-bottom: 10px;
 }
 
 #contact select {
@@ -83,6 +84,11 @@ body{
 @media (max-width: 700px) {
   #contact .logo {
     width: 100px;
+  }
+
+  #contact .contact-title{
+    margin-bottom: 30px;
+    color:white;
   }
 
   #contact .submit-button .btn {
