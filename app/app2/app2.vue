@@ -132,7 +132,7 @@ module.exports={
 		<div class="row conference-form">
 			<div class="col-lg-8 col-lg-offset-2 ">
 				<form method="POST" action="/2/apply" id="contactForm" novalidate>
-					<div>
+					<div class="mid-form">
 					<component is="smartformvue" :scheme="scheme" v-ref="smarttable"/>
 					</div>
 					<div class="col-lg-12 text-center submit-button">

@@ -11,18 +11,17 @@ module.exports={
 		var self=this;
 		$.ajax({
 			type:'GET',
-			url:"/task/111",
+			url:"/public/json/scheme.json",
 			cache:false,
 			//data:JSON.stringify(data),
 			contentType:"application/json",
 			processData: false,
-            success:function(d){
-            	var data=JSON.parse(d)
+            success:function(data){
             	for(var i in data){
             		data[i].data="",
             		data[i].error=""
             	}
-              	self.$data.scheme=data.items
+              	self.$data.scheme=data
               	//console.log(JSON.stringify(data))
             },
             error:function(data){
@@ -132,9 +131,16 @@ module.exports={
 		<div class="row conference-form">
 			<div class="col-lg-8 col-lg-offset-2 ">
 				<form method="POST" action="/apply" id="contactForm" novalidate>
-					<div>
+					<div class="mid-form">
 					<component is="smartformvue" :scheme="scheme" v-ref="smarttable"/>
 					</div>
+
+					<!-- <div class="col-lg-12">
+						<textarea rows="3" cols="20">
+							xxxxx
+						</textarea>
+					</div> -->
+
 					<div class="col-lg-12 text-center submit-button">
 						<button type="submit" class="btn btn-success btn-lg" @click="onsubmit">点击报名</button>
 					</div>
@@ -142,11 +148,8 @@ module.exports={
 				</form>
 			</div>
 			
-		</div>
-	
-		<div class="row contents">
 			<div class="col-lg-8 col-lg-offset-2">
-				<p style="color:gray;font-size:13px;padding:0 15px;"> 
+				<p  style="color:gray;font-size:13px;padding:0 15px;"> 
 					<strong>一、购票来宾权益说明：</strong>	<br><br>
 					1、	贵宾坐席A级（2880元/人）<br>
 						享受1月17日全天会议专属坐席区域（购票贵宾区1-2排）<br>
@@ -167,7 +170,7 @@ module.exports={
 					2、企业管理者，涉及科学及科技领域的各行业企业高级领导，CTO以上级别。<br>
 					3、职场精英，对于科学、人文、生命、宇宙等未来话题深感兴趣的跨龄职场人士。<br><br>
 
-					<strong>三、购票报名截止日期：</strong><br>
+					<strong>三、购票报名截止日期：</strong><br><br>
 					2015年12月31日 (周四)，请在此日期之前完成购票报名。<br><br>
 
 					<strong>四、联系方式：<strong/><br><br>

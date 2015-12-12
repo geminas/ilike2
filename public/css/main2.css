@@ -4,6 +4,7 @@
 #contact .contact-title{
   margin-bottom: 50px;
   color:white;
+  background-color: gray;
 }
 
 body{
@@ -59,4 +60,8 @@ body{
 
 #contact .logo {
   width: 300px;
+}
+
+#contact .mid-form {
+  background-color: wheat;
 }

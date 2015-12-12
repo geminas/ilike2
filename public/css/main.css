@@ -4,19 +4,20 @@
 #contact .contact-title{
   margin-bottom: 50px;
   color:white;
+  background-color: cadetblue;
 }
 
 body{
-  background-color:#35939B;
+  font-family: 'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',"微软雅黑",STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;
 }
 
 #contact .contact-title h3{
-  font-size: 3em;
+  font-size: 1.8em;
   margin-bottom: 30px;
 }
 
 #contact .contact-title h2{
-  font-size: 5em;
+  font-size: 4em;
 }
 
 #contact .contact-title h6{
@@ -24,7 +25,7 @@ body{
 }
 
 #contact .conference-form,#contact .contents{
-  background-color: white;
+  background-color: beige;
   color:black;
 }
 /*#contact .container{
@@ -39,6 +40,7 @@ body{
   border-top: thin solid #eee;
   margin: 13px auto;
   padding-top:10px;
+  font-weight: 500;
 }
 #contact input[type="checkbox"]{
 	/*margin-left:10px; */
@@ -49,4 +51,12 @@ body{
 
 #contact .submit-button{
 	margin:15px 0px 45px 0px;
+}
+
+#contact .mid-form {
+  background-color: wheat;
+}
+
+#contact .contents p {
+  background-color: honeydew;
 }
