@@ -4,7 +4,8 @@ module.exports={
 	el:"#show",
 	data:{
 	target:"app",
-	scheme:{}
+	scheme:{},
+	logo:"../public/img/Future_Forum.jpg"
 	},
 	created:function(){
 		console.log("app has been created");
@@ -179,6 +180,10 @@ module.exports={
 					徐女士： 18301029183<br>
 				</p>
 			</div>
+
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+						<img class="logo" src="{{logo}}">
+					</div>
 		</div>
 	</div>
 </section>

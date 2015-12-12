@@ -60,3 +60,7 @@ body{
 #contact .contents p {
   background-color: honeydew;
 }
+
+#contact .logo {
+  width: 300px;
+}
