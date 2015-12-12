@@ -1,0 +1,60 @@
+#contact .contact-title h2{
+  text-align: center;
+}
+#contact .contact-title{
+  margin-bottom: 50px;
+  color:white;
+}
+
+body{
+  background: url('../img/ljwl_background.jpg');
+}
+
+#contact .contact-title h3{
+  font-size: 3em;
+  margin-bottom: 30px;
+}
+
+#contact .contact-title h2{
+  font-size: 5em;
+}
+
+#contact .contact-title h6{
+  margin-top: 56px;
+}
+
+#contact .conference-form,#contact .contents{
+  background-color: rgba(255, 255, 255, 0.35);
+  color:black;
+}
+/*#contact .container{
+  max-width: 600px;
+}*/
+#contact row{}
+#contact .btn{
+  margin-bottom: 20px;
+}
+#contact label{
+  width: 100%;
+  border-top: thin solid #eee;
+  margin: 13px auto;
+  padding-top:10px;
+}
+#contact input[type="checkbox"]{
+	/*margin-left:10px; */
+}
+#contact .required{
+	color:red;
+}
+
+#contact .submit-button{
+	margin:15px 0px 45px 0px;
+}
+
+#contact .submit-button .btn {
+  background:#FF0000;
+}
+
+#contact .logo {
+  width: 300px;
+}

@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"encoding/base64"
+	// "encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/boltdb/bolt"
@@ -15,50 +15,40 @@ import (
 )
 
 var (
-	correctUsername string = "admin"
-	correctPassword string = "alliance"
+	// correctUsername string = "admin"
+	// correctPassword string = "alliance"
 )
 
-type Info struct {
+type Info2 struct {
 	Name                  string `json:"name"`
 	Phone                 string `json:"phone"`
-	Company               string `json:"company"`
 	Email                 string `json:"email"`
-	Address               string `json:"address"`
-	Category              string `josn:"category"`
-	Origin                string `json:"origin"`
-	Sex                   string `json:"sex"`
-	Idcard                string `json:"idcard"`
+	Company               string `json:"company"`
 	Position              string `json:"position"`
-	EmergencyContact      string `json:"emergency_contact"`
-	EmergencyContactPhone string `json:"emergency_contact_phone"`
 }
 
-var db *bolt.DB
+// var db *bolt.DB
 
-type App struct {
+type App2 struct {
 	*revel.Controller
 }
 
 func init() {}
 
 ///Page for Index
-func (c App) Index() revel.Result {
+func (c App2) Index() revel.Result {
 	return c.Render()
 }
 
-func (c App) Index2() revel.Result {
-	return c.Render()
-}
 
 ///Page for people success apply
-func (c App) Thanks(info string) revel.Result {
+func (c App2) Thanks(info string) revel.Result {
 
 	return c.Render(info)
 }
 
 ///Page for backend to view all the data
-func (c App) ViewTable() revel.Result {
+func (c App2) ViewTable() revel.Result {
 	var infomap = c.viewarray()
 	if auth := c.Request.Header.Get("Authorization"); auth != "" {
 		// Split up the string to get just the data, then get the credentials
@@ -80,7 +70,7 @@ func (c App) ViewTable() revel.Result {
 
 }
 
-// func (c App) BasicAuth() revel.Result {
+// func (c App2) BasicAuth() revel.Result {
 // 	//c.Response.ContentType = "Application/text"
 // 	if auth := c.Request.Header.Get("Authorization"); auth != "" {
 // 		// Split up the string to get just the data, then get the credentials
@@ -101,19 +91,19 @@ func (c App) ViewTable() revel.Result {
 // 	}
 // }
 
-func getCredentials(data string) (username, password string, err error) {
-	decodedData, err := base64.StdEncoding.DecodeString(data)
-	if err != nil {
-		return "", "", err
-	}
-	strData := strings.Split(string(decodedData), ":")
-	username = strData[0]
-	password = strData[1]
-	return
-}
+// func getCredentials(data string) (username, password string, err error) {
+// 	decodedData, err := base64.StdEncoding.DecodeString(data)
+// 	if err != nil {
+// 		return "", "", err
+// 	}
+// 	strData := strings.Split(string(decodedData), ":")
+// 	username = strData[0]
+// 	password = strData[1]
+// 	return
+// }
 
 ///API
-func (c App) Query() revel.Result {
+func (c App2) Query() revel.Result {
 	a := c.Request.URL.Query()
 	if a.Get("key") == "" {
 		return c.RenderText("The key not found")
@@ -123,43 +113,29 @@ func (c App) Query() revel.Result {
 }
 
 ///API
-func (c App) Apply() revel.Result {
+func (c App2) Apply() revel.Result {
 	var name = c.Request.PostForm.Get("name")
 	var phone = c.Request.PostForm.Get("phone")
-	var address = c.Request.PostForm.Get("address")
 	var email = c.Request.PostForm.Get("email")
-	var category = c.Request.PostForm.Get("category")
-	var origin = c.Request.PostForm.Get("origin")
-	var sex = c.Request.PostForm.Get("sex")
-	var idcard = c.Request.PostForm.Get("idcard")
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
-	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
-	var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
-	var info = Info{
+	var info = Info2{
 		Name:                  name,
 		Phone:                 phone,
-		Address:               address,
 		Email:                 email,
-		Category:              category,
-		Origin:                origin,
-		Sex:                   sex,
-		Idcard:                idcard,
 		Company:               company,
 		Position:              position,
-		EmergencyContact:      emergencycontact,
-		EmergencyContactPhone: emergencyphone,
 	}
 	var id = name + "-" + phone
-	if b := c.check(id, "info"); len(b) != 0 {
+	if b := c.check(id, "info2"); len(b) != 0 {
 		return c.RenderError(errors.New("用户被重复申请"))
 	}
-	if b := c.check(email, "email"); len(b) != 0 {
+	if b := c.check(email, "email2"); len(b) != 0 {
 		return c.RenderError(errors.New("邮箱被重复使用"))
 	}
-	if b := c.check(phone, "phone"); len(b) != 0 {
+	if b := c.check(phone, "phone2"); len(b) != 0 {
 		return c.RenderError(errors.New("电话被重复使用"))
 	}
 
@@ -168,31 +144,26 @@ func (c App) Apply() revel.Result {
 	if j, err = json.Marshal(info); err != nil {
 		return c.RenderError(err)
 	}
-	if err := c.update(id, j, "info"); err != nil {
-		c.update(id, []byte{}, "info")
+	if err := c.update(id, j, "info2"); err != nil {
+		c.update(id, []byte{}, "info2")
 		return c.RenderError(err)
 	}
-	if err := c.update(email, j, "email"); err != nil {
-		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
+	if err := c.update(email, j, "email2"); err != nil {
+		c.update(id, []byte{}, "info2")
+		c.update(email, []byte{}, "email2")
 		return c.RenderError(err)
 	}
-	if err := c.update(phone, j, "phone"); err != nil {
-		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
-		c.update(phone, []byte{}, "phone")
+	if err := c.update(phone, j, "phone2"); err != nil {
+		c.update(id, []byte{}, "info2")
+		c.update(email, []byte{}, "email2")
+		c.update(phone, []byte{}, "phone2")
 		return c.RenderError(err)
 	}
 	var r = name
-	if sex == "男" {
-		r += "先生"
-	} else {
-		r += "女士"
-	}
 	return c.Redirect("/thanks/" + r)
 }
 
-func (c App) update(key string, val []byte, table string) error {
+func (c App2) update(key string, val []byte, table string) error {
 	log.Println("updating ", table)
 	err := app.DB.Update(func(tx *bolt.Tx) error {
 		b, err := tx.CreateBucketIfNotExists([]byte(table))
@@ -206,7 +177,7 @@ func (c App) update(key string, val []byte, table string) error {
 	return err
 }
 
-// func (c App) save(key string, val []byte) error {
+// func (c App2) save(key string, val []byte) error {
 // 	err := app.DB.Update(func(tx *bolt.Tx) error {
 // 		b := tx.Bucket([]byte(app.DBNAME))
 // 		c := b.Get([]byte(key))
@@ -220,7 +191,7 @@ func (c App) update(key string, val []byte, table string) error {
 // 	return err
 // }
 
-func (c App) check(key string, table string) []byte {
+func (c App2) check(key string, table string) []byte {
 	var result []byte
 	app.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(table))
@@ -234,10 +205,10 @@ func (c App) check(key string, table string) []byte {
 	return result
 }
 
-func (c App) viewall() map[string]string {
+func (c App2) viewall() map[string]string {
 	m := make(map[string]string)
 	app.DB.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(app.DBNAME))
+		b := tx.Bucket([]byte("info2"))
 		c := b.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
 			m[string(k)] = string(v)
@@ -249,10 +220,10 @@ func (c App) viewall() map[string]string {
 	return m
 }
 
-func (c App) viewarray() string {
+func (c App2) viewarray() string {
 	m := "["
 	app.DB.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("info"))
+		b := tx.Bucket([]byte("info2"))
 		if b == nil {
 			return nil
 		}
@@ -271,7 +242,7 @@ func (c App) viewarray() string {
 	return string(bm)
 }
 
-func (c App) apply(data []byte) error {
+func (c App2) apply(data []byte) error {
 	var v Info
 	err := json.Unmarshal(data, &v)
 	if err != nil {

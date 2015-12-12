@@ -1,0 +1,43 @@
+[{
+    "label": "",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"name",
+    "placeholder":"姓名",
+    "cid": "c6"
+},{
+    "label": "",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"phone",
+    "validator":"phone",
+    "placeholder":"手机",
+    "cid": "c6"
+},{
+    "label": "",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"email",
+    "placeholder":"邮箱:请注意查收邀请函信息",
+    "validator":"email",
+    "cid": "c6"
+},{
+    "label": "",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"company",
+    "placeholder":"公司",
+    "cid": "c6"
+},{
+    "label": "",
+    "field_type": "text",
+    "required": true,
+    "field_options": {},
+    "name":"position",
+    "placeholder":"职务",
+    "cid": "c6"
+}]

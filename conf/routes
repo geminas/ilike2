@@ -8,7 +8,11 @@ GET		/app 									App.Index
 
 GET     /                                       App.Index
 
+GET     /2 										App2.Index
+
 POST	/apply									App.Apply
+
+POST 	/2/apply 								App2.Apply
 
 GET		/query									App.Query
 
@@ -19,6 +23,9 @@ GET		/thanks/:info							App.Thanks
 GET 	/task/:name								Scheme.GetTask
 
 GET		/viewtable								App.Viewtable
+
+GET 	/2/viewtable 							App2.Viewtable
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
