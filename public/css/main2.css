@@ -4,11 +4,12 @@
 #contact .contact-title{
   margin-bottom: 50px;
   color:white;
-  background-color: gray;
 }
 
 body{
   background: url('../img/ljwl_background.jpg');
+  background-size: cover;
+  background-position-y: 40%;
 }
 
 #contact .contact-title h3{
@@ -62,6 +63,3 @@ body{
   width: 300px;
 }
 
-#contact .mid-form {
-  background-color: wheat;
-}
