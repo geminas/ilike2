@@ -151,6 +151,7 @@ module.exports={
 			
 			<div class="col-lg-8 col-lg-offset-2 bottom-form">
 				<p  style="color:gray;font-size:13px;padding:0 15px;"> 
+				<br>
 					<strong>一、购票来宾权益说明：</strong>	<br><br>
 					1、	贵宾坐席A级（2880元/人）<br>
 						享受1月17日全天会议专属坐席区域（购票贵宾区1-2排）<br>
@@ -178,6 +179,7 @@ module.exports={
 					Tel：010-58751635<br>
 					刘女士： 18511296094<br>
 					徐女士： 18301029183<br>
+					<br>
 				</p>
 			</div>
 		</div>

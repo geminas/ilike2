@@ -90,6 +90,14 @@
     "placeholder":"职务",
     "cid": "c6"
 },{
+    "label": "参会原因",
+    "field_type": "textarea",
+    "required": true,
+    "field_options": {},
+    "name":"reson",
+    "placeholder":"请输入参会原因",
+    "cid": "c6"
+},{
     "label": "紧急联系人姓名",
     "field_type": "text",
     "required": false,
@@ -104,13 +112,5 @@
     "field_options": {},
     "name":"emergency_contact_phone",
     "placeholder":"电话",
-    "cid": "c6"
-},{
-    "label": "参会原因",
-    "field_type": "textarea",
-    "required": true,
-    "field_options": {},
-    "name":"reson",
-    "placeholder":"请输入参会原因",
     "cid": "c6"
 }]

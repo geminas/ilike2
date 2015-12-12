@@ -14,15 +14,16 @@ body{
 
 #contact .contact-title h3{
   font-size: 3em;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 #contact .contact-title h2{
   font-size: 5em;
+  margin-bottom: 20px;
 }
 
 #contact .contact-title h6{
-  margin-top: 56px;
+  margin-top: 0px;
 }
 
 #contact .conference-form,#contact .contents{
@@ -42,7 +43,14 @@ body{
   margin: 13px auto;
   padding-top:10px;
   color: white;
+  display: none;
 }
+
+#contact .label-source {
+  margin-right: 10px;
+  display: inline;
+}
+
 #contact input[type="checkbox"]{
 	/*margin-left:10px; */
 }
@@ -63,6 +71,15 @@ body{
   width: 200px;
 }
 
+#contact select {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#contact textarea {
+  resize:none;
+}
+
 @media (max-width: 700px) {
   #contact .logo {
     width: 100px;
@@ -73,7 +90,13 @@ body{
     width: 180px;
   }
 
+  #contact .contact-title h3{
+    font-size: 1.8em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   #contact .contact-title h2{
-  font-size: 2em;
+    font-size: 2em;
   }
 }

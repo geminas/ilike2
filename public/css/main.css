@@ -17,15 +17,16 @@ section {
 
 #contact .contact-title h3{
   font-size: 1.8em;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 #contact .contact-title h2{
   font-size: 4em;
+  margin-bottom: 20px;
 }
 
 #contact .contact-title h6{
-  margin-top: 56px;
+  margin-top: 0px;
 }
 
 #contact .conference-form,#contact .contents{
@@ -69,7 +70,16 @@ section {
   width: 200px;
 }
 
+#contact textarea {
+  resize:none;
+}
+
 @media (max-width: 700px) {
+  #contact .contact-title h3{
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+
   #contact .contact-title h2 {
     font-size: 2em;
   }
