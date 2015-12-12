@@ -16,6 +16,8 @@ GET		/thanks									App.Thanks
 
 GET		/thanks/:info							App.Thanks
 
+GET 	/task/:name								Scheme.GetTask
+
 GET		/viewtable								App.Viewtable
 # Ignore favicon requests
 GET     /favicon.ico                            404

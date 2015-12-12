@@ -73,17 +73,18 @@
 			var self=this;
 			$.ajax({
 				type:'GET',
-				url:"/public/json/scheme.json",
+				url:"/task/111",
 				cache:false,
 				//data:JSON.stringify(data),
 				contentType:"application/json",
 				processData: false,
-	            success:function(data){
+	            success:function(d){
+	            	var data=JSON.parse(d)
 	            	for(var i in data){
 	            		data[i].data="",
 	            		data[i].error=""
 	            	}
-	              	self.$data.scheme=data
+	              	self.$data.scheme=data.items
 	              	//console.log(JSON.stringify(data))
 	            },
 	            error:function(data){
@@ -174,20 +175,22 @@
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(3)
+		'smartformvue':__webpack_require__(4)
 		}
 	}
 
 /***/ },
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
+	module.exports = __webpack_require__(6)
 	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
-/* 4 */
+/* 5 */,
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -298,8 +301,6 @@
 		}
 
 /***/ },
-/* 5 */,
-/* 6 */,
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 

@@ -136,6 +136,10 @@ func (c Scheme) Index() revel.Result {
 	return c.Render()
 }
 
+func (c Scheme) GetTask(name string) revel.Result {
+	return c.RenderJson(string(c.gettask(name)))
+}
+
 // var db *bolt.DB
 
 func (c Scheme) newtask(data []byte) error {
@@ -144,10 +148,14 @@ func (c Scheme) newtask(data []byte) error {
 	if err != nil {
 		return err
 	}
+	println(t.Name)
 	if b := c.check(t.Name, "task"); len(b) != 0 {
 		return errors.New("该任务已经存在")
 	}
-
+	err = c.update(t.Name, data, "task")
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -181,7 +189,7 @@ func (c Scheme) check(key string, table string) []byte {
 }
 
 func (c Scheme) update(key string, val []byte, table string) error {
-	log.Println("updating ", table)
+	log.Println("updating ", table, key)
 	err := app.DB.Update(func(tx *bolt.Tx) error {
 		b, err := tx.CreateBucketIfNotExists([]byte(table))
 		if err != nil {
