@@ -32,6 +32,7 @@ type Info struct {
 	Position              string `json:"position"`
 	EmergencyContact      string `json:"emergency_contact"`
 	EmergencyContactPhone string `json:"emergency_contact_phone"`
+	Reson 				  string `json:"reson"`
 }
 
 var db *bolt.DB
@@ -136,6 +137,7 @@ func (c App) Apply() revel.Result {
 	var position = c.Request.PostForm.Get("position")
 	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
 	var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
+	var reson = c.Request.PostForm.Get("reson")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info{
@@ -151,6 +153,7 @@ func (c App) Apply() revel.Result {
 		Position:              position,
 		EmergencyContact:      emergencycontact,
 		EmergencyContactPhone: emergencyphone,
+		Reson: 				   reson,
 	}
 	var id = name + "-" + phone
 	if b := c.check(id, "info"); len(b) != 0 {
