@@ -1,4 +1,26 @@
 [{
+    "label": "报名来源",
+    "field_type": "select",
+    "required": true,
+    "name":"source",
+    "field_options": {
+        "options": [{
+            "label": "未来论坛官方微信"
+        },{
+            "label":"未来论坛学生会"
+        },{
+            "label":"国贸连线"
+        }, {
+            "label": "清华同学会"
+        }, {
+            "label": "欧美同学会"
+        }, {
+            "label": "其他"
+        }],
+        "include_other_option": true
+    },
+    "cid": "c10"
+},{
     "label": "您的姓名",
     "field_type": "text",
     "required": true,
@@ -39,5 +61,13 @@
     "field_options": {},
     "name":"position",
     "placeholder":"职务",
+    "cid": "c6"
+},{
+    "label": "参会原因",
+    "field_type": "textarea",
+    "required": true,
+    "field_options": {},
+    "name":"reason",
+    "placeholder":"参会原因",
     "cid": "c6"
 }]

@@ -149,7 +149,7 @@ module.exports={
 				</form>
 			</div>
 			
-			<div class="col-lg-8 col-lg-offset-2">
+			<div class="col-lg-8 col-lg-offset-2 bottom-form">
 				<p  style="color:gray;font-size:13px;padding:0 15px;"> 
 					<strong>一、购票来宾权益说明：</strong>	<br><br>
 					1、	贵宾坐席A级（2880元/人）<br>
@@ -180,11 +180,13 @@ module.exports={
 					徐女士： 18301029183<br>
 				</p>
 			</div>
-
-			<div class="col-lg-8 col-lg-offset-2 text-center">
-						<img class="logo" src="{{logo}}">
-					</div>
 		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<img class="logo" src="{{logo}}">
+			</div>
+		</div>
+		
 	</div>
 </section>
 </template>

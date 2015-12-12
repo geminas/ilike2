@@ -2,13 +2,17 @@
   text-align: center;
 }
 #contact .contact-title{
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   color:white;
   background-color: cadetblue;
 }
 
 body{
   font-family: 'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',"微软雅黑",STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;
+}
+
+section {
+  padding: 0px 0;
 }
 
 #contact .contact-title h3{
@@ -53,7 +57,7 @@ body{
 	margin:15px 0px 45px 0px;
 }
 
-#contact .mid-form {
+#contact .bottom-form {
   background-color: wheat;
 }
 
@@ -62,5 +66,15 @@ body{
 }
 
 #contact .logo {
-  width: 300px;
+  width: 200px;
+}
+
+@media (max-width: 700px) {
+  #contact .contact-title h2 {
+    font-size: 2em;
+  }
+
+  #contact .logo {
+    width: 100px;
+  }
 }

@@ -20,11 +20,13 @@ var (
 )
 
 type Info2 struct {
+	Source                string `json:"source"`
 	Name                  string `json:"name"`
 	Phone                 string `json:"phone"`
 	Email                 string `json:"email"`
 	Company               string `json:"company"`
 	Position              string `json:"position"`
+	Reason 				  string `json:"reason"`
 }
 
 // var db *bolt.DB
@@ -114,19 +116,23 @@ func (c App2) Query() revel.Result {
 
 ///API
 func (c App2) Apply() revel.Result {
+	var source = c.Request.PostForm.Get("source")
 	var name = c.Request.PostForm.Get("name")
 	var phone = c.Request.PostForm.Get("phone")
 	var email = c.Request.PostForm.Get("email")
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
+	var reason = c.Request.PostForm.Get("reason")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info2{
+		Source: 			   source,
 		Name:                  name,
 		Phone:                 phone,
 		Email:                 email,
 		Company:               company,
 		Position:              position,
+		Reason: 			   reason,
 	}
 	var id = name + "-" + phone
 	if b := c.check(id, "info2"); len(b) != 0 {

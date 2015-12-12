@@ -60,6 +60,20 @@ body{
 }
 
 #contact .logo {
-  width: 300px;
+  width: 200px;
 }
 
+@media (max-width: 700px) {
+  #contact .logo {
+    width: 100px;
+  }
+
+  #contact .submit-button .btn {
+    background: #F52B2B;
+    width: 180px;
+  }
+
+  #contact .contact-title h2{
+  font-size: 2em;
+  }
+}
