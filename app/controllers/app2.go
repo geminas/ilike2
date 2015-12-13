@@ -28,7 +28,7 @@ type Info2 struct {
 	Company   string `json:"company"`
 	Position  string `json:"position"`
 	Interest  string `json:"interest"`
-	Timestamp int64
+	Timestamp string
 }
 
 // var db *bolt.DB
@@ -128,7 +128,7 @@ func (c App2) Apply() revel.Result {
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
 	var interest = c.Request.PostForm.Get("interest")
-	var timestamp = time.Now().Unix()
+	var timestamp = time.Now().Format("2006-01-02 15:04:05")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info2{
@@ -142,14 +142,14 @@ func (c App2) Apply() revel.Result {
 		Timestamp: timestamp,
 	}
 	var id = name + "-" + phone
-	if b := c.check(id, "info"); len(b) != 0 {
+	if b := c.check(id, "info2"); len(b) != 0 {
 		//return c.RenderError(errors.New("用户被重复申请"))
 		return c.Redirect("/2/errorinfo/用户被重复申请")
 	}
-	if b := c.check(email, "email"); len(b) != 0 {
-		return c.Redirect("/2/errorinfo/邮箱被重复使用")
-	}
-	if b := c.check(phone, "phone"); len(b) != 0 {
+	// if b := c.check(email, "email"); len(b) != 0 {
+	// 	return c.Redirect("/2/errorinfo/邮箱被重复使用")
+	// }
+	if b := c.check(phone, "phone2"); len(b) != 0 {
 		return c.Redirect("/2/errorinfo/电话被重复使用")
 	}
 
@@ -162,14 +162,14 @@ func (c App2) Apply() revel.Result {
 		c.update(id, []byte{}, "info2")
 		return c.RenderError(err)
 	}
-	if err := c.update(email, j, "email2"); err != nil {
-		c.update(id, []byte{}, "info2")
-		c.update(email, []byte{}, "email2")
-		return c.RenderError(err)
-	}
+	// if err := c.update(email, j, "email2"); err != nil {
+	// 	c.update(id, []byte{}, "info2")
+	// 	c.update(email, []byte{}, "email2")
+	// 	return c.RenderError(err)
+	// }
 	if err := c.update(phone, j, "phone2"); err != nil {
 		c.update(id, []byte{}, "info2")
-		c.update(email, []byte{}, "email2")
+		// c.update(email, []byte{}, "email2")
 		c.update(phone, []byte{}, "phone2")
 		return c.RenderError(err)
 	}

@@ -1,0 +1,13 @@
+{{set . "title" "测试Task"}}
+{{append . "moreStyles" "css/freelancer.css"}}
+{{append . "moreStyles" "css/main.css"}}
+
+{{append . "moreScripts" "js/freelancer.js"}}
+{{template "header.html" .}}
+<div id="show" ></div>
+{{template "footer.html" .}}
+<script>
+	window.scheme_path="/task/111"
+</script>
+  <script src="/public/js/task.js" type="text/javascript" charset="utf-8"></script>
+</html>

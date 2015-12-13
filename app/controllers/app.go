@@ -33,7 +33,7 @@ type Info struct {
 	// EmergencyContact      string `json:"emergency_contact"`
 	// EmergencyContactPhone string `json:"emergency_contact_phone"`
 	Reson     string `json:"reson"`
-	Timestamp int64
+	Timestamp string
 }
 
 var db *bolt.DB
@@ -142,7 +142,7 @@ func (c App) Apply() revel.Result {
 	// var emergencycontact = c.Request.PostForm.Get("emergency_contact")
 	// var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
 	var reson = c.Request.PostForm.Get("reson")
-	var timestamp = time.Now().Unix()
+	var timestamp = time.Now().Format("2006-01-02 15:04:05")
 
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
@@ -166,9 +166,9 @@ func (c App) Apply() revel.Result {
 		//return c.RenderError(errors.New("用户被重复申请"))
 		return c.Redirect("/errorinfo/用户被重复申请")
 	}
-	if b := c.check(email, "email"); len(b) != 0 {
-		return c.Redirect("/errorinfo/邮箱被重复使用")
-	}
+	// if b := c.check(email, "email"); len(b) != 0 {
+	// 	return c.Redirect("/errorinfo/邮箱被重复使用")
+	// }
 	if b := c.check(phone, "phone"); len(b) != 0 {
 		return c.Redirect("/errorinfo/电话被重复使用")
 	}
@@ -182,14 +182,14 @@ func (c App) Apply() revel.Result {
 		c.update(id, []byte{}, "info")
 		return c.RenderError(err)
 	}
-	if err := c.update(email, j, "email"); err != nil {
-		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
-		return c.RenderError(err)
-	}
+	// if err := c.update(email, j, "email"); err != nil {
+	// 	c.update(id, []byte{}, "info")
+	// 	c.update(email, []byte{}, "email")
+	// 	return c.RenderError(err)
+	// }
 	if err := c.update(phone, j, "phone"); err != nil {
 		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
+		// c.update(email, []byte{}, "email")
 		c.update(phone, []byte{}, "phone")
 		return c.RenderError(err)
 	}
