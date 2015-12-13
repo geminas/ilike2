@@ -1,7 +1,7 @@
 .thanks{
 	min-height: 200px;
 	width: 100%;
-	background-color: #E13939;
+	background-color: #B53939;
 	color:white;
 	padding-top: 0px;
 }
@@ -15,6 +15,14 @@
 }
 section{
 
+}
+
+ .thanks a{
+ 	color: white;
+	border-style: double;
+	border-radius: 15px;
+	font-size: 0.6em;
+	padding: 5px 20px;
 }
 
 .contents .logo {

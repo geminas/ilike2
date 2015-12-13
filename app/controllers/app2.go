@@ -140,13 +140,13 @@ func (c App2) Apply() revel.Result {
 	var id = name + "-" + phone
 	if b := c.check(id, "info"); len(b) != 0 {
 		//return c.RenderError(errors.New("用户被重复申请"))
-		return c.Redirect("/errorinfo/用户被重复申请")
+		return c.Redirect("/2/errorinfo/用户被重复申请")
 	}
 	if b := c.check(email, "email"); len(b) != 0 {
-		return c.Redirect("/errorinfo/邮箱被重复使用")
+		return c.Redirect("/2/errorinfo/邮箱被重复使用")
 	}
 	if b := c.check(phone, "phone"); len(b) != 0 {
-		return c.Redirect("/errorinfo/电话被重复使用")
+		return c.Redirect("/2/errorinfo/电话被重复使用")
 	}
 
 	var j []byte
