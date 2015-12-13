@@ -23,13 +23,13 @@ var (
 type Info struct {
 	Name     string `json:"name"`
 	Phone    string `json:"phone"`
-	Company  string `json:"company"`
 	Email    string `json:"email"`
+	Company  string `json:"company"`
+	Position string `json:"position"`
 	Category string `josn:"category"`
 	Origin   string `json:"origin"`
 	Sex      string `json:"sex"`
 	Idcard   string `json:"idcard"`
-	Position string `json:"position"`
 	// EmergencyContact      string `json:"emergency_contact"`
 	// EmergencyContactPhone string `json:"emergency_contact_phone"`
 	Reson     string `json:"reson"`
