@@ -31,7 +31,7 @@ type Info struct {
 	Position              string `json:"position"`
 	EmergencyContact      string `json:"emergency_contact"`
 	EmergencyContactPhone string `json:"emergency_contact_phone"`
-	Reson 				  string `json:"reson"`
+	Reson                 string `json:"reson"`
 }
 
 var db *bolt.DB
@@ -49,6 +49,10 @@ func (c App) Index() revel.Result {
 
 func (c App) Index2() revel.Result {
 	return c.Render()
+}
+
+func (c App) ErrorInfo(info string) revel.Result {
+	return c.Render(info)
 }
 
 ///Page for people success apply
@@ -150,17 +154,18 @@ func (c App) Apply() revel.Result {
 		Position:              position,
 		EmergencyContact:      emergencycontact,
 		EmergencyContactPhone: emergencyphone,
-		Reson: 				   reson,
+		Reson: reson,
 	}
 	var id = name + "-" + phone
 	if b := c.check(id, "info"); len(b) != 0 {
-		return c.RenderError(errors.New("用户被重复申请"))
+		//return c.RenderError(errors.New("用户被重复申请"))
+		return c.Redirect("/errorinfo/用户被重复申请")
 	}
 	if b := c.check(email, "email"); len(b) != 0 {
-		return c.RenderError(errors.New("邮箱被重复使用"))
+		return c.Redirect("/errorinfo/邮箱被重复使用")
 	}
 	if b := c.check(phone, "phone"); len(b) != 0 {
-		return c.RenderError(errors.New("电话被重复使用"))
+		return c.Redirect("/errorinfo/电话被重复使用")
 	}
 
 	var j []byte

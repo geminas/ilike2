@@ -18,6 +18,8 @@ GET		/query									App.Query
 
 GET		/thanks									App.Thanks
 
+GET 	/errorinfo/:info 						App.ErrorInfo
+
 GET		/thanks/:info							App.Thanks
 
 GET 	/task/:name								Scheme.GetTask

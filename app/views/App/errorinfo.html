@@ -1,0 +1,20 @@
+{{set . "title" "提交出现问题"}}
+{{append . "moreScripts" "js/bootstrap.min.js"}}
+{{append . "moreStyles" "css/bootstrap.min.css"}}
+{{append . "moreStyles" "css/error.css"}}
+{{template "header.html" .}}
+<section>
+<div class="container">
+<div class="row blank"></div>
+<div class="row thanks text-center">
+  <!-- <div class=" col-sm-12 text-center"> -->
+    <h2>提交出现问题</h2>
+    <h1>{{.info}}</h2>
+    <h3>请重新填写</h3>
+    <p></p>
+  <!-- </div> -->
+</div>
+<div class="row blank"></div>
+</div>
+</section>
+{{template "footer.html" .}}
