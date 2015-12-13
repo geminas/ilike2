@@ -20,7 +20,6 @@ var (
 )
 
 type Info2 struct {
-<<<<<<< Updated upstream
 	Source                string `json:"source"`
 	Name                  string `json:"name"`
 	Phone                 string `json:"phone"`
@@ -28,14 +27,6 @@ type Info2 struct {
 	Company               string `json:"company"`
 	Position              string `json:"position"`
 	Interest			  string `json:"interest"`
-=======
-	Source   string `json:"source"`
-	Name     string `json:"name"`
-	Phone    string `json:"phone"`
-	Email    string `json:"email"`
-	Company  string `json:"company"`
-	Position string `json:"position"`
->>>>>>> Stashed changes
 }
 
 // var db *bolt.DB
@@ -138,7 +129,6 @@ func (c App2) Apply() revel.Result {
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info2{
-<<<<<<< Updated upstream
 		Source: 			   source,
 		Name:                  name,
 		Phone:                 phone,
@@ -146,14 +136,6 @@ func (c App2) Apply() revel.Result {
 		Company:               company,
 		Position:              position,
 		Interest:			   interest,
-=======
-		Source:   source,
-		Name:     name,
-		Phone:    phone,
-		Email:    email,
-		Company:  company,
-		Position: position,
->>>>>>> Stashed changes
 	}
 	var id = name + "-" + phone
 	if b := c.check(id, "info"); len(b) != 0 {
