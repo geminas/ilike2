@@ -128,7 +128,7 @@ func (c App2) Apply() revel.Result {
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
 	var interest = c.Request.PostForm.Get("interest")
-	var timestamp = time.Now().Format("Mon Jan _2 15:04:05 2006")
+	var timestamp = time.Now().Format("2006-01-02 15:04:05")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info2{
