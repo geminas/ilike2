@@ -110,7 +110,7 @@
 
 
 <div v-for="item in scheme" class="row">
-	<div v-if="item.field_type=='text'" class="col-xs-12 ">
+	<div v-if="item.field_type=='text'" class="col-xs-12 {{item.status}}">
 	<label class="label-{{item.name}}">{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
 	<input type="text" class="form-control" name="{{item.name}}" placeholder="{{item.placeholder}}" id="{{item.name}}" required data-validation-required-message="Please enter your name." v-model="item.data">
     <p class="help-block text-danger"></p>

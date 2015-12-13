@@ -15,6 +15,14 @@
         }, {
             "label": "欧美同学会"
         }, {
+            "label": "清华企业家协会"
+        }, {
+            "label": "环球科学"
+        }, {
+            "label": "中金公司"
+        }, {
+            "label": "新华保险"
+        }, {
             "label": "其他"
         }],
         "include_other_option": true
