@@ -23,6 +23,10 @@
         }, {
             "label": "新华保险"
         }, {
+            "label": "长江商学院"
+        }, {
+            "label": "中欧商学院"
+        }, {
             "label": "其他"
         }],
         "include_other_option": true
@@ -69,5 +73,13 @@
     "field_options": {},
     "name":"position",
     "placeholder":"职务",
+    "cid": "c6"
+},{
+    "label": "感兴趣的话题",
+    "field_type": "textarea",
+    "required": false,
+    "field_options": {},
+    "name":"interest",
+    "placeholder":"请输入您感兴趣的话题(选填)",
     "cid": "c6"
 }]
