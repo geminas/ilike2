@@ -17,29 +17,12 @@
     },
     "cid": "c10"
 },{
-    "label": "参会机构来源",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"origin",
-    "placeholder":"来源",
-    "cid": "c6"
-},{
     "label": "您的姓名",
     "field_type": "text",
     "required": true,
     "field_options": {},
     "name":"name",
     "placeholder":"姓名",
-    "cid": "c6"
-},{
-    "label": "您的身份证号",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"idcard",
-    "validator":"idcard",
-    "placeholder":"身份证号",
     "cid": "c6"
 },{
     "label": "联系电话",
@@ -90,12 +73,29 @@
     "placeholder":"职务",
     "cid": "c6"
 },{
+    "label": "参会机构来源",
+    "field_type": "text",
+    "required": false,
+    "field_options": {},
+    "name":"origin",
+    "placeholder":"来源",
+    "cid": "c6"
+},{
     "label": "参会原因",
     "field_type": "textarea",
-    "required": true,
+    "required": false,
     "field_options": {},
     "name":"reson",
     "placeholder":"请输入参会原因",
+    "cid": "c6"
+},{
+    "label": "您的身份证号",
+    "field_type": "text",
+    "required": false,
+    "field_options": {},
+    "name":"idcard",
+    "validator":"idcard",
+    "placeholder":"身份证号",
     "cid": "c6"
 },{
     "label": "紧急联系人姓名",

@@ -145,7 +145,7 @@
 						}
 					}
 
-					if(this.scheme[i].validator==="idcard"){
+					if(this.scheme[i].required==true&&this.scheme[i].validator==="idcard"){
 						var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="身份证号码输入有误"
