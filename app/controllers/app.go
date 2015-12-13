@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 )
 
 var (
@@ -20,18 +21,19 @@ var (
 )
 
 type Info struct {
-	Name                  string `json:"name"`
-	Phone                 string `json:"phone"`
-	Company               string `json:"company"`
-	Email                 string `json:"email"`
-	Category              string `josn:"category"`
-	Origin                string `json:"origin"`
-	Sex                   string `json:"sex"`
-	Idcard                string `json:"idcard"`
-	Position              string `json:"position"`
-	EmergencyContact      string `json:"emergency_contact"`
-	EmergencyContactPhone string `json:"emergency_contact_phone"`
-	Reson                 string `json:"reson"`
+	Name     string `json:"name"`
+	Phone    string `json:"phone"`
+	Company  string `json:"company"`
+	Email    string `json:"email"`
+	Category string `josn:"category"`
+	Origin   string `json:"origin"`
+	Sex      string `json:"sex"`
+	Idcard   string `json:"idcard"`
+	Position string `json:"position"`
+	// EmergencyContact      string `json:"emergency_contact"`
+	// EmergencyContactPhone string `json:"emergency_contact_phone"`
+	Reson     string `json:"reson"`
+	Timestamp int64
 }
 
 var db *bolt.DB
@@ -137,24 +139,27 @@ func (c App) Apply() revel.Result {
 	var idcard = c.Request.PostForm.Get("idcard")
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
-	var emergencycontact = c.Request.PostForm.Get("emergency_contact")
-	var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
+	// var emergencycontact = c.Request.PostForm.Get("emergency_contact")
+	// var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
 	var reson = c.Request.PostForm.Get("reson")
+	var timestamp = time.Now().Unix()
+
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info{
-		Name:                  name,
-		Phone:                 phone,
-		Email:                 email,
-		Category:              category,
-		Origin:                origin,
-		Sex:                   sex,
-		Idcard:                idcard,
-		Company:               company,
-		Position:              position,
-		EmergencyContact:      emergencycontact,
-		EmergencyContactPhone: emergencyphone,
-		Reson: reson,
+		Name:     name,
+		Phone:    phone,
+		Email:    email,
+		Category: category,
+		Origin:   origin,
+		Sex:      sex,
+		Idcard:   idcard,
+		Company:  company,
+		Position: position,
+		// EmergencyContact:      emergencycontact,
+		// EmergencyContactPhone: emergencyphone,
+		Reson:     reson,
+		Timestamp: timestamp,
 	}
 	var id = name + "-" + phone
 	if b := c.check(id, "info"); len(b) != 0 {
