@@ -124,7 +124,7 @@ module.exports={
 	<div class="container">
 		<div class="row contact-title">
 			<div class="col-lg-12 text-center">
-				<h3>理解未来讲座参会报名</h3>
+				<h3>诚挚邀请</h3>
 			</div>
 		</div>
 		<div class="row conference-form">

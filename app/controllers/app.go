@@ -24,7 +24,6 @@ type Info struct {
 	Phone                 string `json:"phone"`
 	Company               string `json:"company"`
 	Email                 string `json:"email"`
-	Address               string `json:"address"`
 	Category              string `josn:"category"`
 	Origin                string `json:"origin"`
 	Sex                   string `json:"sex"`
@@ -127,7 +126,6 @@ func (c App) Query() revel.Result {
 func (c App) Apply() revel.Result {
 	var name = c.Request.PostForm.Get("name")
 	var phone = c.Request.PostForm.Get("phone")
-	var address = c.Request.PostForm.Get("address")
 	var email = c.Request.PostForm.Get("email")
 	var category = c.Request.PostForm.Get("category")
 	var origin = c.Request.PostForm.Get("origin")
@@ -143,7 +141,6 @@ func (c App) Apply() revel.Result {
 	var info = Info{
 		Name:                  name,
 		Phone:                 phone,
-		Address:               address,
 		Email:                 email,
 		Category:              category,
 		Origin:                origin,
