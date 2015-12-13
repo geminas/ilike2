@@ -28,7 +28,7 @@ type Info2 struct {
 	Company   string `json:"company"`
 	Position  string `json:"position"`
 	Interest  string `json:"interest"`
-	Timestamp int64
+	Timestamp string
 }
 
 // var db *bolt.DB
@@ -128,7 +128,7 @@ func (c App2) Apply() revel.Result {
 	var company = c.Request.PostForm.Get("company")
 	var position = c.Request.PostForm.Get("position")
 	var interest = c.Request.PostForm.Get("interest")
-	var timestamp = time.Now().Unix()
+	var timestamp = time.Now().Format("Mon Jan _2 15:04:05 2006")
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
 	var info = Info2{

@@ -33,7 +33,7 @@ type Info struct {
 	// EmergencyContact      string `json:"emergency_contact"`
 	// EmergencyContactPhone string `json:"emergency_contact_phone"`
 	Reson     string `json:"reson"`
-	Timestamp int64
+	Timestamp string
 }
 
 var db *bolt.DB
@@ -142,7 +142,7 @@ func (c App) Apply() revel.Result {
 	// var emergencycontact = c.Request.PostForm.Get("emergency_contact")
 	// var emergencyphone = c.Request.PostForm.Get("emergency_contact_phone")
 	var reson = c.Request.PostForm.Get("reson")
-	var timestamp = time.Now().Unix()
+	var timestamp = time.Now().Format("Mon Jan _2 15:04:05 2006")
 
 	//log.Println(c.Request.PostForm)
 	//log.Println(name, phone, address, email, category, origin, sex, company, position, emergencycontact, emergencyphone)
