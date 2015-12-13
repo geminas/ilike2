@@ -117,6 +117,7 @@
 						continue
 					}else{
 						this.scheme[i].error=""
+						this.scheme[i].status = ""
 					}
 					//console.log(this.scheme[i].validator)
 					if(this.scheme[i].validator==="email"){
@@ -151,6 +152,20 @@
 						var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="身份证号码输入有误"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+						}
+					}
+
+					if(this.scheme[i].validator==="phone"){
+						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
 		    				if(errid==""){
 							errid="#"+this.scheme[i].name;
 							}

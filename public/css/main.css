@@ -7,6 +7,11 @@
   background-color: cadetblue;
 }
 
+#contact .has-error .form-control{
+  border-color: #A72585;
+  border-width: 3px;
+}
+
 body{
   font-family: 'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',"微软雅黑",STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;
 }

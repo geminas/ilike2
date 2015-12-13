@@ -10,6 +10,11 @@
     padding-top: 30px;
 }
 
+#contact .has-error .form-control{
+  border-color: #A72585;
+  border-width: 3px;
+}
+
 body{
   background: url('../img/ljwl_background.jpg');
   background-size: cover;
