@@ -176,6 +176,7 @@ module.exports={
 					2015年12月31日 (周四)，请在此日期之前完成购票报名。<br><br>
 
 					<strong>四、联系方式：<strong/><br><br>
+					Email：FF2016@futureforum.org.cn<br>
 					Tel：010-58751635<br>
 					刘女士： 18511296094<br>
 					徐女士： 18301029183<br>
