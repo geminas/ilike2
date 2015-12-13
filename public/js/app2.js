@@ -125,6 +125,7 @@
 						//console.log("email validator")
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+		    				this.scheme[i].status = "has-error"
 		    				if(errid==""){
 							errid="#"+this.scheme[i].name;
 							}
@@ -132,12 +133,14 @@
 		    				continue
 		    			}else{
 		    				this.scheme[i].error=""
+		    				this.scheme[i].status = ""
 		    			}
 					}
 					if(this.scheme[i].validator==="phone"){
 						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
+		    				this.scheme[i].status = "has-error"
 		    				if(errid==""){
 							errid="#"+this.scheme[i].name;
 							}
@@ -145,6 +148,7 @@
 							continue
 						}else{
 							this.scheme[i].error=""
+							this.scheme[i].status = ""
 						}
 					}
 
@@ -152,6 +156,7 @@
 						var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="身份证号码输入有误"
+		    				this.scheme[i].status = "has-error"
 		    				if(errid==""){
 							errid="#"+this.scheme[i].name;
 							}
@@ -159,6 +164,7 @@
 							continue
 						}else{
 							this.scheme[i].error=""
+							this.scheme[i].status = ""
 						}
 					}
 
@@ -166,6 +172,7 @@
 						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 	    				if(re.test(this.scheme[i].data)==false){
 		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
+		    				this.scheme[i].status = "has-error"
 		    				if(errid==""){
 							errid="#"+this.scheme[i].name;
 							}
@@ -173,6 +180,7 @@
 							continue
 						}else{
 							this.scheme[i].error=""
+							this.scheme[i].status = ""
 						}
 					}
 				}
