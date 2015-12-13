@@ -166,9 +166,9 @@ func (c App) Apply() revel.Result {
 		//return c.RenderError(errors.New("用户被重复申请"))
 		return c.Redirect("/errorinfo/用户被重复申请")
 	}
-	if b := c.check(email, "email"); len(b) != 0 {
-		return c.Redirect("/errorinfo/邮箱被重复使用")
-	}
+	// if b := c.check(email, "email"); len(b) != 0 {
+	// 	return c.Redirect("/errorinfo/邮箱被重复使用")
+	// }
 	if b := c.check(phone, "phone"); len(b) != 0 {
 		return c.Redirect("/errorinfo/电话被重复使用")
 	}
@@ -182,14 +182,14 @@ func (c App) Apply() revel.Result {
 		c.update(id, []byte{}, "info")
 		return c.RenderError(err)
 	}
-	if err := c.update(email, j, "email"); err != nil {
-		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
-		return c.RenderError(err)
-	}
+	// if err := c.update(email, j, "email"); err != nil {
+	// 	c.update(id, []byte{}, "info")
+	// 	c.update(email, []byte{}, "email")
+	// 	return c.RenderError(err)
+	// }
 	if err := c.update(phone, j, "phone"); err != nil {
 		c.update(id, []byte{}, "info")
-		c.update(email, []byte{}, "email")
+		// c.update(email, []byte{}, "email")
 		c.update(phone, []byte{}, "phone")
 		return c.RenderError(err)
 	}
