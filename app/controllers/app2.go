@@ -244,15 +244,22 @@ func (c App2) viewarray() string {
 		c := b.Cursor()
 
 		for k, v := c.First(); k != nil; k, v = c.Next() {
-			m += string(v)
-			m += ","
+			if string(v) != "" {
+				m += string(v)
+				m += ","
+			}
 			//fmt.Printf("key=%s, value=%s\n", k, v)
 		}
 
 		return nil
 	})
 	var bm = []byte(m)
-	bm[len(bm)-1] = ']'
+	if len(bm) > 1 {
+		bm[len(bm)-1] = ']'
+	} else {
+		m += "]"
+		bm = []byte(m)
+	}
 	return string(bm)
 }
 
