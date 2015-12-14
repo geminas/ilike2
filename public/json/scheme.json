@@ -5,7 +5,7 @@
     "name":"category",
     "field_options": {
         "options": [{
-            "label": "申请免费参会人员"
+            "label": "免费参会"
         },{
             "label": "媒体参会"
         }, {
