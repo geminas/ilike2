@@ -5,11 +5,32 @@
 {{append . "moreScripts" "js/infotable.js"}}
 {{template "header.html" .}}
 
-<div id="show"></div>
+<!-- <div id="show"></div>
 {{template "footer.html" .}}
   <script>
   var s={{.infomap}}
   window.data=JSON.parse(s)
   </script>
   <script src="/public/js/infotable.js" type="text/javascript" charset="utf-8"></script>
+</html> -->
+
+<div id="show"></div>
+{{template "footer.html" .}}
+  <script type="text/javascript">
+
+  function sortTime(x,y)
+  {
+    var a = x["Timestamp"], b = y["Timestamp"];
+    return a<b;
+  }
+
+  var s={{.infomap}}
+  var xx=JSON.parse(s)
+  
+  window.data=xx.sort(sortTime)
+  </script>
+  <script src="/public/js/infotable.js" type="text/javascript" charset="utf-8">
+
+  </script>
+
 </html>
