@@ -21,12 +21,17 @@
   function sortTime(x,y)
   {
     var a = x["Timestamp"], b = y["Timestamp"];
-    return a<b;
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   var s={{.infomap}}
   var xx=JSON.parse(s)
-  
   window.data=xx.sort(sortTime)
   </script>
   <script src="/public/js/infotable.js" type="text/javascript" charset="utf-8">
