@@ -90,10 +90,12 @@
  <div class="container-fluid">
 	 <table class="table">
 	 	<thead>
+	 		<th>number</th>
 	 		<th v-for="(key,val) in data[0]">{{key}}</th>
 	 	</thead>
 	 	<tbody>
 	 		<tr v-for="d in data">
+	 			<td>{{$index+1}}</td>
 	 			<td v-for="(k,v) in d">{{v}}</td>
 	 		</tr>
 	 	</tbody>

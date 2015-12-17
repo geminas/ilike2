@@ -45,21 +45,23 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(3)
 	var Vue = __webpack_require__(9)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -72,21 +74,21 @@
 		console.log("The infotable test main is loaded")
 		},
 		components:{
-		'infotablevue':__webpack_require__(3)
+		'infotablevue':__webpack_require__(5)
 		}
 	}
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
+	module.exports = __webpack_require__(6)
 	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 6 */
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -173,16 +175,14 @@
 		}
 
 /***/ },
-/* 5 */,
-/* 6 */,
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\">\n\t \t<thead>\n\t \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>";
 
 /***/ },
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div>\n<component is=\"infotablevue\" :data=\"d\"/>\n</div>";
 
@@ -9496,7 +9496,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -9530,7 +9530,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9582,7 +9584,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');
