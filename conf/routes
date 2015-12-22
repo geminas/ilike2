@@ -49,5 +49,7 @@ POST	/posttask								Scheme.PostTask
 
 POST 	/deletedata 							App.DeleteData
 
+GET 	/viewall								App.ViewAll
+
 # Catch all
 *       /:controller/:action                    :controller.:action

@@ -86,6 +86,35 @@ func (c App) ViewTable() revel.Result {
 
 }
 
+func (c App) ViewAll() revel.Result {
+
+	if auth := c.Request.Header.Get("Authorization"); auth != "" {
+		// Split up the string to get just the data, then get the credentials
+		username, password, err := getCredentials(strings.Split(auth, " ")[1])
+		if err != nil {
+			return c.RenderError(err)
+		}
+		if username != correctUsername || password != correctPassword {
+			c.Response.Status = http.StatusUnauthorized
+			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
+			return c.RenderError(errors.New("401: Not authorized"))
+		}
+		var a = c.Request.URL.Query()
+		var t = a.Get("table")
+		if t == "" {
+			return c.RenderText("The table should not be null")
+
+		}
+		var info = c.viewall(t)
+		return c.RenderJson(info)
+	} else {
+		c.Response.Status = http.StatusUnauthorized
+		c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="新盟"`)
+		return c.RenderError(errors.New("401: Not authorized"))
+	}
+
+}
+
 // func (c App) BasicAuth() revel.Result {
 // 	//c.Response.ContentType = "Application/text"
 // 	if auth := c.Request.Header.Get("Authorization"); auth != "" {
@@ -234,6 +263,11 @@ func (c App) update(key string, val []byte, table string) error {
 	return err
 }
 
+// func (c App) listid(table string) []string {
+// 	var s []string
+
+// }
+
 // func (c App) save(key string, val []byte) error {
 // 	err := app.DB.Update(func(tx *bolt.Tx) error {
 // 		b := tx.Bucket([]byte(app.DBNAME))
@@ -262,10 +296,10 @@ func (c App) check(key string, table string) []byte {
 	return result
 }
 
-func (c App) viewall() map[string]string {
+func (c App) viewall(table string) map[string]string {
 	m := make(map[string]string)
 	app.DB.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(app.DBNAME))
+		b := tx.Bucket([]byte(table))
 		c := b.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
 			m[string(k)] = string(v)
