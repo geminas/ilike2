@@ -47,5 +47,7 @@ GET 	/backend 								Backend.Index
 
 POST	/posttask								Scheme.PostTask
 
+POST 	/deletedata 							App.DeleteData
+
 # Catch all
 *       /:controller/:action                    :controller.:action

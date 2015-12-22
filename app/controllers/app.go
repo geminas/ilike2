@@ -120,10 +120,28 @@ func getCredentials(data string) (username, password string, err error) {
 
 ///API
 func (c App) Query() revel.Result {
+
 	a := c.Request.URL.Query()
 	if a.Get("key") == "" {
 		return c.RenderText("The key not found")
 	} else {
+		return c.RenderText("ok")
+	}
+}
+
+func (c App) DeleteData() revel.Result {
+	// a := c.Request.URL.Query()
+	var table = c.Request.Form.Get("table")
+	var key = c.Request.Form.Get("key")
+	if key == "" {
+		return c.RenderText("The key not found")
+	} else if table == "" {
+		return c.RenderText("The table not found")
+	} else {
+		err := c.delete(key, table)
+		if err != nil {
+			return c.RenderText(err.Error())
+		}
 		return c.RenderText("ok")
 	}
 }
@@ -257,6 +275,19 @@ func (c App) viewall() map[string]string {
 	})
 	//log.Println(m)
 	return m
+}
+
+func (c App) delete(key string, table string) error {
+	err := app.DB.Update(func(tx *bolt.Tx) error {
+		b, err := tx.CreateBucketIfNotExists([]byte(table))
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		err = b.Delete([]byte(key))
+		return err
+	})
+	return err
 }
 
 func (c App) viewarray() string {
