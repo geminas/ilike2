@@ -1,125 +1,156 @@
 package controllers
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"errors"
 	"github.com/boltdb/bolt"
 	"github.com/geminas/ilike2/app"
 	"github.com/revel/revel"
+	"io/ioutil"
 	"log"
+	"strconv"
+	"time"
 )
 
 var testjson = `{
-    "name":"111",
-    "describe":"2222",
-    "items":[{
-    "label": "参会类别",
-    "field_type": "select",
-    "required": true,
-    "name":"category",
-    "field_options": {
-        "options": [{
-            "label": "免费申请"
-        },{
-            "label":"媒体参会"
-        }, {
-            "label": "VIP参会¥2880"
-        }, {
-            "label": "VIP参会¥1880"
-        }],
-        "include_other_option": true
-    },
-    "cid": "c10"
-},{
-    "label": "参会机构来源",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"origin",
-    "placeholder":"来源",
-    "cid": "c6"
-},{
-    "label": "您的姓名",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"name",
-    "placeholder":"姓名",
-    "cid": "c6"
-},{
-    "label": "您的身份证号",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"idcard",
-    "validator":"idcard",
-    "placeholder":"身份证号",
-    "cid": "c6"
-},{
-    "label": "联系电话",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"phone",
-    "validator":"phone",
-    "placeholder":"电话",
-    "cid": "c6"
-},{
-    "label": "电子邮箱",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"email",
-    "placeholder":"邮箱",
-    "validator":"email",
-    "cid": "c6"
-},{
-    "label": "您是先生/女士",
-    "field_type": "radio-inline",
-    "required": true,
-    "name":"sex",
-    "field_options": {
-        "options": [{
-            "label": "男"
-        }, {
-            "label": "女"
-        }],
-        "include_other_option": true
-    },
-    "cid": "c10"
-},{
-    "label": "公司名称",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"company",
-    "placeholder":"公司名字",
-    "cid": "c6"
-},{
-    "label": "职务",
-    "field_type": "text",
-    "required": true,
-    "field_options": {},
-    "name":"position",
-    "placeholder":"职务",
-    "cid": "c6"
-},{
-    "label": "紧急联系人姓名",
-    "field_type": "text",
-    "required": false,
-    "field_options": {},
-    "name":"emergency_contact",
-    "placeholder":"姓名",
-    "cid": "c6"
-},{
-    "label": "紧急联系人电话",
-    "field_type": "text",
-    "required": false,
-    "field_options": {},
-    "name":"emergency_contact_phone",
-    "placeholder":"电话",
-    "cid": "c6"
-}]
+    "name":"活动名字",
+    "describe":"活动描述",
+    "fields":[     {  
+         "label":"下拉选项",
+         "field_type":"dropdown",
+         "required":true,
+         "field_options":{  
+            "options":[  
+               {  
+                  "label":"选项1",
+                  "checked":true
+               },
+               {  
+                  "label":"选项2",
+                  "checked":false
+               },
+               {  
+                  "label":"选项3",
+                  "checked":false
+               }
+            ],
+            "include_blank_option":false
+         },
+         "cid":"c36"
+      },
+      {  
+         "label":"这是输入框",
+         "field_type":"text",
+         "required":true,
+         "field_options":{  
+            "size":"medium",
+            "description":"这里是一些额外数据",
+            "minlength":"12",
+            "maxlength":"22",
+            "min_max_length_units":"words"
+         },
+         "cid":"c45"
+      },
+      {  
+         "label":"这是单选框",
+         "field_type":"radio",
+         "required":true,
+         "field_options":{  
+            "options":[  
+               {  
+                  "label":"选项1",
+                  "checked":false
+               },
+               {  
+                  "label":"选项2",
+                  "checked":false
+               },
+               {  
+                  "label":"选项3",
+                  "checked":false
+               }
+            ],
+            "description":"这里是一些额外数据",
+            "include_other_option":true
+         },
+         "cid":"c49"
+      },
+      {  
+         "label":"这个也是单选",
+         "field_type":"checkboxes",
+         "required":true,
+         "field_options":{  
+            "options":[  
+               {  
+                  "label":"选择a",
+                  "checked":false
+               },
+               {  
+                  "label":"选择b",
+                  "checked":true
+               }
+            ],
+            "description":"在这里输入一些额外的数据",
+            "include_other_option":true
+         },
+         "cid":"c53"
+      },
+      {  
+         "label":"这个是多选框",
+         "field_type":"radio",
+         "required":true,
+         "field_options":{  
+            "options":[  
+               {  
+                  "label":"选项1",
+                  "checked":false
+               },
+               {  
+                  "label":"选项2",
+                  "checked":false
+               },
+               {  
+                  "label":"选项3",
+                  "checked":false
+               },
+               {  
+                  "label":"选项4",
+                  "checked":false
+               }
+            ],
+            "description":"在这里输入一些东西"
+         },
+         "cid":"c57"
+      },
+      {  
+         "label":"这个是下拉列表",
+         "field_type":"dropdown",
+         "required":true,
+         "field_options":{  
+            "options":[  
+               {  
+                  "label":"选项1",
+                  "checked":false
+               },
+               {  
+                  "label":"选项2",
+                  "checked":false
+               },
+               {  
+                  "label":"选项3",
+                  "checked":false
+               },
+               {  
+                  "label":"选项4",
+                  "checked":false
+               }
+            ],
+            "include_blank_option":false,
+            "description":"在这里输入一些东西"
+         },
+         "cid":"c61"
+      }
+]
 }`
 
 type Scheme struct {
@@ -135,24 +166,119 @@ type Task struct {
 func (c Scheme) Index() revel.Result {
 	return c.Render()
 }
-
+func (c Scheme) GetTasks() revel.Result {
+	//ts := c.check(key, table)
+	return c.RenderJson(c.checktable("task"))
+}
 func (c Scheme) GetTask(name string) revel.Result {
 	return c.RenderJson(string(c.gettask(name)))
 }
 
-// var db *bolt.DB
+func (c Scheme) PostTask() revel.Result {
+	b, err := ioutil.ReadAll(c.Request.Body)
+	id := c.Params.Get("id")
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	if id == "" {
+		return c.RenderJson(app.JsonResp{
+			1,
+			"The id is null",
+			"",
+			"",
+		})
+	}
+	err = c.updatetask(id, b)
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	return c.RenderJson(app.JsonResp{
+		0,
+		id,
+		"",
+		testjson,
+	})
+}
+func (c Scheme) NewTask() revel.Result {
+	var t = time.Now().Unix()
+	id := strconv.FormatInt(t, 10)
+	err := c.newtask(id, []byte(testjson))
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	return c.RenderJson(app.JsonResp{
+		0,
+		id,
+		"",
+		testjson,
+	})
+}
 
-func (c Scheme) newtask(data []byte) error {
-	var t Task
-	err := json.Unmarshal(data, &t)
+func (c Scheme) CreateTask() revel.Result {
+	b, err := ioutil.ReadAll(c.Request.Body)
+	id := c.Params.Get("id")
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	if id == "" {
+		return c.RenderJson(app.JsonResp{
+			1,
+			"The id is null",
+			"",
+			"",
+		})
+	}
+	err = c.newtask(id, b)
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	return c.RenderJson(app.JsonResp{
+		0,
+		id,
+		"",
+		testjson,
+	})
+
+}
+
+func (c Scheme) newtask(id string, scheme []byte) error {
+	if b := c.check(id, "task"); len(b) != 0 {
+		return errors.New("该任务已经存在")
+	}
+	err := c.update(id, scheme, "task")
 	if err != nil {
 		return err
 	}
-	println(t.Name)
-	if b := c.check(t.Name, "task"); len(b) != 0 {
-		return errors.New("该任务已经存在")
-	}
-	err = c.update(t.Name, data, "task")
+	return nil
+}
+
+func (c Scheme) updatetask(id string, scheme []byte) error {
+	err := c.update(id, scheme, "task")
 	if err != nil {
 		return err
 	}
@@ -172,6 +298,20 @@ func (c Scheme) gettask(name string) []byte {
 	})
 
 	return result
+}
+
+func (c Scheme) checktable(table string) map[string]string {
+	m := make(map[string]string)
+	app.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(table))
+		b.ForEach(func(k, v []byte) error {
+			//fmt.Printf("key=%s, value=%s\n", k, v)
+			m[string(k)] = string(v)
+			return nil
+		})
+		return nil
+	})
+	return m
 }
 
 func (c Scheme) check(key string, table string) []byte {
@@ -200,23 +340,4 @@ func (c Scheme) update(key string, val []byte, table string) error {
 		return err
 	})
 	return err
-}
-
-// func NewTask(name string) *Scheme {
-// 	var s = new(Scheme)
-// 	app.DB.View(func(tx *bolt.Tx) error {
-// 		b := tx.Bucket([]byte("aabb"))
-// 		if b == nil {
-// 			log.Println("The bucket is not exists")
-// 		}
-// 		// v := b.Get([]byte("answer"))
-// 		// fmt.Printf("The answer is: %s\n", v)
-// 		return nil
-// 	})
-// 	return s
-// }
-
-func (c Scheme) TryNew() revel.Result {
-	c.newtask([]byte(testjson))
-	return c.RenderText("ok")
 }

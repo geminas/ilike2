@@ -15,6 +15,13 @@ var (
 	DBPATH = ""
 )
 
+type JsonResp struct {
+	Status   int    `json:"status"`
+	Msg      string `json:"msg"`
+	Redirect string `json:"redirect"`
+	Data     string `json:"data"`
+}
+
 func init() {
 	// Filters is the default set of global filters.
 	//log.Println("hehehehe")

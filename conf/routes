@@ -37,11 +37,19 @@ GET 	/bootstrap 								Bootstrap.Index
 
 GET		/getjson								Static.Serve("public/json/scheme.json")
 
+GET 	/gettasks 								Scheme.GetTasks
 
-
-GET 	/trynew									Scheme.TryNew
+GET 	/newtask								Scheme.NewTask
 # Map static resources from the /app/public folder to the /public path
 GET     /public/*filepath                       Static.Serve("public")
+
+GET 	/backend 								Backend.Index
+
+POST	/posttask								Scheme.PostTask
+
+POST 	/deletedata 							App.DeleteData
+
+GET 	/viewall								App.ViewAll
 
 # Catch all
 *       /:controller/:action                    :controller.:action
