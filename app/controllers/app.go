@@ -99,6 +99,9 @@ func (c App) ViewAll() revel.Result {
 			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
 			return c.RenderError(errors.New("401: Not authorized"))
 		}
+		println(username)
+		println(password)
+		//println("here1111")
 		var a = c.Request.URL.Query()
 		var t = a.Get("table")
 		if t == "" {

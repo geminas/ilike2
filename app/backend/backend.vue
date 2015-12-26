@@ -46,9 +46,14 @@ module.exports={
 		choosetask:function(index){
 			this.bindform=this.schemes[index].scheme
 			this.bindid=this.schemes[index].id
+			$('#myModal').modal()
 		},
-		save:function(){
+		save:function(e){
 			//var item=JSON.parse(this.taskMap[this.bindid])
+			e.preventDefault()
+			e.stopPropagation()
+			//console.log("okoik")
+			$('#myModal').modal('hide')
 			var j=this.$refs.formbuilder.getCollection()
 			//console.log()
 			//console.log(item)
@@ -76,6 +81,7 @@ module.exports={
                alert("error: "+data)
             }
 		});
+			
 		}
 	},
 	ready:function(){
@@ -108,25 +114,37 @@ module.exports={
 			</tbody>
 		</table>
 	</div>
-	<div class="row">
-		<button @click="save()">保存设置</button>
-	</div>
 
-	<div class="row">
-		<!-- <div>
-			<component is="smartformvue" :scheme="bindform.items" v-ref="smarttable"/>
-		</div>
- -->		
- 		<div class="row text-center">
- 			<label for="">活动名</label><input type="text" v-model="bindform.name">
- 			<label for="">活动描述</label><input type="text" v-model="bindform.describe">
+	<!-- Button trigger modal -->
+	<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	  Launch demo modal
+	</button> -->
 
- 		</div>
- 		
- 		<div class="row">
- 			<component is="formbuildervue" v-ref:formbuilder :scheme="bindform.fields"/>
- 		</div>
- 		
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">修改活动设置</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+	      		<label for="">活动名</label><input type="text" v-model="bindform.name">
+	      	</div>
+	      	<div class="row">
+	      		<label for="">活动描述</label><input type="text" v-model="bindform.describe">
+	      	</div>
+	        <div class="row">
+ 				<component is="formbuildervue" v-ref:formbuilder :scheme="bindform.fields"/>
+ 			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" @click="save($event)">保存设置</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </div>
 

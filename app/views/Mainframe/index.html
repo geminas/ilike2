@@ -1,29 +1,23 @@
-{{set . "title" "Home"}}
-{{append . "moreScripts" "js/bootstrap.min.js"}}
-{{append . "moreStyles" "css/bootstrap.min.css"}}
+{{set . "title" "未来论坛年会报名"}}
+{{append . "moreStyles" "css/freelancer.css"}}
 {{append . "moreStyles" "css/main.css"}}
+
+{{append . "moreScripts" "js/freelancer.js"}}
 {{template "header.html" .}}
-
-<header class="hero-unit" style="background-color:#A9F16C">
-  <div class="container">
-    <div class="row">
-      <div class="hero-text">
-        <h1>It works!</h1>
-        <p></p>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="apply-form">
-  
-<form method="POST" action="/apply">
-  <div><span class="">name:</span><input type="text" value="" name="name"/></div>
-  <div><span>phone:</span><input type="text" value="" name="phone"/></div>
-  <div><span>address:</span><input type="text" value="" name="address"/></div>
-  <div><span>email:</span><input type="text" value="" name="email"/></div>
-  <input type="submit" value="submit" />
-</form>
-</div>
-
+<div id="show" ></div>
 {{template "footer.html" .}}
+  <script>
+   (function(){
+   	window.scheme = JSON.parse({{.task}})
+   //	console.log(window.scheme)
+   for(var i in window.scheme.fields){
+   	window.scheme.fields[i].data=""
+   	window.scheme.fields[i].error=""
+   	window.scheme.fields[i].status=""
+   }
+   console.log(window.scheme)
+   })();
+   
+  </script>
+  <script src="/public/js/frontend.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -7,38 +7,9 @@
 			}
 		},
 		props:["scheme"],
-		/////////////Life Span/////////////////////
-		
-		// beforeCompile:function(){
-		// 	console.log("smartform beforeCompiled");
-		// },
-		// compiled:function(){
-		// 	console.log("smartform has been compiled");
-		// },
 		created:function(){
 		console.log("app has been created");
-		var self=this;
-		// $.ajax({
-		// 	type:'GET',
-		// 	url:"/getjson",
-		// 	cache:false,
-		// 	//data:JSON.stringify(data),
-		// 	contentType:"application/json",
-		// 	processData: false,
-  //           success:function(data){
-  //               //console.log(data)
-  //             	//alert(data)
-  //             	//var d=JSON.parse(data)
-  //             	//console.log(d)
-  //             	//self.$data.scheme=d
-  //           },
-  //           error:function(data){
-  //               console.log("error");
-  //               //console.log(data);
-  //              alert("error: "+data)
-  //           }
-		// });	
-	},
+		},
 		ready:function(){
 			//console.log("smartform has been ready");
 			//console.log(this.scheme)
@@ -56,29 +27,7 @@
 		// 	console.log("smartform has been destoryed");
 		// },
 		methods:{
-			// sayHello:function(){
-			// 	console.log("Hello,This is the smartform component");
-			// }
-			sendurl:function(){
-				var data={hello:"world"}
-				$.ajax({
-					type:'POST',
-					url:"testsmartform",
-					cache:false,
-					data:JSON.stringify(data),
-					contentType:"application/json",
-					processData: false,
-		            success:function(data){
-		                console.log(data)
-		              	alert(data)
-		            },
-		            error:function(data){
-		                console.log("error");
-		                console.log(data);
-		               alert("error: "+data)
-		            }
-				});			
-			}
+			
 		},
 		computed:{
 			// foo:function(){
@@ -120,6 +69,14 @@
 	<textarea class="form-control" name="{{item.name}}" placeholder="{{item.placeholder}}" id="{{item.name}}" required data-validation-required-message="Please enter your name." v-model="item.data"></textarea>
     <p class="help-block text-danger"></p>
 	</div>
+	<div v-if="item.field_type=='dropdown'" class="col-xs-12 ">
+		<label class="label-{{item.name}}">{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
+		<select name="{{item.name}}" id="{{item.name}}" v-model="item.data">
+			<option v-for="op in item.field_options.options" selected>
+				{{op.label}}
+			</option>
+		</select>
+	</div>
 	<div v-if="item.field_type=='select'" class="col-xs-12 ">
 		<label class="label-{{item.name}}">{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
 		<select name="{{item.name}}" id="{{item.name}}" v-model="item.data">
@@ -132,7 +89,7 @@
 		<label class="label-{{item.name}}">{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
 		
 		<div v-for="op in item.field_options.options" class="radio-inline">
-			<input type="radio" name="{{item.name}}" v-model="item.data" :value="op.label" checked>
+			<input type="radio" name="{{item.name}}" v-model="item.data" :value="op.label" >
 			<span>{{op.label}}</span>
 		</div>
 	</div>
@@ -140,7 +97,15 @@
 	<div v-if="item.field_type=='radio'" class="col-xs-12 " id="{{item.name}}">
 		<label class="label-{{item.name}}">{{item.label}}<span v-if="item.required==true" style="color:red;">*</span><span style="color:red;">{{item.error}}</span></label>
 		<div v-for="op in item.field_options.options" class="">
-			<input type="radio" name="{{item.name}}"  v-model="item.data" :value="op.label" checked>
+			<input type="radio" name="{{item.name}}"  v-model="item.data" :value="op.label" >
+			<span>{{op.label}}</span>
+		</div>
+	</div>
+	<div v-if="item.field_type=='checkboxes'" class="col-xs-12 " id="{{item.name}}">
+		<label class="label-{{item.name}}">{{item.label}}</label>
+		<!-- <label for="">{{item.data}}</label> -->
+		<div v-for="op in item.field_options.options">
+			<input type="checkbox" name="{{item.name}}" v-model="item.data" :true-value="op.label">
 			<span>{{op.label}}</span>
 		</div>
 	</div>

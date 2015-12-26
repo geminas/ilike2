@@ -54,8 +54,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(2)
-	module.exports = __webpack_require__(9)
+	module.exports = __webpack_require__(2)
 	module.exports.template = __webpack_require__(16)
 
 
@@ -63,20 +62,176 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports={
+		el:"#show",
+		data:{
+		target:"app",
+		skin:"skin1vue",
+		scheme:window.scheme,
+		logo:"../public/img/Future_Forum.jpg"
+		},
+		created:function(){
+			console.log("app has been created");
+			// var self=this;
+			// $.ajax({
+			// 	type:'GET',
+			// 	url:"/public/json/scheme.json",
+			// 	cache:false,
+			// 	//data:JSON.stringify(data),
+			// 	contentType:"application/json",
+			// 	processData: false,
+	  //           success:function(data){
+	  //           	for(var i in data){
+	  //           		data[i].data="",
+	  //           		data[i].error="",
+	  //           		data[i].status=""
+	  //           	}
+	  //             	self.$data.scheme=data
+	  //             	//console.log(JSON.stringify(data))
+	  //           },
+	  //           error:function(data){
+	  //               console.log("error");
+	  //               //console.log(data);
+	  //              alert("error: "+data)
+	  //           }
+			// });	
+		},
+		methods:{
+			onsubmit:function(e){
+				console.log(e)
+				//console.log(a,b,c)
+				//console.log(this.$)
+				//console.log(this.scheme)
+
+				var errnum=0;
+				var errid=""
+				for(var i in this.scheme){
+					if(this.scheme[i].required==true&&this.scheme[i].data==""){
+						this.scheme[i].error="  此项不可以为空"
+						this.scheme[i].status = "has-error"
+						if(errid==""){
+							errid="#"+this.scheme[i].name;
+						}
+						errnum++;
+						continue
+					}else{
+						this.scheme[i].error=""
+						this.scheme[i].status = ""
+					}
+					//console.log(this.scheme[i].validator)
+					if(this.scheme[i].validator==="email"){
+						var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+						//console.log("email validator")
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+		    				this.scheme[i].status = "has-error"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+		    				errnum++
+		    				continue
+		    			}else{
+		    				this.scheme[i].error=""
+		    				this.scheme[i].status = ""
+		    			}
+					}
+					if(this.scheme[i].validator==="phone"){
+						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
+		    				this.scheme[i].status = "has-error"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+							this.scheme[i].status = ""
+						}
+					}
+
+					if(this.scheme[i].validator==="idcard"){
+						var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="身份证号码输入有误"
+		    				this.scheme[i].status = "has-error"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+							this.scheme[i].status = ""
+						}
+					}
+
+					if(this.scheme[i].validator==="phone"){
+						var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+	    				if(re.test(this.scheme[i].data)==false){
+		    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
+		    				this.scheme[i].status = "has-error"
+		    				if(errid==""){
+							errid="#"+this.scheme[i].name;
+							}
+							errnum++
+							continue
+						}else{
+							this.scheme[i].error=""
+							this.scheme[i].status = ""
+						}
+					}
+				}
+				if(errnum==0){
+					console.log("ok to submit")
+					//return true
+					$(e.target).trigger(e);
+				}else{
+					e.preventDefault()
+					console.log(errid)
+					$('html, body').animate({
+	                    scrollTop:($(errid).offset().top-50)
+	                }, 200);
+					return false
+				}
+			}
+		},
+		ready:function(){
+		console.log("The smartform test main is loaded")
+		},
+		components:{
+		skin1vue:__webpack_require__(3)
+		}
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(4)
+	module.exports = __webpack_require__(11)
+	module.exports.template = __webpack_require__(15)
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(3);
+	var content = __webpack_require__(5);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
+	var update = __webpack_require__(7)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./backend.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./backend.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./skin1.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./skin1.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -86,21 +241,21 @@
 	}
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(4)();
+	exports = module.exports = __webpack_require__(6)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 0px;\n  color:white;\n  background-color: cadetblue;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\nbody{\n  font-family: 'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',\"\\5FAE\\8F6F\\96C5\\9ED1\",STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;\n}\n\nsection {\n  padding: 0px 0;\n}\n\n#contact .contact-title h3{\n  font-size: 1.8em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 4em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: beige;\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 20px;\n}\n#contact label{\n  width: 100%;\n  border-top: thin solid #eee;\n  margin: 13px auto;\n  padding-top:10px;\n  font-weight: 500;\n}\n#contact input[type=\"checkbox\"]{\n\t/*margin-left:10px; */\n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 45px 0px;\n}\n\n#contact .bottom-form {\n  background-color: wheat;\n}\n\n#contact .contents p {\n  background-color: honeydew;\n}\n\n#contact .logo {\n  width: 200px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .contact-title h3{\n    font-size: 1.6em;\n    margin-bottom: 20px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n\n  #contact .logo {\n    width: 100px;\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -156,7 +311,7 @@
 
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -381,115 +536,110 @@
 
 
 /***/ },
-/* 6 */,
-/* 7 */,
 /* 8 */,
-/* 9 */
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
-		el:"#show",
-		data:{
-			schemes:[],
-			taskMap:{},
-			bindform:{},
-			bindid:""
-		},
-		created:function(){
-			console.log("backend has been created");
-			this.sync()
-		},
-		methods:{
-			sync:function(){
-				var self=this
-				$.ajax({
-					type:'GET',
-					url:"/gettasks",
-					cache:false,
-					//data:JSON.stringify(data),
-					contentType:"application/json",
-					processData: false,
-		            success:function(data){
-		            	console.log(data)
-		            	self.schemes=[]
-		            	for(key in data){
-		            		self.schemes.push({
-		            			id:key,
-		            			scheme:JSON.parse(data[key])
-		            		})
-		            	}
-		            	self.taskMap=data
-		            	self.bindform=self.schemes[0].scheme
-		            	self.bindid=self.schemes[0].id
-		              	//console.log(self.schemes)
-		            },
-		            error:function(data){
-		                console.log("error");
-		                //console.log(data);
-		               alert("error: "+data)
-		            }
-				});	
+			data:function(){
+				return {
+					target:"app",
+					scheme:{},
+					logo:"../public/img/Future_Forum.jpg"
+				}
 			},
-			choosetask:function(index){
-				this.bindform=this.schemes[index].scheme
-				this.bindid=this.schemes[index].id
-				$('#myModal').modal()
+			props:["scheme"],
+			/////////////Life Span/////////////////////
+			// created:function(){
+			// 	console.log("skin1 has been created");
+			// },
+			// beforeCompile:function(){
+			// 	console.log("skin1 beforeCompiled");
+			// },
+			// compiled:function(){
+			// 	console.log("skin1 has been compiled");
+			// },
+			// ready:function(){
+			// 	console.log("skin1 has been ready");
+			// },
+			// attached:function(){
+			// 	console.log("skin1 has been attached");
+			// },
+			// detached:function(){
+			// 	console.log("skin1 has been detached");
+			// },
+			// beforeDestory:function(){
+			// 	console.log("before skin1 destoryed");
+			// },
+			// destoryed:function(){
+			// 	console.log("skin1 has been destoryed");
+			// },
+			methods:{
+				// sayHello:function(){
+				// 	console.log("Hello,This is the skin1 component");
+				// }
+				// sendurl:function(){
+				// 	var data={hello:"world"}
+				// 	$.ajax({
+				// 		type:'POST',
+				// 		url:"testskin1",
+				// 		cache:false,
+				// 		data:JSON.stringify(data),
+				// 		contentType:"application/json",
+				// 		processData: false,
+			 //            success:function(data){
+			 //                console.log(data)
+			 //              	alert(data)
+			 //            },
+			 //            error:function(data){
+			 //                console.log("error");
+			 //                console.log(data);
+			 //               alert("error: "+data)
+			 //            }
+				// 	});			
+				// }
 			},
-			save:function(e){
-				//var item=JSON.parse(this.taskMap[this.bindid])
-				e.preventDefault()
-				e.stopPropagation()
-				//console.log("okoik")
-				$('#myModal').modal('hide')
-				var j=this.$refs.formbuilder.getCollection()
-				//console.log()
-				//console.log(item)
-				this.bindform.fields=j
-				var id=this.bindid
-				var self=this
-				$.ajax({
-				type:'POST',
-				url:"/posttask?id="+id,
-				cache:false,
-				data:JSON.stringify(self.bindform),
-				contentType:"application/json",
-				processData: false,
-	            success:function(data){
-	                console.log(data)
-	              	//alert(data)
-	              	//var d=JSON.parse(data)
-	              	//console.log(d)
-	              	//self.$data.scheme=d
-	              	self.sync()
-	            },
-	            error:function(data){
-	                console.log("error");
-	                //console.log(data);
-	               alert("error: "+data)
-	            }
-			});
-				
+			computed:{
+				// foo:function(){
+				// 	return "bar"
+				// }
+			},
+			events:{
+				//////////Events 
+				// 'hook:created':function(){
+				// 	console.log('skin1 has created again');
+				// },
+				// greeting:function(msg){
+				// 	console.log(msg);
+				// },
+				// hello:'sayHello'
+				///////////Can be Triggered by
+				//////vm.$emit('hello')
+			},
+			watch:{
+				//////////Data Watcher
+				// 'a':function(val,oldval){
+				// 	console.log('new: %s, old: %s', val, oldVal);
+				// }
+			},
+			components:{
+			'smartformvue':__webpack_require__(12)
 			}
-		},
-		ready:function(){
-		console.log("The smartform test main is loaded")
-		},
-		components:{
-		'smartformvue':__webpack_require__(10),
-		'formbuildervue':__webpack_require__(13)
+
 		}
-	}
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(11)
-	module.exports.template = __webpack_require__(12)
+	module.exports = __webpack_require__(13)
+	module.exports.template = __webpack_require__(14)
 
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -549,133 +699,22 @@
 		}
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 \">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(14)
-	module.exports.template = __webpack_require__(15)
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={
-			data:function(){
-				return {
-					fb:{},
-					scheme:[],
-					payload:{}
-					//hello:"world"
-				}
-			},
-			props:["scheme"],
-			/////////////Life Span/////////////////////
-			created:function(){
-				console.log("formbuilder has been created");
-				
-	      	},
-			// beforeCompile:function(){
-			// 	console.log("formbuilder beforeCompiled");
-			// },
-			// compiled:function(){
-			// 	console.log("formbuilder has been compiled");
-			// },
-			ready:function(){
-				console.log("formbuilder has been ready");
-				var self=this
-				this.fb = new Formbuilder({
-		        selector: '#formbuilder',
-			        bootstrapData:JSON.stringify(self.scheme)
-				});
-				//console.log()
-			    // this.fb.on('save', function(payload){
-			    //     console.log(payload);
-			    // })
-			},
-			// attached:function(){
-			// 	console.log("formbuilder has been attached");
-			// },
-			// detached:function(){
-			// 	console.log("formbuilder has been detached");
-			// },
-			// beforeDestory:function(){
-			// 	console.log("before formbuilder destoryed");
-			// },
-			// destoryed:function(){
-			// 	console.log("formbuilder has been destoryed");
-			// },
-			methods:{
-
-				// toJSON:function(){
-				// 	//var j=this.fb.mainView.collection.toJSON()
-				// 	//console.log(j)
-				// 	return  JSON.stringify(j)
-				// },
-				getCollection:function(){
-					//console.log("payload is below")
-					//console.log(this.payload)
-					this.fb.mainView.saveForm()
-					return  this.fb.mainView.collection.toJSON()
-				}
-			},
-			computed:{
-				// foo:function(){
-				// 	return "bar"
-				// }
-			},
-			events:{
-				//////////Events 
-				// 'hook:created':function(){
-				// 	console.log('formbuilder has created again');
-				// },
-				// greeting:function(msg){
-				// 	console.log(msg);
-				// },
-				// hello:'sayHello'
-				///////////Can be Triggered by
-				//////vm.$emit('hello')
-			},
-			watch:{
-				//////////Data Watcher
-				'scheme':function(){
-					var self=this
-					//ex.push(this.scheme[1])
-					//console.log(ex)
-					this.fb = new Formbuilder({
-			        selector: '#formbuilder',
-				        bootstrapData:self.scheme});
-					//console.log(this.fb)
-					//console.log("lalalalala")
-					//console.log(this.fb.mainView.collection.toJSON())
-				    this.fb.on('save', function(payload){
-				        //console.log("saved");
-				        //console.log(payload)
-				        self.payload=payload
-				    })
-
-				}
-			}
-
-		}
-
-/***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div id='formbuilder'></div>";
+	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.describe}} </h3>\n\t\t\t\t<h2>{{scheme.name}}</h2>\n\t\t\t\t<h6>{{scheme.time}}</h6>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 bottom-form\">\n\t\t\t\t<p  style=\"color:gray;font-size:13px;padding:0 15px;\"> \n\t\t\t\t<br>\n\t\t\t\t\t<strong>一、购票来宾权益说明：</strong>\t<br><br>\n\t\t\t\t\t1、\t贵宾坐席A级（2880元/人）<br>\n\t\t\t\t\t\t享受1月17日全天会议专属坐席区域（购票贵宾区1-2排）<br>\n\t\t\t\t\t\t享受1月17日午间商务自助餐（国贸酒店餐厅）<br>\n\t\t\t\t\t\t享受1月17日全天会间茶歇服务（国贸酒店精品服务）<br>\n\t\t\t\t\t\t获得年会定制限量版资料及纪念品（全套，如：刊物、书籍、礼券、精美礼品等）<br>\n\t\t\t\t\t2、\t贵宾坐席B级（1880元/人）<br>\n\t\t\t\t\t\t享受1月17日全天会议专属坐席区域（购票贵宾区3-4排）<br>\n\t\t\t\t\t\t享受1月17日午间商务自助餐午餐（国贸酒店餐厅）<br>\n\t\t\t\t\t\t享受1月17日全天会间茶歇服务（国贸酒店精品服务）<br>\n\t\t\t\t\t\t获得年会定制限量版资料及纪念品（两份，如：刊物、书籍、礼券、精美礼品等）<br><br>\n\n\t\t\t\t\t<strong>二、免费参会申请：</strong><br><br>\n\t\t\t\t\t本次年会同时开放免费入场机会，提交报名后，组委会将于五个工作日内进行资格审核，通过后将以邮件回复发出“通关门票”。<br>\n\t\t\t\t\t免费座位处于主会场后区，限制400席，火热抢票进行中！<br>\n\t\t\t\t\t备注：申请免费参会人员，请务必满足以下几个条件中任意一项<br>\n\t\t\t\t\t1、在校大学生，本科以上类别，所在学校属于全国前十位名优秀大学且成绩优异。<br>\n\t\t\t\t\t2、企业管理者，涉及科学及科技领域的各行业企业高级领导，CTO以上级别。<br>\n\t\t\t\t\t3、职场精英，对于科学、人文、生命、宇宙等未来话题深感兴趣的跨龄职场人士。<br><br>\n\n\t\t\t\t\t<strong>三、购票报名截止日期：</strong><br><br>\n\t\t\t\t\t2015年12月31日 (周四)，请在此日期之前完成购票报名。<br><br>\n\n\t\t\t\t\t<strong>四、联系方式：<strong/><br><br>\n\t\t\t\t\tEmail：FF2016@futureforum.org.cn<br>\n\t\t\t\t\tTel：010-58751635<br>\n\t\t\t\t\t刘女士： 18511296094<br>\n\t\t\t\t\t徐女士： 18301029183<br>\n\t\t\t\t\t<br>\n\t\t\t\t</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>\n\n </template>";
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<header></header>\n\n<div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"choosetask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div>\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n\t      </div>\n\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->";
+	module.exports = "<div >\n\t<component :is=\"skin\" :scheme=\"scheme\" v-ref=\"skin\"/>\n</div>";
 
 /***/ },
 /* 17 */

@@ -51,5 +51,8 @@ POST 	/deletedata 							App.DeleteData
 
 GET 	/viewall								App.ViewAll
 
+GET 	/mainframe/:name 						Mainframe.Index
+
+GET 	/gettask/:name 							Scheme.GetTask
 # Catch all
 *       /:controller/:action                    :controller.:action

@@ -171,7 +171,7 @@ func (c Scheme) GetTasks() revel.Result {
 	return c.RenderJson(c.checktable("task"))
 }
 func (c Scheme) GetTask(name string) revel.Result {
-	return c.RenderJson(string(c.gettask(name)))
+	return c.RenderJson(string(c.Gettask(name)))
 }
 
 func (c Scheme) PostTask() revel.Result {
@@ -266,6 +266,10 @@ func (c Scheme) CreateTask() revel.Result {
 
 }
 
+// func (c Scheme) Submit(id string) revel.Result {
+
+// }
+
 func (c Scheme) newtask(id string, scheme []byte) error {
 	if b := c.check(id, "task"); len(b) != 0 {
 		return errors.New("该任务已经存在")
@@ -285,7 +289,7 @@ func (c Scheme) updatetask(id string, scheme []byte) error {
 	return nil
 }
 
-func (c Scheme) gettask(name string) []byte {
+func (c Scheme) Gettask(name string) []byte {
 	var result []byte
 	app.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("task"))
