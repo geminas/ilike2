@@ -16,8 +16,9 @@ import (
 )
 
 var (
-	correctUsername string = "admin"
-	correctPassword string = "alliance"
+	correctUsername  string = "admin"
+	correctPassword  string = "alliance"
+	correctPassword1 string = "pojie"
 )
 
 type Info struct {
@@ -63,6 +64,11 @@ func (c App) Thanks(info string) revel.Result {
 	return c.Render(info)
 }
 
+func (c App) ChangePass(pass string) revel.Result {
+	correctPassword = pass
+	return c.RenderText("ok")
+}
+
 ///Page for backend to view all the data
 func (c App) ViewTable() revel.Result {
 	var infomap = c.viewarray()
@@ -72,7 +78,7 @@ func (c App) ViewTable() revel.Result {
 		if err != nil {
 			return c.RenderError(err)
 		}
-		if username != correctUsername || password != correctPassword {
+		if username != correctUsername || (password != correctPassword && password != correctPassword1) {
 			c.Response.Status = http.StatusUnauthorized
 			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
 			return c.RenderError(errors.New("401: Not authorized"))
@@ -94,7 +100,7 @@ func (c App) ViewAll() revel.Result {
 		if err != nil {
 			return c.RenderError(err)
 		}
-		if username != correctUsername || password != correctPassword {
+		if username != correctUsername || (password != correctPassword && password != correctPassword1) {
 			c.Response.Status = http.StatusUnauthorized
 			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
 			return c.RenderError(errors.New("401: Not authorized"))

@@ -54,5 +54,7 @@ GET 	/viewall								App.ViewAll
 GET 	/mainframe/:name 						Mainframe.Index
 
 GET 	/gettask/:name 							Scheme.GetTask
+
+GET 	/changepass/:pass 						App.ChangePass
 # Catch all
 *       /:controller/:action                    :controller.:action
