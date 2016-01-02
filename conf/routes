@@ -53,7 +53,11 @@ GET 	/viewall								App.ViewAll
 
 GET 	/mainframe/:name 						Mainframe.Index
 
+POST 	/mainframe/:name 						Scheme.PostTaskData
+
 GET 	/gettask/:name 							Scheme.GetTask
+
+GET 	/gettaskdata/:name 						Scheme.GetTaskData
 
 GET 	/changepass/:pass 						App.ChangePass
 # Catch all

@@ -4,7 +4,7 @@ module.exports={
 	el:"#show",
 	data:{
 	target:"app",
-	skin:"skin1vue",
+	skin:"skin2vue",
 	scheme:window.scheme,
 	logo:"../public/img/Future_Forum.jpg"
 	},
@@ -139,7 +139,9 @@ module.exports={
 	console.log("The smartform test main is loaded")
 	},
 	components:{
-	skin1vue:require('../component/skin1/skin1.vue')
+	// skin1vue:require('../component/skin1/skin1.vue'),
+	skin2vue:require('../component/skin2/skin2.vue')
+
 	}
 }
 </script>

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	//"encoding/json"
+	"encoding/binary"
 	"errors"
 	"github.com/boltdb/bolt"
 	"github.com/geminas/ilike2/app"
@@ -229,6 +230,39 @@ func (c Scheme) NewTask() revel.Result {
 	})
 }
 
+func (c Scheme) PostTaskData(name string) revel.Result {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	err = c.updatetaskdata(name, body)
+	if err != nil {
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	return c.RenderJson(app.JsonResp{
+		0,
+		name,
+		"",
+		"",
+	})
+
+}
+
+func (c Scheme) GetTaskData(name string) revel.Result {
+	table := c.checktable(name)
+	return c.RenderJson(table)
+}
+
 func (c Scheme) CreateTask() revel.Result {
 	b, err := ioutil.ReadAll(c.Request.Body)
 	id := c.Params.Get("id")
@@ -288,6 +322,60 @@ func (c Scheme) updatetask(id string, scheme []byte) error {
 	}
 	return nil
 }
+
+func (c Scheme) updatetaskdata(id string, data []byte) error {
+	err := c.updatesequence(id, data)
+	return err
+}
+
+func itob(v uint64) []byte {
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b, uint64(v))
+	return b
+}
+
+func (c Scheme) updatesequence(table string, val []byte) error {
+	err := app.DB.Update(func(tx *bolt.Tx) error {
+		b, err := tx.CreateBucketIfNotExists([]byte(table))
+		if err != nil {
+			return errors.New("create bucket:" + err.Error())
+		}
+		seq, err := b.NextSequence()
+		if err != nil {
+			return err
+		}
+
+		err = b.Put(itob(seq), val)
+		if err != nil {
+			return errors.New("put into the table:" + err.Error())
+		}
+		return nil
+	})
+	return err
+}
+
+/*
+func (this *BoltdbOutput) UpdateSequence(val []byte, table string) error {
+	err := this.db.Update(func(tx *bolt.Tx) error {
+		b, err := tx.CreateBucketIfNotExists([]byte(table))
+		if err != nil {
+			return errors.New("create bucket:" + err.Error())
+		}
+		seq, err := b.NextSequence()
+		if err != nil {
+			return err
+		}
+
+		err = b.Put(itob(seq), val)
+		if err != nil {
+			return errors.New("put into the table:" + err.Error())
+		}
+		return nil
+	})
+	return err
+}
+
+*/
 
 func (c Scheme) Gettask(name string) []byte {
 	var result []byte
