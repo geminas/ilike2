@@ -60,5 +60,7 @@ GET 	/gettask/:name 							Scheme.GetTask
 GET 	/gettaskdata/:name 						Scheme.GetTaskData
 
 GET 	/changepass/:pass 						App.ChangePass
+
+GET 	/viewdata/:name 						Scheme.ViewData
 # Catch all
 *       /:controller/:action                    :controller.:action

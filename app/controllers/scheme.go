@@ -304,6 +304,42 @@ func (c Scheme) CreateTask() revel.Result {
 
 // }
 
+func (c Scheme) ViewData(name string) revel.Result {
+	infomap := c.viewarray(name)
+	log.Println(infomap)
+	sc := string(c.Gettask(name))
+	return c.Render(infomap, sc)
+}
+
+func (c Scheme) viewarray(table string) string {
+	m := "["
+	app.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(table))
+		if b == nil {
+			return nil
+		}
+		c := b.Cursor()
+
+		for k, v := c.First(); k != nil; k, v = c.Next() {
+			if string(v) != "" {
+				m += string(v)
+				m += ","
+			}
+			//fmt.Printf("key=%s, value=%s\n", k, v)
+		}
+
+		return nil
+	})
+	var bm = []byte(m)
+	if len(bm) > 1 {
+		bm[len(bm)-1] = ']'
+	} else {
+		m += "]"
+		bm = []byte(m)
+	}
+	return string(bm)
+}
+
 func (c Scheme) newtask(id string, scheme []byte) error {
 	if b := c.check(id, "task"); len(b) != 0 {
 		return errors.New("该任务已经存在")

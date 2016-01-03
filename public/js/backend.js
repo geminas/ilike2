@@ -94,7 +94,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "iframe{\n\t\twidth: 100%;\n\t}", ""]);
 
 	// exports
 
@@ -393,6 +393,7 @@
 			schemes:[],
 			taskMap:{},
 			bindform:{},
+			binddatapath:"",
 			bindid:""
 		},
 		created:function(){
@@ -400,6 +401,37 @@
 			this.sync()
 		},
 		methods:{
+			addtask:function(){
+				var self=this
+				$.ajax({
+					type:'GET',
+					url:"/newtask",
+					cache:false,
+					//data:JSON.stringify(data),
+					//contentType:"application/json",
+					processData: false,
+		            success:function(data){
+		            	// console.log(data)
+		            	// self.schemes=[]
+		            	// for(key in data){
+		            	// 	self.schemes.push({
+		            	// 		id:key,
+		            	// 		scheme:JSON.parse(data[key])
+		            	// 	})
+		            	// }
+		            	// self.taskMap=data
+		            	// self.bindform=self.schemes[0].scheme
+		            	// self.bindid=self.schemes[0].id
+		              	//console.log(self.schemes)
+		              	self.sync()
+		            },
+		            error:function(data){
+		                console.log("error");
+		                //console.log(data);
+		               alert("error: "+data)
+		            }
+				});	
+			},
 			sync:function(){
 				var self=this
 				$.ajax({
@@ -434,6 +466,14 @@
 				this.bindform=this.schemes[index].scheme
 				this.bindid=this.schemes[index].id
 				$('#myModal').modal()
+			},
+			checktask:function(index){
+				// this.bindform=this.schemes[index].scheme
+				// this.bindid=this.schemes[index].id
+				if(this.schemes[index].id!=""){
+				this.binddatapath="/viewdata/"+this.schemes[index].id
+				}
+				$('#myModal2').modal()
 			},
 			save:function(e){
 				//var item=JSON.parse(this.taskMap[this.bindid])
@@ -675,7 +715,7 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<header></header>\n\n<div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"choosetask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div>\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n\t      </div>\n\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->";
+	module.exports = "<header></header>\n\n\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->\n<ul id=\"myTab\" class=\"nav nav-tabs\">\n   <li class=\"active\">\n      <a href=\"#home\" data-toggle=\"tab\">\n         活动设置\n      </a>\n   </li>\n   <li><a href=\"#ios\" data-toggle=\"tab\">查看活动数据</a></li>\n\n</ul>\n<div id=\"myTabContent\" class=\"tab-content\">\n   <div class=\"tab-pane fade in active\" id=\"home\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"choosetask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div>\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n\t      </div>\n\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n   <div class=\"tab-pane fade\" id=\"ios\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"checktask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n -->\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">查看活动数据</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<!-- <div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div> -->\n\t        <div class=\"row\">\n \t\t\t\t<iframe src=\"{{binddatapath}}\" frameborder=\"0\"></iframe>\n \t\t\t</div>\n\t      </div>\n\t      <!-- <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div> -->\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n  \n</div>";
 
 /***/ },
 /* 17 */

@@ -39,11 +39,12 @@
 				e.preventDefault()
 				console.log("on submit")
 				//console.log(this.scheme)
-				var res=[]
+				var res={}
 				try{
+
 					for(var i in scheme.fields){
 						console.log(scheme.fields[i].name,scheme.fields[i].data)
-						res.push({name:scheme.fields[i].name,data:scheme.fields[i].data})
+						res[scheme.fields[i].name]=scheme.fields[i].data
 					}
 				}catch(e){
 					console.log(e)
