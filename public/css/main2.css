@@ -59,6 +59,24 @@ body{
   display: inline;
 }
 
+#contact .label-checkboxes{
+  display: block;
+}
+
+#contact .label-checkboxes ~ div{
+  margin-right: 10px;
+  display: inline;
+}
+
+#contact .label-radio {
+  display: block;
+}
+
+#contact .label-radio ~div {
+  margin-right: 10px;
+  display: inline;
+}
+
 #contact input[type="checkbox"]{
 	/*margin-left:10px; */
 }

@@ -19,9 +19,15 @@
 		// compiled:function(){
 		// 	console.log("skin1 has been compiled");
 		// },
-		// ready:function(){
-		// 	console.log("skin1 has been ready");
-		// },
+		ready:function(){
+			console.log("skin1 has been ready");
+			
+			// for(var i in this.scheme.fields) {
+			// 	this.scheme.fields[i].placeholder = this.scheme.fields[i].label;
+			// }
+
+			// console.log(this.scheme);
+		},
 		// attached:function(){
 		// 	console.log("skin1 has been attached");
 		// },
