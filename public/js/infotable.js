@@ -45,23 +45,21 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(3)
+	var app=__webpack_require__(1)
 	var Vue = __webpack_require__(9)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
+	module.exports = __webpack_require__(2)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 4 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -72,23 +70,24 @@
 		},
 		ready:function(){
 		console.log("The infotable test main is loaded")
+		console.log(window)
 		},
 		components:{
-		'infotablevue':__webpack_require__(5)
+		'infotablevue':__webpack_require__(3)
 		}
 	}
 
 /***/ },
-/* 5 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
-/* 6 */
-/***/ function(module, exports) {
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
 			data:function(){
@@ -124,6 +123,35 @@
 			// 	console.log("infotable has been destoryed");
 			// },
 			methods:{
+				onsave:function(){
+					this.savexls(this.data)
+				},
+				savexls:function(objArray){
+			        // var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+			        // var str = '';
+
+			        // for (var i = 0; i < array.length; i++) {
+			        //     var line = '';
+
+			        //     for (var index in array[i]) {
+			        //         line += array[i][index] + ',';
+			        //     }
+
+			        //     // Here is an example where you would wrap the values in double quotes
+			        //     // for (var index in array[i]) {
+			        //     //    line += '"' + array[i][index] + '",';
+			        //     // }
+
+			        //     line.slice(0,line.Length-1); 
+
+			        //     str += line + '\r\n';
+			        // }
+			        // window.open( "data:text/csv;charset=utf-8," + escape(str))
+			        console.log(window)
+			        var t=Date.now()
+			        window.tableExport('data-table', t, 'xls');
+			    }
 				// sayHello:function(){
 				// 	console.log("Hello,This is the infotable component");
 				// }
@@ -175,14 +203,16 @@
 		}
 
 /***/ },
+/* 5 */,
+/* 6 */,
 /* 7 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<div>\n<component is=\"infotablevue\" :data=\"d\"/>\n</div>";
 
@@ -9496,7 +9526,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	// shim for using process in browser
 
@@ -9530,9 +9560,7 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
+	            currentQueue[queueIndex].run();
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9584,6 +9612,7 @@
 	    throw new Error('process.binding is not supported');
 	};
 
+	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');

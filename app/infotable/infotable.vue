@@ -8,6 +8,7 @@ module.exports={
 	},
 	ready:function(){
 	console.log("The infotable test main is loaded")
+	console.log(window)
 	},
 	components:{
 	'infotablevue':require('../component/infotable/infotable.vue')

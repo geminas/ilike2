@@ -33,6 +33,35 @@
 		// 	console.log("infotable has been destoryed");
 		// },
 		methods:{
+			onsave:function(){
+				this.savexls(this.data)
+			},
+			savexls:function(objArray){
+		        // var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+		        // var str = '';
+
+		        // for (var i = 0; i < array.length; i++) {
+		        //     var line = '';
+
+		        //     for (var index in array[i]) {
+		        //         line += array[i][index] + ',';
+		        //     }
+
+		        //     // Here is an example where you would wrap the values in double quotes
+		        //     // for (var index in array[i]) {
+		        //     //    line += '"' + array[i][index] + '",';
+		        //     // }
+
+		        //     line.slice(0,line.Length-1); 
+
+		        //     str += line + '\r\n';
+		        // }
+		        // window.open( "data:text/csv;charset=utf-8," + escape(str))
+		        console.log(window)
+		        var t=Date.now()
+		        window.tableExport('data-table', t, 'xls');
+		    }
 			// sayHello:function(){
 			// 	console.log("Hello,This is the infotable component");
 			// }
@@ -88,7 +117,7 @@
 <!-- <div>This is component infotable</div>
  -->
  <div class="container-fluid">
-	 <table class="table">
+	 <table class="table" id="data-table">
 	 	<thead>
 	 		<th>number</th>
 	 		<th v-for="(key,val) in data[0]">{{key}}</th>
@@ -101,5 +130,6 @@
 	 	</tbody>
 	 </table>
 </div>
+<button type="button" @click="onsave">保存成xls</button>
  </template>
 <style type="text/css"></style>
