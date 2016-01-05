@@ -94,7 +94,7 @@
 
 
 	// module
-	exports.push([module.id, "iframe{\n\t\twidth: 100%;\n\t}", ""]);
+	exports.push([module.id, ".modal img{\n\t\twidth: 100%;\n\t}\n\tiframe{\n\t\twidth: 100%;\n\t}", ""]);
 
 	// exports
 
@@ -394,13 +394,53 @@
 			taskMap:{},
 			bindform:{},
 			binddatapath:"",
-			bindid:""
+			bindid:"",
+			bg_img:""
 		},
 		created:function(){
 			console.log("backend has been created");
 			this.sync()
 		},
+		ready:function(){
+			$('#uploader').on('change',function(e){
+					console.log("changed")
+					e.preventDefault();
+					//self.$parent.$.mainframe.progress="正在处理中..."
+					var fileupload=document.getElementById('uploader')
+					//console.log(fileupload.files.length)
+					self.uploadfile();
+				})
+
+		},
 		methods:{
+			uploadfile:function(e){
+					e.preventDefault();
+					var self=this;
+					var fd=new FormData();
+					var fileupload=document.getElementById('uploader')
+					fd.append("uploadfile", fileupload.files[0]);
+
+					$.ajax({
+						type:'POST',
+						url:"/upload",
+						data:fd,
+						cache:false,
+						contentType:false,
+						processData: false,
+			            success:function(data){
+			                //console.log(data)
+			              	if(data.status==0){
+			              		self.bindform.bgimg=data.msg;
+			              	}
+			            },
+			            error: function(data){
+			                console.log("error");
+			                console.log(data);
+			                
+			            }
+					});
+					
+				},
 			addtask:function(){
 				var self=this
 				$.ajax({
@@ -462,6 +502,10 @@
 		            }
 				});	
 			},
+			deletetask:function(index){
+				this.schemes[index].scheme.deleted=true
+				this.updatetask(index)
+			},
 			choosetask:function(index){
 				this.bindform=this.schemes[index].scheme
 				this.bindid=this.schemes[index].id
@@ -474,6 +518,35 @@
 				this.binddatapath="/viewdata/"+this.schemes[index].id
 				}
 				$('#myModal2').modal()
+			},
+			updatetask:function(index){
+				var id=this.schemes[index].id
+				if(id ===""||id===undefined){
+					console.log("Id is invalid")
+					return 
+				}
+				var self=this;
+				$.ajax({
+				type:'POST',
+				url:"/posttask?id="+id,
+				cache:false,
+				data:JSON.stringify(self.schemes[index].scheme),
+				contentType:"application/json",
+				processData: false,
+	            success:function(data){
+	                console.log(data)
+	              	//alert(data)
+	              	//var d=JSON.parse(data)
+	              	//console.log(d)
+	              	//self.$data.scheme=d
+	              	self.sync()
+	            },
+	            error:function(data){
+	                console.log("error");
+	                //console.log(data);
+	               alert("error: "+data)
+	            }
+			});
 			},
 			save:function(e){
 				//var item=JSON.parse(this.taskMap[this.bindid])
@@ -715,7 +788,7 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<header></header>\n\n\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->\n<ul id=\"myTab\" class=\"nav nav-tabs\">\n   <li class=\"active\">\n      <a href=\"#home\" data-toggle=\"tab\">\n         活动设置\n      </a>\n   </li>\n   <li><a href=\"#ios\" data-toggle=\"tab\">查看活动数据</a></li>\n\n</ul>\n<div id=\"myTabContent\" class=\"tab-content\">\n   <div class=\"tab-pane fade in active\" id=\"home\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"choosetask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div>\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n\t      </div>\n\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n   <div class=\"tab-pane fade\" id=\"ios\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for=\"t in schemes\" @click=\"checktask($index)\">\n\t\t\t\t\t<th>{{t.id}}</th>\n\t\t\t\t\t<th>{{t.scheme.name}}</th>\n\t\t\t\t\t<th>{{t.scheme.describe}}</th>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n -->\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">查看活动数据</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<!-- <div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div> -->\n\t        <div class=\"row\">\n \t\t\t\t<iframe src=\"{{binddatapath}}\" frameborder=\"0\"></iframe>\n \t\t\t</div>\n\t      </div>\n\t      <!-- <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div> -->\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n  \n</div>";
+	module.exports = "<header></header>\n\n\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->\n<ul id=\"myTab\" class=\"nav nav-tabs\">\n   <li class=\"active\">\n      <a href=\"#home\" data-toggle=\"tab\">\n         活动设置\n      </a>\n   </li>\n   <li><a href=\"#ios\" data-toggle=\"tab\">查看活动数据</a></li>\n\n</ul>\n<div id=\"myTabContent\" class=\"tab-content\">\n   <div class=\"tab-pane fade in active\" id=\"home\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<template v-for=\"t in schemes\">\n\t\t\t\t<tr v-if=\"t.scheme.deleted===false\" >\n\t\t\t\t\t<td @click=\"choosetask($index)\">{{t.id}}</td>\n\t\t\t\t\t<td @click=\"choosetask($index)\">{{t.scheme.name}}</td>\n\t\t\t\t\t<td @click=\"choosetask($index)\">{{t.scheme.describe}}</td>\n\t\t\t\t\t<td @click=\"deletetask($index)\">删除</td>\n\t\t\t\t\t<td ><a href=\"/mainframe/{{t.id}}\">浏览</a></td>\n\t\t\t\t</tr>\n\t\t\t\t</template>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div>\n\t\t\t<div class=\"row\">\n\t\t\t\t<form action=\"/upload\" method=\"post\" enctype=\"multipart/form-data\" id=\"form\">\n\t\t\t\t\t\n\t\t\t\t\t<input id=\"uploader\" type=\"file\" name=\"uploadfile\" style=\"display:inline-block;width:70%\"/>\n\t\t\t\t\t<input type=\"submit\" value=\"upload\" @click=\"uploadfile($event)\" style=\"display:inline-block;width:23%\"/>\n\n\t\t\t\t</form>\n\t\t\t\t<img src=\"{{bindform.bgimg}}\" alt=\"\">\n\t\t\t</div>\n\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n\t      </div>\n\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n   <div class=\"tab-pane fade\" id=\"ios\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>活动描述</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<template v-for=\"t in schemes\">\n\t\t\t\t<tr v-if=\"t.scheme.deleted===false\" >\n\t\t\t\t\t<td @click=\"checktask($index)\">{{t.id}}</td>\n\t\t\t\t\t<td @click=\"checktask($index)\">{{t.scheme.name}}</td>\n\t\t\t\t\t<td @click=\"choosetchecktaskask($index)\">{{t.scheme.describe}}</td>\n\t\t\t\t\t\n\t\t\t\t</tr>\n\t\t\t\t</template>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n -->\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">查看活动数据</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<!-- <div class=\"row\">\n\t      \t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t</div>\n\t      \t<div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div> -->\n\t        <div class=\"row\">\n \t\t\t\t<iframe src=\"{{binddatapath}}\" frameborder=\"0\"></iframe>\n \t\t\t</div>\n\t      </div>\n\t      <!-- <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div> -->\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n  \n</div>";
 
 /***/ },
 /* 17 */

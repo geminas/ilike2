@@ -7,8 +7,10 @@ import (
 	"github.com/boltdb/bolt"
 	"github.com/geminas/ilike2/app"
 	"github.com/revel/revel"
+	"io"
 	"io/ioutil"
 	"log"
+	"os"
 	"strconv"
 	"time"
 )
@@ -16,6 +18,8 @@ import (
 var testjson = `{
     "name":"活动名字",
     "describe":"活动描述",
+    "deleted":false,
+    "bgimg":"/public/img/ljwl_background.jpg",
     "fields":[     {  
          "label":"下拉选项",
          "field_type":"dropdown",
@@ -261,6 +265,50 @@ func (c Scheme) PostTaskData(name string) revel.Result {
 func (c Scheme) GetTaskData(name string) revel.Result {
 	table := c.checktable(name)
 	return c.RenderJson(table)
+}
+
+func (c Scheme) Upload(name string) revel.Result {
+	log.Println("uploading")
+	c.Request.ParseMultipartForm(32 << 20)
+	file, handler, err := c.Request.FormFile("uploadfile")
+	if err != nil {
+		log.Println(err)
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	defer file.Close()
+
+	out, err := os.Create("/Users/deepglint/gocode/src/github.com/geminas/ilike2/public/img/" + handler.Filename)
+	if err != nil {
+		log.Println(err)
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	defer out.Close()
+	_, err = io.Copy(out, file)
+	if err != nil {
+		log.Println(err)
+		return c.RenderJson(app.JsonResp{
+			1,
+			err.Error(),
+			"",
+			"",
+		})
+	}
+	return c.RenderJson(app.JsonResp{
+		0,
+		"/public/img/" + handler.Filename,
+		"",
+		"",
+	})
 }
 
 func (c Scheme) CreateTask() revel.Result {

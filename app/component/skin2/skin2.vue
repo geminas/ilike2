@@ -5,7 +5,7 @@
 				target:"app",
 				scheme:{},
 				logo:"../public/img/Future_Forum.jpg",
-				background:"../public/img/ljwl_background.jpg"
+				
 			}
 		},
 		props:["scheme"],
@@ -21,7 +21,7 @@
 		// },
 		ready:function(){
 			console.log("skin1 has been ready");
-			
+			// document.getElementsByTagName('body').style.backgroundImage = "url('"+this.background+"');";
 			// for(var i in this.scheme.fields) {
 			// 	this.scheme.fields[i].placeholder = this.scheme.fields[i].label;
 			// }
@@ -128,7 +128,7 @@
 	}
 </script>
 <template>
-<section id="contact">
+<section id="contact" style="background:url('{{scheme.bgimg}}');">
 	<div class="container">
 		<div class="row contact-title">
 			<div class="col-lg-12 text-center">
@@ -166,3 +166,140 @@
 </section>
 
  </template>
+<style>
+	#contact .contact-title h2{
+  text-align: center;
+}
+#contact .contact-title{
+  margin-bottom: 30px;
+  color:white;
+}
+
+#contact {
+    padding-top: 30px;
+}
+
+#contact .has-error .form-control{
+  border-color: #A72585;
+  border-width: 3px;
+}
+
+#contact{
+ /* background: url('{{background}}');*/
+  background-size: cover !important;
+  background-position-y: 40% !important;
+}
+
+#contact .contact-title h3{
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+#contact .contact-title h2{
+  font-size: 5em;
+  margin-bottom: 20px;
+}
+
+#contact .contact-title h6{
+  margin-top: 0px;
+}
+
+#contact .conference-form,#contact .contents{
+  background-color: rgba(255, 255, 255, 0.35);
+  color:black;
+}
+/*#contact .container{
+  max-width: 600px;
+}*/
+#contact row{}
+#contact .btn{
+  margin-bottom: 0px;
+}
+#contact label{
+  width: 100%;
+  margin: 13px auto;
+  padding-top:10px;
+  color: white;
+  display: none;
+}
+
+#contact .label-source {
+  margin-right: 10px;
+  display: inline;
+}
+
+#contact .label-checkboxes{
+  display: block;
+}
+
+#contact .label-checkboxes ~ div{
+  margin-right: 10px;
+  display: inline;
+}
+
+#contact .label-radio {
+  display: block;
+}
+
+#contact .label-radio ~div {
+  margin-right: 10px;
+  display: inline;
+}
+
+#contact input[type="checkbox"]{
+	/*margin-left:10px; */
+}
+#contact .required{
+	color:red;
+}
+
+#contact .submit-button{
+	margin:15px 0px 18px 0px;
+}
+
+#contact .submit-button .btn {
+    background: #F52B2B;
+    width: 250px;
+}
+
+#contact .logo {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+#contact select {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#contact textarea {
+  resize:none;
+}
+
+@media (max-width: 700px) {
+  #contact .logo {
+    width: 100px;
+  }
+
+  #contact .contact-title{
+    margin-bottom: 30px;
+    color:white;
+  }
+
+  #contact .submit-button .btn {
+    background: #F52B2B;
+    width: 180px;
+  }
+
+  #contact .contact-title h3 {
+    font-size: 1.8em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  #contact .contact-title h2 {
+    font-size: 2em;
+  }
+}
+
+</style>

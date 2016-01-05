@@ -148,7 +148,7 @@ module.exports={
 
 <template>
 <div >
-	<component :is="skin" :scheme="scheme" v-ref="skin"/>
+	<component :is="skin" :scheme="scheme"  v-ref="skin"/>
 </div>
 
 </template>
