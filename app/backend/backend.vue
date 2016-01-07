@@ -237,14 +237,14 @@ module.exports={
 			<thead>
 				<th>活动ID</th>
 				<th>活动名</th>
-				<th>活动描述</th>
+				<!-- <th>活动描述</th> -->
 			</thead>
 			<tbody>
 				<template v-for="t in schemes">
 				<tr v-if="t.scheme.deleted===false" >
 					<td @click="choosetask($index)">{{t.id}}</td>
 					<td @click="choosetask($index)">{{t.scheme.name}}</td>
-					<td @click="choosetask($index)">{{t.scheme.describe}}</td>
+					<!-- <td @click="choosetask($index)">{{t.scheme.describe}}</td> -->
 					<td @click="deletetask($index)">删除</td>
 					<td ><a href="/mainframe/{{t.id}}">浏览</a></td>
 				</tr>
@@ -272,9 +272,9 @@ module.exports={
 	      	<div class="row">
 	      		<label for="">活动名</label><input type="text" v-model="bindform.name">
 	      	</div>
-	      	<div class="row">
+	      	<!-- <div class="row">
 	      		<label for="">活动描述</label><input type="text" v-model="bindform.describe">
-	      	</div>
+	      	</div> -->
 			<div class="row">
 				<form action="/upload" method="post" enctype="multipart/form-data" id="form">
 					

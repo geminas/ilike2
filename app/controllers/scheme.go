@@ -24,11 +24,12 @@ var testjson = `{
          "label":"下拉选项",
          "field_type":"dropdown",
          "required":true,
+         "name":"c1",
          "field_options":{  
             "options":[  
                {  
                   "label":"选项1",
-                  "checked":true
+                  "checked":false
                },
                {  
                   "label":"选项2",
@@ -47,9 +48,10 @@ var testjson = `{
          "label":"这是输入框",
          "field_type":"text",
          "required":true,
+         "name":"c2",
          "field_options":{  
             "size":"medium",
-            "description":"这里是一些额外数据",
+            "description":"",
             "minlength":"12",
             "maxlength":"22",
             "min_max_length_units":"words"
@@ -60,6 +62,7 @@ var testjson = `{
          "label":"这是单选框",
          "field_type":"radio",
          "required":true,
+         "name":"c3",
          "field_options":{  
             "options":[  
                {  
@@ -75,35 +78,16 @@ var testjson = `{
                   "checked":false
                }
             ],
-            "description":"这里是一些额外数据",
-            "include_other_option":true
+            "description":"",
+            "include_other_option":false
          },
          "cid":"c49"
       },
       {  
-         "label":"这个也是单选",
+         "label":"这个是多选框",
          "field_type":"checkboxes",
          "required":true,
-         "field_options":{  
-            "options":[  
-               {  
-                  "label":"选择a",
-                  "checked":false
-               },
-               {  
-                  "label":"选择b",
-                  "checked":true
-               }
-            ],
-            "description":"在这里输入一些额外的数据",
-            "include_other_option":true
-         },
-         "cid":"c53"
-      },
-      {  
-         "label":"这个是多选框",
-         "field_type":"radio",
-         "required":true,
+         "name":"c5",
          "field_options":{  
             "options":[  
                {  
@@ -123,7 +107,7 @@ var testjson = `{
                   "checked":false
                }
             ],
-            "description":"在这里输入一些东西"
+            "description":""
          },
          "cid":"c57"
       },
@@ -131,6 +115,7 @@ var testjson = `{
          "label":"这个是下拉列表",
          "field_type":"dropdown",
          "required":true,
+         "name":"c6",
          "field_options":{  
             "options":[  
                {  
@@ -151,7 +136,7 @@ var testjson = `{
                }
             ],
             "include_blank_option":false,
-            "description":"在这里输入一些东西"
+            "description":""
          },
          "cid":"c61"
       }
@@ -480,6 +465,9 @@ func (c Scheme) checktable(table string) map[string]string {
 	m := make(map[string]string)
 	app.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(table))
+		if b == nil {
+			return nil
+		}
 		b.ForEach(func(k, v []byte) error {
 			//fmt.Printf("key=%s, value=%s\n", k, v)
 			m[string(k)] = string(v)

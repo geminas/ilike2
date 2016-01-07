@@ -16,6 +16,12 @@ func (c MainFrame) Index(name string) revel.Result {
 
 }
 
+func (c MainFrame) Thanks() revel.Result {
+
+	return c.Render()
+
+}
+
 func (c MainFrame) Gettask(name string) []byte {
 	var result []byte
 	app.DB.View(func(tx *bolt.Tx) error {

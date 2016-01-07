@@ -44,19 +44,45 @@
 			onsubmit:function(e){
 				e.preventDefault()
 				console.log("on submit")
+			    var errnum=0;
+				var errid=""
 				//console.log(this.scheme)
 				var res={}
 				try{
 
 					for(var i in scheme.fields){
 						console.log(scheme.fields[i].name,scheme.fields[i].data)
+						if(scheme.fields[i].field_type=="checkboxes"){
+							for(var j in scheme.fields[i].datas){
+								scheme.fields[i].data+=scheme.fields[i].datas[j]
+								scheme.fields[i].data+=";"
+							}
+						}
+						if(this.scheme.fields[i].required==true&&this.scheme.fields[i].data==""){
+							this.scheme.fields[i].error="此项不可以为空"
+							this.scheme.fields[i].status = "has-error"
+							if(errid==""){
+								errid="#"+this.scheme.fields[i].name;
+							}
+							errnum++;
+
+							continue
+						}else{
+							this.scheme.fields[i].error=""
+							this.scheme.fields[i].status = ""
+						}
+
 						res[scheme.fields[i].name]=scheme.fields[i].data
 					}
 				}catch(e){
 					console.log(e)
 				}
 				console.log(res)
-					$.ajax({
+
+				if(errnum==0){
+				console.log("ok to submit")
+				//return true
+				$.ajax({
 					type:'POST',
 					url:window.location.href,
 					cache:false,
@@ -65,7 +91,12 @@
 					processData: false,
 		            success:function(data){
 		                console.log(data)
-		              	alert(data)
+		                if(data.status==0){
+		                	//window.location.href="/thankyou";
+		                }else{
+		                	alert(data.msg);
+		                }
+		              	//alert(data)
 		            },
 		            error:function(data){
 		                console.log("error");
@@ -73,6 +104,16 @@
 		               alert("error: "+data)
 		            }
 				});
+				}else{
+					e.preventDefault()
+					console.log(errid)
+					alert("请完成没有填完的必填选项")
+					$('html, body').animate({
+	                    scrollTop:($(errid).offset().top-50)
+	                }, 200);
+					return false
+				}
+					
 			}
 			// sayHello:function(){
 			// 	console.log("Hello,This is the skin1 component");

@@ -18,6 +18,8 @@ GET		/query									App.Query
 
 GET		/thanks									App.Thanks
 
+GET 	/thankyou 								MainFrame.Thanks
+
 GET 	/errorinfo/:info 						App.ErrorInfo
 
 GET 	/2/errorinfo/:info 						App2.ErrorInfo
