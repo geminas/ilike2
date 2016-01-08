@@ -253,6 +253,8 @@ func (c Scheme) GetTaskData(name string) revel.Result {
 }
 
 func (c Scheme) Upload(name string) revel.Result {
+	var imgpath = revel.Config.StringDefault("imgpath", "")
+
 	log.Println("uploading")
 	c.Request.ParseMultipartForm(32 << 20)
 	file, handler, err := c.Request.FormFile("uploadfile")
@@ -267,7 +269,7 @@ func (c Scheme) Upload(name string) revel.Result {
 	}
 	defer file.Close()
 
-	out, err := os.Create("/Users/deepglint/gocode/src/github.com/geminas/ilike2/public/img/" + handler.Filename)
+	out, err := os.Create(imgpath + handler.Filename)
 	if err != nil {
 		log.Println(err)
 		return c.RenderJson(app.JsonResp{
