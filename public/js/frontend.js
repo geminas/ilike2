@@ -637,7 +637,7 @@
 			            success:function(data){
 			                console.log(data)
 			                if(data.status==0){
-			                	//window.location.href="/thankyou";
+			                	window.location.href="/thankyou";
 			                }else{
 			                	alert(data.msg);
 			                }

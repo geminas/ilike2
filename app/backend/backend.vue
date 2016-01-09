@@ -220,23 +220,18 @@ module.exports={
 		</li>
 	</ul>
 </div> -->
-<ul id="myTab" class="nav nav-tabs">
-   <li class="active">
-      <a href="#home" data-toggle="tab">
-         活动设置
-      </a>
-   </li>
-   <li><a href="#ios" data-toggle="tab">查看活动数据</a></li>
-
-</ul>
+<div class="page-header text-center">
+  <h1>活动报名系统后台</h1>
+</div>
 <div id="myTabContent" class="tab-content">
    <div class="tab-pane fade in active" id="home">
       <div class="container">
 	<div class="row">
-		<table class="table table-hover">
+		<table class="table table-hover activity-table">
 			<thead>
 				<th>活动ID</th>
 				<th>活动名</th>
+				<th>操作</th>	
 				<!-- <th>活动描述</th> -->
 			</thead>
 			<tbody>
@@ -245,8 +240,7 @@ module.exports={
 					<td @click="choosetask($index)">{{t.id}}</td>
 					<td @click="choosetask($index)">{{t.scheme.name}}</td>
 					<!-- <td @click="choosetask($index)">{{t.scheme.describe}}</td> -->
-					<td @click="deletetask($index)">删除</td>
-					<td ><a href="/mainframe/{{t.id}}">浏览</a></td>
+					<td><span @click="choosetask($index)">设置活动</span><span @click="checktask($index)">查看数据</span><span ><a href="/mainframe/{{t.id}}">浏览</a></span><span @click="deletetask($index)">删除</span></td>	
 				</tr>
 				</template>
 			</tbody>
@@ -296,38 +290,7 @@ module.exports={
 	    </div>
 	  </div>
 	</div>
-</div>
-   </div>
-   <div class="tab-pane fade" id="ios">
-      <div class="container">
-	<div class="row">
-		<table class="table table-hover">
-			<thead>
-				<th>活动ID</th>
-				<th>活动名</th>
-				<th>活动描述</th>
-			</thead>
-			<tbody>
-				<template v-for="t in schemes">
-				<tr v-if="t.scheme.deleted===false" >
-					<td @click="checktask($index)">{{t.id}}</td>
-					<td @click="checktask($index)">{{t.scheme.name}}</td>
-					<td @click="choosetchecktaskask($index)">{{t.scheme.describe}}</td>
-					
-				</tr>
-				</template>
-			</tbody>
-		</table>
-	</div>
-	<!-- <button type="button" class="btn btn-primary btn-lg" @click="addtask">
-	  新增活动
-	</button>
- -->	<!-- Button trigger modal -->
-	<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-	  Launch demo modal
-	</button> -->
-
-	<!-- Modal -->
+	
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -336,12 +299,7 @@ module.exports={
 	        <h4 class="modal-title" id="myModalLabel">查看活动数据</h4>
 	      </div>
 	      <div class="modal-body">
-	      	<!-- <div class="row">
-	      		<label for="">活动名</label><input type="text" v-model="bindform.name">
-	      	</div>
-	      	<div class="row">
-	      		<label for="">活动描述</label><input type="text" v-model="bindform.describe">
-	      	</div> -->
+	      	
 	        <div class="row">
  				<iframe src="{{binddatapath}}" frameborder="0"></iframe>
  			</div>
@@ -356,6 +314,7 @@ module.exports={
 </div>
    </div>
   
+  
 </div>
 </template>
 
@@ -366,4 +325,14 @@ module.exports={
 	iframe{
 		width: 100%;
 	}
+	.activity-table span{
+		margin-right: 5px;
+	}
+	.activity-table a{
+		color:black;
+	}
+	.activity-table span:hover{
+		cursor: pointer;
+	}
+
 </style>
