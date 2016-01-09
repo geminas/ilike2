@@ -247,6 +247,18 @@ func (c Scheme) PostTaskData(name string) revel.Result {
 
 }
 
+func (c Scheme) GetFile(name string) revel.Result {
+	var imgpath = revel.Config.StringDefault("imgpath", "")
+	var p = imgpath + name
+
+	file, err := os.Open(p)
+	if err != nil {
+		return c.RenderError(err)
+	}
+	//defer file.Close()
+	return c.RenderFile(file, revel.Inline)
+}
+
 func (c Scheme) GetTaskData(name string) revel.Result {
 	table := c.checktable(name)
 	return c.RenderJson(table)
@@ -292,7 +304,7 @@ func (c Scheme) Upload(name string) revel.Result {
 	}
 	return c.RenderJson(app.JsonResp{
 		0,
-		"/public/img/" + handler.Filename,
+		"/files/" + handler.Filename,
 		"",
 		"",
 	})

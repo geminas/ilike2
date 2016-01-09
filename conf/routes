@@ -67,6 +67,8 @@ GET 	/viewdata/:name 						Scheme.ViewData
 
 POST 	/upload 								Scheme.Upload
 
+GET 	/files/:name 							Scheme.GetFile
+
 GET 	/img/*filepath 							Static.Serve("img")
 # Catch all
 *       /:controller/:action                    :controller.:action
