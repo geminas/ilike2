@@ -54,12 +54,14 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -71,13 +73,12 @@
 		console.log("The formbuilder test main is loaded")
 		},
 		components:{
-		'formbuildervue':__webpack_require__(4)
+		'formbuildervue':__webpack_require__(5)
 		}
 	}
 
 /***/ },
-/* 3 */,
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(6)
@@ -85,78 +86,42 @@
 
 
 /***/ },
-/* 5 */,
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	$(function(){
-	      fb = new Formbuilder({
-	        selector: '#formbuilder',
-	        bootstrapData: [
-	          {
-	            "label": "Do you have a website?",
-	            "field_type": "website",
-	            "required": false,
-	            "field_options": {},
-	            "cid": "c1"
-	          },
-	          {
-	            "label": "Please enter your clearance number",
-	            "field_type": "text",
-	            "required": true,
-	            "field_options": {},
-	            "cid": "c6"
-	          },
-	          {
-	            "label": "Security personnel #82?",
-	            "field_type": "radio",
-	            "required": true,
-	            "field_options": {
-	                "options": [{
-	                    "label": "Yes",
-	                    "checked": false
-	                }, {
-	                    "label": "No",
-	                    "checked": false
-	                }],
-	                "include_other_option": true
-	            },
-	            "cid": "c10"
-	          },
-	          {
-	            "label": "Medical history",
-	            "field_type": "file",
-	            "required": true,
-	            "field_options": {},
-	            "cid": "c14"
-	          }
-	        ]
-	      });
-
-	      fb.on('save', function(payload){
-	        console.log(payload);
-	      })
-	    });
-		module.exports={
+	module.exports={
 			data:function(){
 				return {
+					fb:{},
+					scheme:[],
+					payload:{}
 					//hello:"world"
 				}
 			},
-			props:[],
+			props:["scheme"],
 			/////////////Life Span/////////////////////
-			// created:function(){
-			// 	console.log("formbuilder has been created");
-			// },
+			created:function(){
+				console.log("formbuilder has been created");
+				
+	      	},
 			// beforeCompile:function(){
 			// 	console.log("formbuilder beforeCompiled");
 			// },
 			// compiled:function(){
 			// 	console.log("formbuilder has been compiled");
 			// },
-			// ready:function(){
-			// 	console.log("formbuilder has been ready");
-			// },
+			ready:function(){
+				console.log("formbuilder has been ready");
+				var self=this
+				this.fb = new Formbuilder({
+		        selector: '#formbuilder',
+			        bootstrapData:JSON.stringify(self.scheme)
+				});
+				//console.log()
+			    // this.fb.on('save', function(payload){
+			    //     console.log(payload);
+			    // })
+			},
 			// attached:function(){
 			// 	console.log("formbuilder has been attached");
 			// },
@@ -170,28 +135,17 @@
 			// 	console.log("formbuilder has been destoryed");
 			// },
 			methods:{
-				// sayHello:function(){
-				// 	console.log("Hello,This is the formbuilder component");
-				// }
-				sendurl:function(){
-					var data={hello:"world"}
-					$.ajax({
-						type:'POST',
-						url:"testformbuilder",
-						cache:false,
-						data:JSON.stringify(data),
-						contentType:"application/json",
-						processData: false,
-			            success:function(data){
-			                console.log(data)
-			              	alert(data)
-			            },
-			            error:function(data){
-			                console.log("error");
-			                console.log(data);
-			               alert("error: "+data)
-			            }
-					});			
+
+				// toJSON:function(){
+				// 	//var j=this.fb.mainView.collection.toJSON()
+				// 	//console.log(j)
+				// 	return  JSON.stringify(j)
+				// },
+				getCollection:function(){
+					//console.log("payload is below")
+					//console.log(this.payload)
+					this.fb.mainView.saveForm()
+					return  this.fb.mainView.collection.toJSON()
 				}
 			},
 			computed:{
@@ -213,9 +167,23 @@
 			},
 			watch:{
 				//////////Data Watcher
-				// 'a':function(val,oldval){
-				// 	console.log('new: %s, old: %s', val, oldVal);
-				// }
+				'scheme':function(){
+					var self=this
+					//ex.push(this.scheme[1])
+					//console.log(ex)
+					this.fb = new Formbuilder({
+			        selector: '#formbuilder',
+				        bootstrapData:self.scheme});
+					//console.log(this.fb)
+					//console.log("lalalalala")
+					//console.log(this.fb.mainView.collection.toJSON())
+				    this.fb.on('save', function(payload){
+				        //console.log("saved");
+				        //console.log(payload)
+				        self.payload=payload
+				    })
+
+				}
 			}
 
 		}
