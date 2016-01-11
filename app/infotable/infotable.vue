@@ -4,7 +4,8 @@ module.exports={
 	el:"#show",
 	data:{
 	target:"infotable",
-	d:window.data
+	d:window.data,
+	scheme:window.scheme
 	},
 	ready:function(){
 	console.log("The infotable test main is loaded")
@@ -18,6 +19,6 @@ module.exports={
 
 <template>
 <div>
-<component is="infotablevue" :data="d"/>
+<component is="infotablevue" :data="d" :scheme="scheme"/>
 </div>
 </template>

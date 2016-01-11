@@ -9,7 +9,8 @@ module.exports={
 	logo:"../public/img/Future_Forum.jpg"
 	},
 	created:function(){
-		console.log("app has been created");
+		console.log("app111 has been created");
+		document.getElementsByTagName('title')[0].innerHTML = this.scheme.name;
 		// var self=this;
 		// $.ajax({
 		// 	type:'GET',
@@ -34,6 +35,10 @@ module.exports={
   //           }
 		// });	
 	},
+	// ready:function(){
+	// 	console.log("change title")
+		
+	// },
 	methods:{
 		onsubmit:function(e){
 			console.log(e)

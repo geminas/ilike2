@@ -3,10 +3,11 @@
 		data:function(){
 			return {
 				//hello:"world"
+				scheme:{},
 				data:[]
 			}
 		},
-		props:["data"],
+		props:["data","scheme"],
 		/////////////Life Span/////////////////////
 		// created:function(){
 		// 	console.log("infotable has been created");
@@ -58,7 +59,7 @@
 		        //     str += line + '\r\n';
 		        // }
 		        // window.open( "data:text/csv;charset=utf-8," + escape(str))
-		        console.log(window)
+		        //console.log(window)
 		        var t=Date.now()
 		        window.tableExport('data-table', t, 'xls');
 		    }
@@ -120,12 +121,12 @@
 	 <table class="table" id="data-table">
 	 	<thead>
 	 		<th>number</th>
-	 		<th v-for="(key,val) in data[0]">{{key}}</th>
+	 		<th v-for="f in scheme.fields">{{f.label}}</th>
 	 	</thead>
 	 	<tbody>
 	 		<tr v-for="d in data">
 	 			<td>{{$index+1}}</td>
-	 			<td v-for="(k,v) in d">{{v}}</td>
+	 			<td v-for="f in scheme.fields">{{d[f.cid]}}</td>
 	 		</tr>
 	 	</tbody>
 	 </table>

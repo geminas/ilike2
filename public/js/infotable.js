@@ -66,7 +66,8 @@
 		el:"#show",
 		data:{
 		target:"infotable",
-		d:window.data
+		d:window.data,
+		scheme:window.scheme
 		},
 		ready:function(){
 		console.log("The infotable test main is loaded")
@@ -93,10 +94,11 @@
 			data:function(){
 				return {
 					//hello:"world"
+					scheme:{},
 					data:[]
 				}
 			},
-			props:["data"],
+			props:["data","scheme"],
 			/////////////Life Span/////////////////////
 			// created:function(){
 			// 	console.log("infotable has been created");
@@ -148,7 +150,7 @@
 			        //     str += line + '\r\n';
 			        // }
 			        // window.open( "data:text/csv;charset=utf-8," + escape(str))
-			        console.log(window)
+			        //console.log(window)
 			        var t=Date.now()
 			        window.tableExport('data-table', t, 'xls');
 			    }
@@ -208,13 +210,13 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>\n<!-- <button type=\"button\" @click=\"onsave\">保存成xls</button>\n -->";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>\n<!-- <button type=\"button\" @click=\"onsave\">保存成xls</button>\n -->";
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div>\n<component is=\"infotablevue\" :data=\"d\"/>\n</div>";
+	module.exports = "<div>\n<component is=\"infotablevue\" :data=\"d\" :scheme=\"scheme\"/>\n</div>";
 
 /***/ },
 /* 9 */

@@ -38,8 +38,8 @@
   var s={{.infomap}}
   var xx=JSON.parse(s)
   window.data=xx.sort(sortTime)
-
-  console.log("{{.sc}}")
+  window.scheme = JSON.parse({{.sc}})
+  //console.log("{{.sc}}")
   </script>
   <script src="/public/js/infotable.js" type="text/javascript" charset="utf-8">
 

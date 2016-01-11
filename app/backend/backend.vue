@@ -103,6 +103,7 @@ module.exports={
 	            			scheme:JSON.parse(data[key])
 	            		})
 	            	}
+	            	self.schemes.sort(function(a,b){return b.id-a.id})
 	            	self.taskMap=data
 	            	self.bindform=self.schemes[0].scheme
 	            	self.bindid=self.schemes[0].id
@@ -127,10 +128,12 @@ module.exports={
 		checktask:function(index){
 			// this.bindform=this.schemes[index].scheme
 			// this.bindid=this.schemes[index].id
-			if(this.schemes[index].id!=""){
-			this.binddatapath="/viewdata/"+this.schemes[index].id
-			}
-			$('#myModal2').modal()
+			// if(this.schemes[index].id!=""){
+			// this.binddatapath="/viewdata/"+this.schemes[index].id
+			// }
+			// $('#myModal2').modal()
+			// 
+			window.open("/viewdata/"+this.schemes[index].id)
 		},
 		updatetask:function(index){
 			var id=this.schemes[index].id
@@ -160,6 +163,10 @@ module.exports={
                alert("error: "+data)
             }
 		});
+		},
+		seecode:function(){
+			var markupStr = $('#summernote').summernote('code');
+			console.log(markupStr)
 		},
 		save:function(e){
 			//var item=JSON.parse(this.taskMap[this.bindid])
@@ -264,7 +271,18 @@ module.exports={
 	      </div>
 	      <div class="modal-body">
 	      	<div class="row">
-	      		<label for="">活动名</label><input type="text" v-model="bindform.name">
+	      		<div class="row">
+	      			<label for="">活动名</label><input type="text" v-model="bindform.name">
+	      		</div>
+	      		
+				<div class="row">
+					<!-- <div id="summernote">Hello Summernote</div>
+					<button type="button" @click="seecode()">ClickMe</button> -->
+				</div>
+				
+
+				  
+
 	      	</div>
 	      	<!-- <div class="row">
 	      		<label for="">活动描述</label><input type="text" v-model="bindform.describe">

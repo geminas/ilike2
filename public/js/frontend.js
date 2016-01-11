@@ -71,7 +71,8 @@
 		logo:"../public/img/Future_Forum.jpg"
 		},
 		created:function(){
-			console.log("app has been created");
+			console.log("app111 has been created");
+			document.getElementsByTagName('title')[0].innerHTML = this.scheme.name;
 			// var self=this;
 			// $.ajax({
 			// 	type:'GET',
@@ -96,6 +97,10 @@
 	  //           }
 			// });	
 		},
+		// ready:function(){
+		// 	console.log("change title")
+			
+		// },
 		methods:{
 			onsubmit:function(e){
 				console.log(e)
@@ -251,7 +256,7 @@
 
 
 	// module
-	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  padding-top:10px;\n  color: white;\n  display: none;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"checkbox\"]{\n\t/*margin-left:10px; */\n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
+	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n}\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
 
 	// exports
 
@@ -617,7 +622,7 @@
 								this.scheme.fields[i].status = ""
 							}
 
-							res[scheme.fields[i].name]=scheme.fields[i].data
+							res[scheme.fields[i].cid]=scheme.fields[i].data
 						}
 					}catch(e){
 						console.log(e)

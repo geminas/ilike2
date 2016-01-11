@@ -72,7 +72,7 @@
 							this.scheme.fields[i].status = ""
 						}
 
-						res[scheme.fields[i].name]=scheme.fields[i].data
+						res[scheme.fields[i].cid]=scheme.fields[i].data
 					}
 				}catch(e){
 					console.log(e)
@@ -259,7 +259,9 @@
 #contact label{
   width: 100%;
   margin: 13px auto;
-  padding-top:10px;
+  margin-top:0px;
+  margin-bottom: 10px;
+  padding-top:0px;
   color: white;
   display: none;
 }
@@ -281,14 +283,20 @@
 #contact .label-radio {
   display: block;
 }
-
+#contact .mid-form{
+	margin-top: 10px;
+}
 #contact .label-radio ~div {
   margin-right: 10px;
   display: inline;
 }
 
+#contact input[type="radio"]{
+	margin-bottom:10px; 
+}
+
 #contact input[type="checkbox"]{
-	/*margin-left:10px; */
+	margin-bottom:10px; 
 }
 #contact .required{
 	color:red;
@@ -309,7 +317,7 @@
 }
 
 #contact select {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   margin-bottom: 10px;
 }
 

@@ -933,8 +933,10 @@ __p += '<div class=\'fb-edit-section-header\'>Label</div>\n\n<div class=\'fb-com
 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
 '\n  </div>\n  <div class=\'fb-common-checkboxes\'>\n    ' +
 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
-'\n  </div>\n  <div class=\'fb-clear\'></div>\n<div class=\'fb-edit-section-header\'>Name</div>\n<div class=\'fb-label-description\'>\n   '+
-((__t = ( Formbuilder.templates['edit/name']() )) == null ? '' : __t)+'</div>\n</div>\n';
+'\n  </div>\n  <div class=\'fb-clear\'></div>\n'+
+// '<div class=\'fb-edit-section-header\'>Name</div>\n<div class=\'fb-label-description\'>\n   '+
+// ((__t = ( Formbuilder.templates['edit/name']() )) == null ? '' : __t)+'</div>\n'+
+'</div>\n';
 
 }
 return __p
