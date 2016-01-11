@@ -199,7 +199,9 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
+			<a href="http://futureforum.org.cn">
 				<img class="logo" src="{{logo}}">
+			</a>
 			</div>
 		</div>
 		
