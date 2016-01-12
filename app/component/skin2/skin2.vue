@@ -162,6 +162,10 @@
 					return false
 				}
 					
+			},
+			jumpToWebsite:function(e){
+				e.preventDefault()
+				window.open("http://www.futureforum.org.cn")
 			}
 			// sayHello:function(){
 			// 	console.log("Hello,This is the skin1 component");
@@ -247,7 +251,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
-			<a href="http://futureforum.org.cn">
+			<a href="http://www.futureforum.org.cn" @click="jumpToWebsite|prevent">
 				<img class="logo" src="{{logo}}">
 			</a>
 			</div>
