@@ -55,7 +55,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2)
-	module.exports = __webpack_require__(6)
+	module.exports = __webpack_require__(9)
 	module.exports.template = __webpack_require__(16)
 
 
@@ -381,7 +381,10 @@
 
 
 /***/ },
-/* 6 */
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -448,7 +451,7 @@
 					//contentType:"application/json",
 					processData: false,
 		            success:function(data){
-		            	// console.log(data)
+		            	 console.log(data)
 		            	// self.schemes=[]
 		            	// for(key in data){
 		            	// 	self.schemes.push({
@@ -592,14 +595,13 @@
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(8),
+		'smartformvue':__webpack_require__(10),
 		'formbuildervue':__webpack_require__(13)
 		}
 	}
 
 /***/ },
-/* 7 */,
-/* 8 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(11)
@@ -607,8 +609,6 @@
 
 
 /***/ },
-/* 9 */,
-/* 10 */,
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 

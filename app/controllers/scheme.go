@@ -12,7 +12,7 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"time"
+	//"time"
 )
 
 var testjson = `{
@@ -200,9 +200,9 @@ func (c Scheme) PostTask() revel.Result {
 	})
 }
 func (c Scheme) NewTask() revel.Result {
-	var t = time.Now().Unix()
-	id := strconv.FormatInt(t, 10)
-	err := c.newtask(id, []byte(testjson))
+	//var t = time.Now().Unix()
+	//id := strconv.FormatInt(t, 10)
+	id, err := c.newtaskautoid([]byte(testjson))
 	if err != nil {
 		return c.RenderJson(app.JsonResp{
 			1,
@@ -213,7 +213,7 @@ func (c Scheme) NewTask() revel.Result {
 	}
 	return c.RenderJson(app.JsonResp{
 		0,
-		id,
+		"" + strconv.Itoa(id),
 		"",
 		testjson,
 	})
@@ -398,6 +398,17 @@ func (c Scheme) newtask(id string, scheme []byte) error {
 	return nil
 }
 
+func (c Scheme) newtaskautoid(scheme []byte) (int, error) {
+	// if b := c.check(id, "task"); len(b) != 0 {
+	// 	return errors.New("该任务已经存在")
+	// }
+	id, err := c.updatesequence("task", scheme)
+	if err != nil {
+		return id, err
+	}
+	return id, nil
+}
+
 func (c Scheme) updatetask(id string, scheme []byte) error {
 	err := c.update(id, scheme, "task")
 	if err != nil {
@@ -407,34 +418,59 @@ func (c Scheme) updatetask(id string, scheme []byte) error {
 }
 
 func (c Scheme) updatetaskdata(id string, data []byte) error {
-	err := c.updatesequence(id, data)
+	_, err := c.updatesequence(id, data)
 	return err
 }
 
-func itob(v uint64) []byte {
+func itob(v int) []byte {
 	b := make([]byte, 8)
 	binary.BigEndian.PutUint64(b, uint64(v))
 	return b
 }
 
-func (c Scheme) updatesequence(table string, val []byte) error {
+// func (c Scheme) updateautoid(table string, val []byte) err {
+// 	err := app.DB.Update(func(tx *bolt.Tx) error {
+// 		b, err := tx.CreateBucketIfNotExists([]byte(table))
+// 		if err != nil {
+// 			return errors.New("create bucket:" + err.Error())
+// 		}
+// 		seq, err := b.NextSequence()
+// 		var id = int(seq)
+// 		if err != nil {
+// 			return err
+// 		}
+
+// 		err = b.Put(itob(id), val)
+// 		if err != nil {
+// 			return errors.New("put into the table:" + err.Error())
+// 		}
+// 		return nil
+// 	})
+// 	return err
+// }
+
+func (c Scheme) updatesequence(table string, val []byte) (int, error) {
+	var id = -1
 	err := app.DB.Update(func(tx *bolt.Tx) error {
 		b, err := tx.CreateBucketIfNotExists([]byte(table))
 		if err != nil {
 			return errors.New("create bucket:" + err.Error())
 		}
 		seq, err := b.NextSequence()
+		id = int(seq)
+		//println("id-------")
+		//println(id)
 		if err != nil {
 			return err
 		}
 
-		err = b.Put(itob(seq), val)
+		err = b.Put([]byte(strconv.Itoa(id)), val)
 		if err != nil {
 			return errors.New("put into the table:" + err.Error())
 		}
 		return nil
 	})
-	return err
+	return id, err
 }
 
 /*

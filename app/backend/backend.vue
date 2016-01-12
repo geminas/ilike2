@@ -64,7 +64,7 @@ module.exports={
 				//contentType:"application/json",
 				processData: false,
 	            success:function(data){
-	            	// console.log(data)
+	            	 console.log(data)
 	            	// self.schemes=[]
 	            	// for(key in data){
 	            	// 	self.schemes.push({
