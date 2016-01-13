@@ -48,6 +48,7 @@
 				var errid=""
 				//console.log(this.scheme)
 				var res={}
+				//var msg=""
 				try{
 
 					for(var i in scheme.fields){
@@ -155,7 +156,7 @@
 				}else{
 					e.preventDefault()
 					console.log(errid)
-					alert("请完成没有填完的必填选项")
+					alert("请完成没有填完的必填选项,或按照提示修改错误")
 					$('html, body').animate({
 	                    scrollTop:($(errid).offset().top-50)
 	                }, 200);
@@ -318,6 +319,10 @@
   padding-top:0px;
   color: white;
   display: none;
+}
+
+#contact .label-text-error{
+	display: block;
 }
 
 #contact .label-source {
