@@ -210,7 +210,7 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>\n<!-- <button type=\"button\" @click=\"onsave\">保存成xls</button>\n -->";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in data\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n</div>\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
 /* 8 */

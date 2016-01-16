@@ -131,6 +131,8 @@
 	 	</tbody>
 	 </table>
 </div>
-<!-- <button type="button" @click="onsave">保存成xls</button>
- --> </template>
+<button type="button" @click="onsave">保存成xls</button>
+ 
+
+ </template>
 <style type="text/css"></style>
