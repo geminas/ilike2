@@ -33,7 +33,7 @@
 				var f=[]
 				for(var i in this.scheme.fields){
 					f.push( this.data[d][this.scheme.fields[i].cid])
-				}
+				}    
 				this.xlsx.push(f)
 			}
 			var tmp;
