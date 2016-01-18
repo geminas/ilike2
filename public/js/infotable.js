@@ -99,7 +99,7 @@
 					scheme:{},
 					data:[],
 					xlsx:[],
-					pagesize:50,
+					pagesize:100,
 					page:[],
 					index:0
 				}
@@ -316,7 +316,7 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\n \t<!-- <div v-for=\"p in page\" id=\"tagle-{{$index}}\" style=\"display:none;\"> -->\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in page[index]\">\n\t \t\t\t<td>{{$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n\t </div>\n\t <div class=\"row text-center\">\n\t \t<ul class=\"pagination\">\n\t\t  <li v-for=\"i in page\"><a href=\"#\" @click=\"pageto($index)\">{{$index+1}}</a></li>\n\t\t</ul>\n\t </div>\n\t \n<!-- </div> -->\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\n \t<!-- <div v-for=\"p in page\" id=\"tagle-{{$index}}\" style=\"display:none;\"> -->\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in page[index]\">\n\t \t\t\t<td>{{index*pagesize+$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n\t </div>\n\t <div class=\"row text-center\">\n\t \t<ul class=\"pagination\">\n\t\t  <li v-for=\"i in page\"><a href=\"#\" @click=\"pageto($index)\">{{$index+1}}</a></li>\n\t\t</ul>\n\t </div>\n\t \n<!-- </div> -->\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
 /* 8 */

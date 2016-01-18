@@ -6,7 +6,7 @@
 				scheme:{},
 				data:[],
 				xlsx:[],
-				pagesize:50,
+				pagesize:100,
 				page:[],
 				index:0
 			}
@@ -233,7 +233,7 @@
 	 	</thead>
 	 	<tbody>
 	 		<tr v-for="d in page[index]">
-	 			<td>{{$index+1}}</td>
+	 			<td>{{index*pagesize+$index+1}}</td>
 	 			<td v-for="f in scheme.fields">{{d[f.cid]}}</td>
 	 		</tr>
 	 	</tbody>
