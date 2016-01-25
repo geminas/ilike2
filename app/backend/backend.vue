@@ -247,7 +247,7 @@ module.exports={
 					<td @click="choosetask($index)">{{t.id}}</td>
 					<td @click="choosetask($index)">{{t.scheme.name}}</td>
 					<!-- <td @click="choosetask($index)">{{t.scheme.describe}}</td> -->
-					<td><span @click="choosetask($index)">设置</span><span @click="checktask($index)">查看</span><span ><a href="/mainframe/{{t.id}}">浏览</a></span><span @click="deletetask($index)">删除</span></td>	
+					<td><span @click="choosetask($index)">设置</span><span @click="checktask($index)">查看</span><span ><a target="_blank" href="/mainframe/{{t.id}}">浏览</a></span><span @click="deletetask($index)">删除</span></td>	
 				</tr>
 				</template>
 			</tbody>
