@@ -245,11 +245,16 @@
 					<div class="col-lg-12 text-center submit-button">
 						<button type="submit" class="btn btn-success btn-lg" @click="onsubmit">点击报名</button>
 					</div>
-
+					<div class="mid-form">
+					<div v-html="scheme.code">
+						<!-- {{scheme.code}}</pre> -->
+					</div>
+					</div>
 				</form>
 			</div>
 			
 		</div>
+		
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
 			<a href="http://www.futureforum.org.cn" @click="jumpToWebsite|prevent">

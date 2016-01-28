@@ -9,6 +9,7 @@ module.exports={
 		binddatapath:"",
 		bindid:"",
 		bg_img:""
+		//code:""
 	},
 	created:function(){
 		console.log("backend has been created");
@@ -23,6 +24,7 @@ module.exports={
 				//console.log(fileupload.files.length)
 				self.uploadfile();
 			})
+		
 
 	},
 	methods:{
@@ -123,7 +125,14 @@ module.exports={
 		choosetask:function(index){
 			this.bindform=this.schemes[index].scheme
 			this.bindid=this.schemes[index].id
+			if(this.bindform.code===undefined){
+				this.bindform.code=""
+			}
+			//this.code=this.bindform.code
 			$('#myModal').modal()
+			var markupStr = $('#summernote').summernote('code');
+			$('#summernote').summernote('code', this.bindform.code);
+			//
 		},
 		checktask:function(index){
 			// this.bindform=this.schemes[index].scheme
@@ -180,6 +189,7 @@ module.exports={
 			this.bindform.fields=j
 			var id=this.bindid
 			var self=this
+			this.bindform.code=$('#summernote').summernote('code');
 			$.ajax({
 			type:'POST',
 			url:"/posttask?id="+id,
@@ -240,6 +250,7 @@ module.exports={
 				<th>活动名</th>
 				<th>操作</th>	
 				<!-- <th>活动描述</th> -->
+				
 			</thead>
 			<tbody>
 				<template v-for="t in schemes">
@@ -275,10 +286,13 @@ module.exports={
 	      			<label for="">活动名</label><input type="text" v-model="bindform.name">
 	      		</div>
 	      		
-				<div class="row">
-					<!-- <div id="summernote">Hello Summernote</div>
-					<button type="button" @click="seecode()">ClickMe</button> -->
-				</div>
+				<div class="row activity-extra" >
+					<div class="row" class=""><label for="">活动概述</label></div>
+					<div id="summernote">{{bindform.code}}</div>
+					<!-- <button type="button" @click="seecode()">ClickMe</button>
+ -->				</div>
+	      	</div>
+
 				
 
 				  
@@ -300,8 +314,7 @@ module.exports={
 	        <div class="row">
  				<component is="formbuildervue" v-ref:formbuilder :scheme="bindform.fields"/>
  			</div>
-	      </div>
-	      <div class="modal-footer">
+ 				      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" @click="save($event)">保存设置</button>
 	      </div>
@@ -347,6 +360,27 @@ module.exports={
 		margin-right: 5px;
 		color: cadetblue;
 	}
+	
+	.activity-extra{
+		margin-top:18px;
+		margin-bottom:8px;
+	}
+	.note-toolbar button[data-original-title="Picture"]{
+		display: none;
+	}
+	.note-toolbar button[data-original-title="Full Screen"]{
+		display: none;
+	}
+	.note-toolbar button[data-original-title="Code View"]{
+		display: none;
+	}
+	.note-toolbar button[data-original-title="Help"]{
+		display: none;
+	}
+	.note-toolbar button[data-original-title="Video"]{
+		display: none;
+	}
+
 	.activity-table a{
 		color: cadetblue;
 	}

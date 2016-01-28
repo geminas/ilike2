@@ -54,12 +54,14 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -74,13 +76,12 @@
 		console.log(window)
 		},
 		components:{
-		'infotablevue':__webpack_require__(4)
+		'infotablevue':__webpack_require__(5)
 		}
 	}
 
 /***/ },
-/* 3 */,
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(6)
@@ -88,7 +89,6 @@
 
 
 /***/ },
-/* 5 */,
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 

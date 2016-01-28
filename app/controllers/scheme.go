@@ -18,6 +18,7 @@ import (
 var testjson = `{
     "name":"活动名字",
     "describe":"活动描述",
+    "code":"",
     "deleted":false,
     "bgimg":"/public/img/ljwl_background.jpg",
     "fields":[     {  
