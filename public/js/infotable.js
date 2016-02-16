@@ -93,7 +93,12 @@
 /***/ function(module, exports) {
 
 	function dataCom(a, b) {
-			return a["timestamp"].localeCompare(b["timestamp"]) * -1;
+			if (a["timestamp"] > b["timestamp"]) {
+				return -1;
+			}
+			else {
+				return 1;
+			}
 		}
 
 		module.exports={
@@ -123,6 +128,9 @@
 				console.log("infotable has been ready");
 				var fs=[]
 				this.data.reverse()
+
+				this.data.sort(dataCom)
+
 				console.log("data")
 				console.log(this.data)
 				for(var i in this.scheme.fields){
@@ -130,7 +138,6 @@
 				}
 				fs.push("提交时间")
 				this.xlsx.push(fs)
-				this.data.sort(dataCom)
 
 				for(var d in this.data){
 					var f=[]
