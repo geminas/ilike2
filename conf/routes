@@ -18,6 +18,8 @@ GET		/query									App.Query
 
 GET		/thanks									App.Thanks
 
+POST 	/cleartable								App.ClearTable
+
 GET 	/thankyou 								MainFrame.Thanks
 
 GET 	/errorinfo/:info 						App.ErrorInfo

@@ -169,8 +169,10 @@ func (c App) Query() revel.Result {
 
 func (c App) DeleteData() revel.Result {
 	// a := c.Request.URL.Query()
-	var table = c.Request.Form.Get("table")
-	var key = c.Request.Form.Get("key")
+	var table = c.Request.URL.Query().Get("table")
+	var key = c.Request.URL.Query().Get("key")
+	//println("here")
+	//println(key, table)
 	if key == "" {
 		return c.RenderText("The key not found")
 	} else if table == "" {
@@ -182,6 +184,20 @@ func (c App) DeleteData() revel.Result {
 		}
 		return c.RenderText("ok")
 	}
+}
+
+func (c App) ClearTable() revel.Result {
+	var table = c.Request.URL.Query().Get("table")
+	if table == "" {
+		return c.RenderText("The table not found")
+	} else {
+		err := c.deleteTable(table)
+		if err != nil {
+			return c.RenderText(err.Error())
+		}
+		return c.RenderText("ok")
+	}
+
 }
 
 ///API
@@ -328,6 +344,29 @@ func (c App) delete(key string, table string) error {
 			return err
 		}
 		err = b.Delete([]byte(key))
+		return err
+	})
+	return err
+}
+
+func (c App) deleteTable(table string) error {
+	err := app.DB.Update(func(tx *bolt.Tx) error {
+		// b, err := tx.CreateBucketIfNotExists([]byte(table))
+		// if err != nil {
+		// 	log.Println(err)
+		// 	return err
+		// }
+		err := tx.DeleteBucket([]byte(table))
+		//err = b.Delete([]byte(key))
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		_, err = tx.CreateBucketIfNotExists([]byte(table))
+		if err != nil {
+			log.Println(err)
+			return err
+		}
 		return err
 	})
 	return err
