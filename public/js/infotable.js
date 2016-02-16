@@ -45,21 +45,23 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(3)
 	var Vue = __webpack_require__(9)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -74,21 +76,21 @@
 		console.log(window)
 		},
 		components:{
-		'infotablevue':__webpack_require__(3)
+		'infotablevue':__webpack_require__(5)
 		}
 	}
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
-	module.exports.template = __webpack_require__(6)
+	module.exports = __webpack_require__(6)
+	module.exports.template = __webpack_require__(7)
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 6 */
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -317,16 +319,14 @@
 		}
 
 /***/ },
-/* 5 */,
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/* 7 */
+/***/ function(module, exports) {
 
 	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\n \t<!-- <div v-for=\"p in page\" id=\"tagle-{{$index}}\" style=\"display:none;\"> -->\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t\t<th>time</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in page[index]\">\n\t \t\t\t<td>{{index*pagesize+$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t\t<td>{{d[\"timestamp\"]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n\t </div>\n\t <div class=\"row text-center\">\n\t \t<ul class=\"pagination\">\n\t\t  <li v-for=\"i in page\"><a href=\"#\" @click=\"pageto($index)\">{{$index+1}}</a></li>\n\t\t</ul>\n\t </div>\n\t \n<!-- </div> -->\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
-/* 7 */,
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div>\n<component is=\"infotablevue\" :data=\"d\" :scheme=\"scheme\"/>\n</div>";
 
@@ -9640,7 +9640,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -9674,7 +9674,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9726,7 +9728,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');
