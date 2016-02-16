@@ -26,15 +26,20 @@
 			console.log("infotable has been ready");
 			var fs=[]
 			this.data.reverse()
+			console.log("data")
+			console.log(this.data)
 			for(var i in this.scheme.fields){
 				fs.push(this.scheme.fields[i].label)
 			}
+			fs.push("提交时间")
 			this.xlsx.push(fs)
+
 			for(var d in this.data){
 				var f=[]
 				for(var i in this.scheme.fields){
 					f.push( this.data[d][this.scheme.fields[i].cid])
-				}    
+				}
+				f.push(this.data[d]["timestamp"])
 				this.xlsx.push(f)
 			}
 			var tmp;

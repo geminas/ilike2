@@ -55,7 +55,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2)
-	module.exports = __webpack_require__(9)
+	module.exports = __webpack_require__(6)
 	module.exports.template = __webpack_require__(16)
 
 
@@ -381,10 +381,7 @@
 
 
 /***/ },
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -605,13 +602,15 @@
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(10),
+		'smartformvue':__webpack_require__(9),
 		'formbuildervue':__webpack_require__(13)
 		}
 	}
 
 /***/ },
-/* 10 */
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(11)
@@ -619,6 +618,7 @@
 
 
 /***/ },
+/* 10 */,
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 

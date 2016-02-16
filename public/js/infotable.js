@@ -54,14 +54,12 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(4)
+	module.exports = __webpack_require__(2)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */,
-/* 3 */,
-/* 4 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -76,20 +74,20 @@
 		console.log(window)
 		},
 		components:{
-		'infotablevue':__webpack_require__(5)
+		'infotablevue':__webpack_require__(3)
 		}
 	}
 
 /***/ },
-/* 5 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6)
-	module.exports.template = __webpack_require__(7)
+	module.exports = __webpack_require__(4)
+	module.exports.template = __webpack_require__(6)
 
 
 /***/ },
-/* 6 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -119,15 +117,20 @@
 				console.log("infotable has been ready");
 				var fs=[]
 				this.data.reverse()
+				console.log("data")
+				console.log(this.data)
 				for(var i in this.scheme.fields){
 					fs.push(this.scheme.fields[i].label)
 				}
+				fs.push("提交时间")
 				this.xlsx.push(fs)
+
 				for(var d in this.data){
 					var f=[]
 					for(var i in this.scheme.fields){
 						f.push( this.data[d][this.scheme.fields[i].cid])
-					}    
+					}
+					f.push(this.data[d]["timestamp"])
 					this.xlsx.push(f)
 				}
 				var tmp;
@@ -314,12 +317,14 @@
 		}
 
 /***/ },
-/* 7 */
+/* 5 */,
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\n \t<!-- <div v-for=\"p in page\" id=\"tagle-{{$index}}\" style=\"display:none;\"> -->\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t\t<th>time</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in page[index]\">\n\t \t\t\t<td>{{index*pagesize+$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t\t<td>{{d[\"timestamp\"]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n\t </div>\n\t <div class=\"row text-center\">\n\t \t<ul class=\"pagination\">\n\t\t  <li v-for=\"i in page\"><a href=\"#\" @click=\"pageto($index)\">{{$index+1}}</a></li>\n\t\t</ul>\n\t </div>\n\t \n<!-- </div> -->\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
+/* 7 */,
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
