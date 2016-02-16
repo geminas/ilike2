@@ -25,6 +25,7 @@
 		ready:function(){
 			console.log("infotable has been ready");
 			var fs=[]
+			this.data.reverse()
 			for(var i in this.scheme.fields){
 				fs.push(this.scheme.fields[i].label)
 			}
@@ -230,11 +231,13 @@
 	 	<thead>
 	 		<th>number</th>
 	 		<th v-for="f in scheme.fields">{{f.label}}</th>
+	 		<th>time</th>
 	 	</thead>
 	 	<tbody>
 	 		<tr v-for="d in page[index]">
 	 			<td>{{index*pagesize+$index+1}}</td>
 	 			<td v-for="f in scheme.fields">{{d[f.cid]}}</td>
+	 			<td>{{d["timestamp"]}}</td>
 	 		</tr>
 	 	</tbody>
 	 </table>

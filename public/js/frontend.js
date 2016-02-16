@@ -677,7 +677,8 @@
 						console.log(e)
 					}
 					console.log(res)
-
+					var d=new Date()
+					res["timestamp"]=d.toISOString()
 					if(errnum==0){
 					console.log("ok to submit")
 					//return true
