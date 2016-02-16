@@ -45,31 +45,34 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(4)
 	var Vue = __webpack_require__(17)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(2)
-	module.exports = __webpack_require__(6)
+	__webpack_require__(5)
+	module.exports = __webpack_require__(9)
 	module.exports.template = __webpack_require__(16)
 
 
 /***/ },
-/* 2 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(3);
+	var content = __webpack_require__(6);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
+	var update = __webpack_require__(8)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -86,10 +89,10 @@
 	}
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(4)();
+	exports = module.exports = __webpack_require__(7)();
 	// imports
 
 
@@ -100,8 +103,8 @@
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 7 */
+/***/ function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -156,7 +159,7 @@
 
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -381,7 +384,7 @@
 
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -602,15 +605,13 @@
 		console.log("The smartform test main is loaded")
 		},
 		components:{
-		'smartformvue':__webpack_require__(9),
+		'smartformvue':__webpack_require__(10),
 		'formbuildervue':__webpack_require__(13)
 		}
 	}
 
 /***/ },
-/* 7 */,
-/* 8 */,
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(11)
@@ -618,9 +619,8 @@
 
 
 /***/ },
-/* 10 */,
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -680,7 +680,7 @@
 
 /***/ },
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'||item.field_type=='email'||item.field_type=='phone'||item.field_type=='idcard'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<label class=\"label-text-error\" for=\"\"><span style=\"color:red;\">{{item.error}}</span></label></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='paragraph'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-source\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-radio\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-checkboxes\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.datas\" :true-value=\"op.label\" value=\"{{op.label}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
@@ -694,7 +694,7 @@
 
 /***/ },
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -797,13 +797,13 @@
 
 /***/ },
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div id='formbuilder'></div>";
 
 /***/ },
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<header></header>\n\n\n\n\n<!-- <div>\n\t<ul>\n\t\t<li v-for=\"(k,v) in schemes\">\n\t\t\t{{v.id}}\n\t\t</li>\n\t</ul>\n</div> -->\n<div class=\"page-header text-center\">\n  <h1>活动报名系统后台</h1>\n</div>\n<div id=\"myTabContent\" class=\"tab-content\">\n   <div class=\"tab-pane fade in active\" id=\"home\">\n      <div class=\"container\">\n\t<div class=\"row\">\n\t\t<table class=\"table table-hover activity-table\">\n\t\t\t<thead>\n\t\t\t\t<th>活动ID</th>\n\t\t\t\t<th>活动名</th>\n\t\t\t\t<th>操作</th>\t\n\t\t\t\t<!-- <th>活动描述</th> -->\n\t\t\t\t\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<template v-for=\"t in schemes\">\n\t\t\t\t<tr v-if=\"t.scheme.deleted===false\" >\n\t\t\t\t\t<td @click=\"choosetask($index)\">{{t.id}}</td>\n\t\t\t\t\t<td @click=\"choosetask($index)\">{{t.scheme.name}}</td>\n\t\t\t\t\t<!-- <td @click=\"choosetask($index)\">{{t.scheme.describe}}</td> -->\n\t\t\t\t\t<td><span @click=\"choosetask($index)\">设置</span><span @click=\"checktask($index)\">查看</span><span ><a target=\"_blank\" href=\"/mainframe/{{t.id}}\">浏览</a></span><span @click=\"deletetask($index)\">删除</span></td>\t\n\t\t\t\t</tr>\n\t\t\t\t</template>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\t<button type=\"button\" class=\"btn btn-primary btn-lg\" @click=\"addtask\">\n\t  新增活动\n\t</button>\n\t<!-- Button trigger modal -->\n\t<!-- <button type=\"button\" class=\"btn btn-primary btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">\n\t  Launch demo modal\n\t</button> -->\n\n\t<!-- Modal -->\n\t<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">修改活动设置</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t<div class=\"row\">\n\t      \t\t<div class=\"row\">\n\t      \t\t\t<label for=\"\">活动名</label><input type=\"text\" v-model=\"bindform.name\">\n\t      \t\t</div>\n\t      \t\t\n\t\t\t\t<div class=\"row activity-extra\" >\n\t\t\t\t\t<div class=\"row\" class=\"\"><label for=\"\">活动概述</label></div>\n\t\t\t\t\t<div id=\"summernote\">{{bindform.code}}</div>\n\t\t\t\t\t<!-- <button type=\"button\" @click=\"seecode()\">ClickMe</button>\n -->\t\t\t\t</div>\n\t      \t</div>\n\n\t\t\t\t\n\n\t\t\t\t  \n\n\t      \t</div>\n\t      \t<!-- <div class=\"row\">\n\t      \t\t<label for=\"\">活动描述</label><input type=\"text\" v-model=\"bindform.describe\">\n\t      \t</div> -->\n\t\t\t<div class=\"row\">\n\t\t\t\t<form action=\"/upload\" method=\"post\" enctype=\"multipart/form-data\" id=\"form\">\n\t\t\t\t\t\n\t\t\t\t\t<input id=\"uploader\" type=\"file\" name=\"uploadfile\" style=\"display:inline-block;width:70%\"/>\n\t\t\t\t\t<input type=\"submit\" value=\"upload\" @click=\"uploadfile($event)\" style=\"display:inline-block;width:23%\"/>\n\n\t\t\t\t</form>\n\t\t\t\t<img src=\"{{bindform.bgimg}}\" alt=\"\">\n\t\t\t</div>\n\n\t        <div class=\"row\">\n \t\t\t\t<component is=\"formbuildervue\" v-ref:formbuilder :scheme=\"bindform.fields\"/>\n \t\t\t</div>\n \t\t\t\t      <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div>\n\t    </div>\n\t  </div>\n\t</div>\n\t\n\t<div class=\"modal fade\" id=\"myModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n\t  <div class=\"modal-dialog\" role=\"document\">\n\t    <div class=\"modal-content\">\n\t      <div class=\"modal-header\">\n\t        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n\t        <h4 class=\"modal-title\" id=\"myModalLabel\">查看活动数据</h4>\n\t      </div>\n\t      <div class=\"modal-body\">\n\t      \t\n\t        <div class=\"row\">\n \t\t\t\t<iframe src=\"{{binddatapath}}\" frameborder=\"0\"></iframe>\n \t\t\t</div>\n\t      </div>\n\t      <!-- <div class=\"modal-footer\">\n\t        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n\t        <button type=\"button\" class=\"btn btn-primary\" @click=\"save($event)\">保存设置</button>\n\t      </div> -->\n\t    </div>\n\t  </div>\n\t</div>\n</div>\n   </div>\n  \n  \n</div>";
 
@@ -10117,7 +10117,7 @@
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -10151,7 +10151,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -10203,7 +10205,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');

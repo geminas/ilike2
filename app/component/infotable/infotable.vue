@@ -1,4 +1,13 @@
 <script type="text/javascript">
+	function dataCom(a, b) {
+		if (a["timestamp"] > b["timestamp"]) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
+	}
+
 	module.exports={
 		data:function(){
 			return {
@@ -26,6 +35,9 @@
 			console.log("infotable has been ready");
 			var fs=[]
 			this.data.reverse()
+
+			this.data.sort(dataCom)
+
 			console.log("data")
 			console.log(this.data)
 			for(var i in this.scheme.fields){
