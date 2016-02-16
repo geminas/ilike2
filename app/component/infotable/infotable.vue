@@ -1,4 +1,8 @@
 <script type="text/javascript">
+	function dataCom(a, b) {
+		return a["timestamp"].localeCompare(b["timestamp"]) * -1;
+	}
+
 	module.exports={
 		data:function(){
 			return {
@@ -33,6 +37,7 @@
 			}
 			fs.push("提交时间")
 			this.xlsx.push(fs)
+			this.data.sort(dataCom)
 
 			for(var d in this.data){
 				var f=[]
