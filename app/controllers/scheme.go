@@ -10,8 +10,10 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	//"time"
 )
 
@@ -353,10 +355,29 @@ func (c Scheme) CreateTask() revel.Result {
 // }
 
 func (c Scheme) ViewData(name string) revel.Result {
-	infomap := c.viewarray(name)
-	log.Println(infomap)
-	sc := string(c.Gettask(name))
-	return c.Render(infomap, sc)
+
+	if auth := c.Request.Header.Get("Authorization"); auth != "" {
+		// Split up the string to get just the data, then get the credentials
+		username, password, err := getCredentials(strings.Split(auth, " ")[1])
+		if err != nil {
+			return c.RenderError(err)
+		}
+		if username != correctUsername || password != correctPassword {
+			c.Response.Status = http.StatusUnauthorized
+			c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="revel"`)
+			return c.RenderError(errors.New("401: Not authorized"))
+		}
+		infomap := c.viewarray(name)
+		log.Println(infomap)
+		sc := string(c.Gettask(name))
+		return c.Render(infomap, sc)
+
+	} else {
+		c.Response.Status = http.StatusUnauthorized
+		c.Response.Out.Header().Set("WWW-Authenticate", `Basic realm="新盟"`)
+		return c.RenderError(errors.New("401: Not authorized"))
+	}
+
 }
 
 func (c Scheme) viewarray(table string) string {
