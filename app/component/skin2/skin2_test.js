@@ -579,7 +579,7 @@
 					
 				$.ajax({
 					type:'GET',
-					url:"/phoneexist/"+this.id+"/"+this.scheme.fields[i].data,
+					url:"/phoneexist/"+this.id+"/"+this.phone,
 					cache:false,
 					processData: false,
 		            success:function(data){
