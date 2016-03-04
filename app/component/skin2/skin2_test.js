@@ -119,7 +119,7 @@
 
 
 	// module
-	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\nbody{\n  background: url('{{background}}');\n  background-size: cover;\n  background-position-y: 40%;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  padding-top:10px;\n  color: white;\n  display: none;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"checkbox\"]{\n\t/*margin-left:10px; */\n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
+	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-text-error{\n\tdisplay: block;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n}\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
 
 	// exports
 
@@ -412,16 +412,40 @@
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports={
+	Date.prototype.format = function(format) {
+		       var date = {
+		              "M+": this.getMonth() + 1,
+		              "d+": this.getDate(),
+		              "h+": this.getHours(),
+		              "m+": this.getMinutes(),
+		              "s+": this.getSeconds(),
+		              "q+": Math.floor((this.getMonth() + 3) / 3),
+		              "S+": this.getMilliseconds()
+		       };
+		       if (/(y+)/i.test(format)) {
+		              format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+		       }
+		       for (var k in date) {
+		              if (new RegExp("(" + k + ")").test(format)) {
+		                     format = format.replace(RegExp.$1, RegExp.$1.length == 1
+		                            ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+		              }
+		       }
+		       return format;
+		}
+
+		module.exports={
 			data:function(){
 				return {
 					target:"app",
 					scheme:{},
+					id:"",
+					phone:"",
 					logo:"../public/img/Future_Forum.jpg",
-					background:"../public/img/ljwl_background.jpg"
+					
 				}
 			},
-			props:["scheme"],
+			props:["scheme","id"],
 			/////////////Life Span/////////////////////
 			// created:function(){
 			// 	console.log("skin1 has been created");
@@ -432,9 +456,18 @@
 			// compiled:function(){
 			// 	console.log("skin1 has been compiled");
 			// },
-			// ready:function(){
-			// 	console.log("skin1 has been ready");
-			// },
+			ready:function(){
+				console.log("skin1 has been ready");
+				// document.getElementsByTagName('body').style.backgroundImage = "url('"+this.background+"');";
+				// for(var i in this.scheme.fields) {
+				// 	this.scheme.fields[i].placeholder = this.scheme.fields[i].label;
+				// }
+
+				// console.log(this.scheme);
+				//var arr=location.href.split('/')
+				//this.id=
+				console.log(this.id)
+			},
 			// attached:function(){
 			// 	console.log("skin1 has been attached");
 			// },
@@ -449,36 +482,160 @@
 			// },
 			methods:{
 				onsubmit:function(e){
+					var phoneerr=false
+					var self=this
 					e.preventDefault()
 					console.log("on submit")
-					//console.log(this.scheme)
-					var res=[]
+				    var errnum=0;
+					var errid=""
+					console.log(this.scheme)
+					var res={}
+					//var msg=""
 					try{
+
 						for(var i in scheme.fields){
 							console.log(scheme.fields[i].name,scheme.fields[i].data)
-							res.push({name:scheme.fields[i].name,data:scheme.fields[i].data})
+							if(scheme.fields[i].field_type=="checkboxes"){
+								for(var j in scheme.fields[i].datas){
+									scheme.fields[i].data+=scheme.fields[i].datas[j]
+									scheme.fields[i].data+=";"
+								}
+							}
+							if(this.scheme.fields[i].required==true&&this.scheme.fields[i].data==""){
+								this.scheme.fields[i].error="此项不可以为空"
+								this.scheme.fields[i].status = "has-error"
+								if(errid==""){
+									errid="#"+this.scheme.fields[i].name;
+								}
+								errnum++;
+
+								continue
+							}else{
+								this.scheme.fields[i].error=""
+								this.scheme.fields[i].status = ""
+							}
+							if(this.scheme.fields[i].field_type==="email"){
+								var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+								//console.log("email validator")
+			    				if(re.test(this.scheme.fields[i].data)==false){
+				    				this.scheme.fields[i].error="邮箱输入有误,请按照example@website.xx的格式输入"
+				    				this.scheme.fields[i].status = "has-error"
+				    				if(errid==""){
+									errid="#"+this.scheme.fields[i].name;
+									}
+				    				errnum++
+				    				continue
+				    			}else{
+				    				this.scheme.fields[i].error=""
+				    				this.scheme.fields[i].status = ""
+				    			}
+							}
+							if(this.scheme.fields[i].field_type==="phone"){
+								var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+			    				if(re.test(this.scheme.fields[i].data)==false){
+				    				this.scheme.fields[i].error="电话输入有误,请按照真实的电话号码输入"
+				    				this.scheme.fields[i].status = "has-error"
+				    				if(errid==""){
+									errid="#"+this.scheme.fields[i].name;
+									}
+									errnum++
+									continue
+								}else{
+									//var iferr=false
+									
+										this.phone=this.scheme.fields[i].data
+										this.scheme.fields[i].error=""
+										this.scheme.fields[i].status = ""
+									
+								}
+							}
+
+							if(this.scheme.fields[i].field_type==="idcard"){
+								var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+			    				if(re.test(this.scheme.fields[i].data)==false){
+				    				this.scheme.fields[i].error="身份证号码输入有误"
+				    				this.scheme.fields[i].status = "has-error"
+				    				if(errid==""){
+									errid="#"+this.scheme.fields[i].name;
+									}
+									errnum++
+									continue
+								}else{
+									this.scheme.fields[i].error=""
+									this.scheme.fields[i].status = ""
+								}
+							}
+							
+
+							res[scheme.fields[i].cid]=scheme.fields[i].data
 						}
 					}catch(e){
 						console.log(e)
 					}
 					console.log(res)
-						$.ajax({
-						type:'POST',
-						url:window.location.href,
-						cache:false,
-						data:JSON.stringify(res),
-						contentType:"application/json",
-						processData: false,
-			            success:function(data){
-			                console.log(data)
-			              	alert(data)
-			            },
-			            error:function(data){
-			                console.log("error");
-			                console.log(data);
-			               alert("error: "+data)
-			            }
-					});
+					res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
+					if(errnum==0){
+					console.log("ok to submit")
+					
+				$.ajax({
+					type:'GET',
+					url:"/phoneexist/"+this.id+"/"+this.scheme.fields[i].data,
+					cache:false,
+					processData: false,
+		            success:function(data){
+		                console.log(data)
+		                if(data.status==0){
+		                	console.log("phone not exist")
+		                	$.ajax({
+							type:'POST',
+							url:window.location.href+"?phone="+self.phone,
+							cache:false,
+							data:JSON.stringify(res),
+							contentType:"application/json",
+							processData: false,
+				            success:function(data){
+				                console.log(data)
+				                if(data.status==0){
+				                	window.location.href="/thankyou";
+				                }else{
+				                	alert(data.msg);
+				                }
+				              	//alert(data)
+				            },
+				            error:function(data){
+				                console.log("error");
+				                console.log(data);
+				               alert("error: "+data)
+				            }
+						});
+
+		                }else{
+		                	alert("电话号码已经存在");
+		                }
+		              	//alert(data)
+		            },
+		            error:function(data){
+		                console.log("error");
+		                console.log(data);
+		               alert("error: "+data)
+		            }
+				});
+
+										
+					}else{
+						e.preventDefault()
+						console.log(errid)
+						alert("请完成没有填完的必填选项,或按照提示修改错误")
+						$('html, body').animate({
+		                    scrollTop:($(errid).offset().top-50)
+		                }, 200);
+						return false
+					}
+						
+				},
+				jumpToWebsite:function(e){
+					e.preventDefault()
+					window.open("http://www.futureforum.org.cn")
 				}
 				// sayHello:function(){
 				// 	console.log("Hello,This is the skin1 component");
@@ -605,13 +762,13 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 \">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
+	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'||item.field_type=='email'||item.field_type=='phone'||item.field_type=='idcard'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<label class=\"label-text-error\" for=\"\"><span style=\"color:red;\">{{item.error}}</span></label></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='paragraph'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-source\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-radio\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-checkboxes\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.datas\" :true-value=\"op.label\" value=\"{{op.label}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section id=\"contact\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\" style=\"background:url('{{scheme.bgimg}}');\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<div v-html=\"scheme.code\">\n\t\t\t\t\t\t<!-- {{scheme.code}}</pre> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t<a href=\"http://www.futureforum.org.cn\" @click=\"jumpToWebsite|prevent\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
 
 /***/ },
 /* 16 */

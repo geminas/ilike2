@@ -6,6 +6,7 @@ module.exports={
 	target:"app",
 	skin:"skin2vue",
 	scheme:window.scheme,
+	id:window.id,
 	logo:"../public/img/Future_Forum.jpg"
 	},
 	created:function(){
@@ -153,7 +154,7 @@ module.exports={
 
 <template>
 <div >
-	<component :is="skin" :scheme="scheme"  v-ref="skin"/>
+	<component :is="skin" :scheme="scheme"  :id="id" v-ref="skin"/>
 </div>
 
 </template>

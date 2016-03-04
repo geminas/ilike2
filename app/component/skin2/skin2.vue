@@ -27,11 +27,13 @@
 			return {
 				target:"app",
 				scheme:{},
+				id:"",
+				phone:"",
 				logo:"../public/img/Future_Forum.jpg",
 				
 			}
 		},
-		props:["scheme"],
+		props:["scheme","id"],
 		/////////////Life Span/////////////////////
 		// created:function(){
 		// 	console.log("skin1 has been created");
@@ -50,6 +52,9 @@
 			// }
 
 			// console.log(this.scheme);
+			//var arr=location.href.split('/')
+			//this.id=
+			console.log(this.id)
 		},
 		// attached:function(){
 		// 	console.log("skin1 has been attached");
@@ -65,11 +70,13 @@
 		// },
 		methods:{
 			onsubmit:function(e){
+				var phoneerr=false
+				var self=this
 				e.preventDefault()
 				console.log("on submit")
 			    var errnum=0;
 				var errid=""
-				//console.log(this.scheme)
+				console.log(this.scheme)
 				var res={}
 				//var msg=""
 				try{
@@ -122,8 +129,12 @@
 								errnum++
 								continue
 							}else{
-								this.scheme.fields[i].error=""
-								this.scheme.fields[i].status = ""
+								//var iferr=false
+								
+									this.phone=this.scheme.fields[i].data
+									this.scheme.fields[i].error=""
+									this.scheme.fields[i].status = ""
+								
 							}
 						}
 
@@ -153,29 +164,52 @@
 				res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
 				if(errnum==0){
 				console.log("ok to submit")
-				//return true
-				$.ajax({
-					type:'POST',
-					url:window.location.href,
-					cache:false,
-					data:JSON.stringify(res),
-					contentType:"application/json",
-					processData: false,
-		            success:function(data){
-		                console.log(data)
-		                if(data.status==0){
-		                	window.location.href="/thankyou";
-		                }else{
-		                	alert(data.msg);
-		                }
-		              	//alert(data)
-		            },
-		            error:function(data){
-		                console.log("error");
-		                console.log(data);
-		               alert("error: "+data)
-		            }
-				});
+				
+			$.ajax({
+				type:'GET',
+				url:"/phoneexist/"+this.id+"/"+this.scheme.fields[i].data,
+				cache:false,
+				processData: false,
+	            success:function(data){
+	                console.log(data)
+	                if(data.status==0){
+	                	console.log("phone not exist")
+	                	$.ajax({
+						type:'POST',
+						url:window.location.href+"?phone="+self.phone,
+						cache:false,
+						data:JSON.stringify(res),
+						contentType:"application/json",
+						processData: false,
+			            success:function(data){
+			                console.log(data)
+			                if(data.status==0){
+			                	window.location.href="/thankyou";
+			                }else{
+			                	alert(data.msg);
+			                }
+			              	//alert(data)
+			            },
+			            error:function(data){
+			                console.log("error");
+			                console.log(data);
+			               alert("error: "+data)
+			            }
+					});
+
+	                }else{
+	                	alert("电话号码已经存在");
+	                }
+	              	//alert(data)
+	            },
+	            error:function(data){
+	                console.log("error");
+	                console.log(data);
+	               alert("error: "+data)
+	            }
+			});
+
+									
 				}else{
 					e.preventDefault()
 					console.log(errid)
