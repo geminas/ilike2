@@ -66,6 +66,7 @@
 		methods:{
 			onsubmit:function(e){
 				e.preventDefault()
+				e.target.disabled="disabled"
 				console.log("on submit")
 			    var errnum=0;
 				var errid=""

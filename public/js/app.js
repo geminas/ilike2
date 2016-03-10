@@ -201,38 +201,9 @@
 				}
 			},
 			props:["scheme"],
-			/////////////Life Span/////////////////////
-			
-			// beforeCompile:function(){
-			// 	console.log("smartform beforeCompiled");
-			// },
-			// compiled:function(){
-			// 	console.log("smartform has been compiled");
-			// },
 			created:function(){
 			console.log("app has been created");
-			var self=this;
-			// $.ajax({
-			// 	type:'GET',
-			// 	url:"/getjson",
-			// 	cache:false,
-			// 	//data:JSON.stringify(data),
-			// 	contentType:"application/json",
-			// 	processData: false,
-	  //           success:function(data){
-	  //               //console.log(data)
-	  //             	//alert(data)
-	  //             	//var d=JSON.parse(data)
-	  //             	//console.log(d)
-	  //             	//self.$data.scheme=d
-	  //           },
-	  //           error:function(data){
-	  //               console.log("error");
-	  //               //console.log(data);
-	  //              alert("error: "+data)
-	  //           }
-			// });	
-		},
+			},
 			ready:function(){
 				//console.log("smartform has been ready");
 				//console.log(this.scheme)
@@ -250,29 +221,7 @@
 			// 	console.log("smartform has been destoryed");
 			// },
 			methods:{
-				// sayHello:function(){
-				// 	console.log("Hello,This is the smartform component");
-				// }
-				sendurl:function(){
-					var data={hello:"world"}
-					$.ajax({
-						type:'POST',
-						url:"testsmartform",
-						cache:false,
-						data:JSON.stringify(data),
-						contentType:"application/json",
-						processData: false,
-			            success:function(data){
-			                console.log(data)
-			              	alert(data)
-			            },
-			            error:function(data){
-			                console.log("error");
-			                console.log(data);
-			               alert("error: "+data)
-			            }
-					});			
-				}
+				
 			},
 			computed:{
 				// foo:function(){
@@ -304,7 +253,7 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 \">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
+	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'||item.field_type=='email'||item.field_type=='phone'||item.field_type=='idcard'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<label class=\"label-text-error\" for=\"\"><span style=\"color:red;\">{{item.error}}</span></label></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='paragraph'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-source\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-radio\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-checkboxes\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.datas\" :true-value=\"op.label\" value=\"{{op.label}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
 /* 8 */
