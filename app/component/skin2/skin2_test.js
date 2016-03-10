@@ -122,7 +122,7 @@
 
 
 	// module
-	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-text-error{\n\tdisplay: block;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n}\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
+	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-text-error{\n\tdisplay: block;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n\n}\n\n#contact .schemeclass{\n\tbackground-color: white; \n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
 
 	// exports
 
@@ -439,11 +439,13 @@
 				return {
 					target:"app",
 					scheme:{},
+					id:"",
+					phone:"",
 					logo:"../public/img/Future_Forum.jpg",
 					
 				}
 			},
-			props:["scheme"],
+			props:["scheme","id"],
 			/////////////Life Span/////////////////////
 			// created:function(){
 			// 	console.log("skin1 has been created");
@@ -462,6 +464,9 @@
 				// }
 
 				// console.log(this.scheme);
+				//var arr=location.href.split('/')
+				//this.id=
+				console.log(this.id)
 			},
 			// attached:function(){
 			// 	console.log("skin1 has been attached");
@@ -477,12 +482,14 @@
 			// },
 			methods:{
 				onsubmit:function(e){
+					var phoneerr=false
+					var self=this
 					e.preventDefault()
 					e.target.disabled="disabled"
 					console.log("on submit")
 				    var errnum=0;
 					var errid=""
-					//console.log(this.scheme)
+					console.log(this.scheme)
 					var res={}
 					//var msg=""
 					try{
@@ -535,8 +542,12 @@
 									errnum++
 									continue
 								}else{
-									this.scheme.fields[i].error=""
-									this.scheme.fields[i].status = ""
+									//var iferr=false
+									
+										this.phone=this.scheme.fields[i].data
+										this.scheme.fields[i].error=""
+										this.scheme.fields[i].status = ""
+									
 								}
 							}
 
@@ -566,29 +577,52 @@
 					res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
 					if(errnum==0){
 					console.log("ok to submit")
-					//return true
-					$.ajax({
-						type:'POST',
-						url:window.location.href,
-						cache:false,
-						data:JSON.stringify(res),
-						contentType:"application/json",
-						processData: false,
-			            success:function(data){
-			                console.log(data)
-			                if(data.status==0){
-			                	window.location.href="/thankyou";
-			                }else{
-			                	alert(data.msg);
-			                }
-			              	//alert(data)
-			            },
-			            error:function(data){
-			                console.log("error");
-			                console.log(data);
-			               alert("error: "+data)
-			            }
-					});
+					
+				$.ajax({
+					type:'GET',
+					url:"/phoneexist/"+this.id+"/"+this.phone,
+					cache:false,
+					processData: false,
+		            success:function(data){
+		                console.log(data)
+		                if(data.status==0){
+		                	console.log("phone not exist")
+		                	$.ajax({
+							type:'POST',
+							url:window.location.href+"?phone="+self.phone,
+							cache:false,
+							data:JSON.stringify(res),
+							contentType:"application/json",
+							processData: false,
+				            success:function(data){
+				                console.log(data)
+				                if(data.status==0){
+				                	window.location.href="/thankyou";
+				                }else{
+				                	alert(data.msg);
+				                }
+				              	//alert(data)
+				            },
+				            error:function(data){
+				                console.log("error");
+				                console.log(data);
+				               alert("error: "+data)
+				            }
+						});
+
+		                }else{
+		                	alert("电话号码已经存在");
+		                }
+		              	//alert(data)
+		            },
+		            error:function(data){
+		                console.log("error");
+		                console.log(data);
+		               alert("error: "+data)
+		            }
+				});
+
+										
 					}else{
 						e.preventDefault()
 						console.log(errid)
@@ -735,7 +769,7 @@
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<section id=\"contact\" style=\"background:url('{{scheme.bgimg}}');\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"mid-form\" style=\"background-color: white; margin-left: 10px; margin-right: 10px; \">\n\t\t\t\t\t<div v-html=\"scheme.code\">\n\t\t\t\t\t\t<!-- {{scheme.code}}</pre> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t<a href=\"http://www.futureforum.org.cn\" @click=\"jumpToWebsite|prevent\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\" style=\"background:url('{{scheme.bgimg}}');\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row mid-form\">\n\t\t\t\t\t<div class=\"schemeclass\" v-html=\"scheme.code\">\n\t\t\t\t\t\t<!-- {{scheme.code}}</pre> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t<a href=\"http://www.futureforum.org.cn\" @click=\"jumpToWebsite|prevent\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
 
 /***/ },
 /* 16 */

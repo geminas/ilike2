@@ -12,7 +12,7 @@ type MainFrame struct {
 
 func (c MainFrame) Index(name string) revel.Result {
 	task := string(c.Gettask(name))
-	return c.Render(task)
+	return c.Render(task, name)
 
 }
 

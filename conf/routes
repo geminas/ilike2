@@ -72,5 +72,9 @@ POST 	/upload 								Scheme.Upload
 GET 	/files/:name 							Scheme.GetFile
 
 GET 	/img/*filepath 							Static.Serve("img")
+
+GET 	/phoneexist/:name/:phone 				Scheme.PhoneExist
+
+Get 	/setphone/:name/:phone 					Scheme.GetSetPhone
 # Catch all
 *       /:controller/:action                    :controller.:action

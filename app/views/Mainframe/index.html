@@ -9,6 +9,7 @@
   <script>
    (function(){
    	window.scheme = JSON.parse({{.task}})
+    window.id={{.name}}
    //	console.log(window.scheme)
    for(var i in window.scheme.fields){
    	window.scheme.fields[i].data=""

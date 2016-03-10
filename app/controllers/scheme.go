@@ -222,7 +222,51 @@ func (c Scheme) NewTask() revel.Result {
 	})
 }
 
+func (c Scheme) SetPhone(name string, phone string) error {
+	err := c.update(phone, []byte("true"), name+"-phone")
+	return err
+}
+
+func (c Scheme) GetSetPhone(name string, phone string) revel.Result {
+	err := c.SetPhone(name+"-phone", phone)
+	if err != nil {
+		return c.RenderError(err)
+	} else {
+		return c.RenderText("OK")
+	}
+}
+
+func (c Scheme) PhoneExist(name string, phone string) revel.Result {
+	p := c.check(phone, name+"-phone")
+	println(p)
+	println(name)
+	println(phone)
+	if len(p) == 0 {
+		return c.RenderJson(app.JsonResp{
+			0,
+			"null",
+			"",
+			"",
+		})
+	} else {
+		return c.RenderJson(app.JsonResp{
+			1,
+			"exist",
+			"",
+			"",
+		})
+	}
+}
 func (c Scheme) PostTaskData(name string) revel.Result {
+	p := c.Request.URL.Query().Get("phone")
+	//println("phone")
+	//println(p)
+	if p != "" {
+		err := c.SetPhone(name, p)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	}
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		return c.RenderJson(app.JsonResp{
