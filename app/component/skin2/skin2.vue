@@ -265,12 +265,13 @@
 							xxxxx
 						</textarea>
 					</div> -->
-
-					<div class="col-lg-12 text-center submit-button">
-						<button type="submit" class="btn btn-success btn-lg" @click="onsubmit">点击报名</button>
+					<div class="row">
+						<div class="col-lg-12 text-center submit-button">
+							<button type="submit" class="btn btn-success btn-lg" @click="onsubmit">点击报名</button>
+						</div>
 					</div>
-					<div class="mid-form">
-					<div v-html="scheme.code">
+					<div class="row mid-form">
+					<div class="schemeclass" v-html="scheme.code">
 						<!-- {{scheme.code}}</pre> -->
 					</div>
 					</div>
@@ -373,7 +374,15 @@
 }
 #contact .mid-form{
 	margin-top: 10px;
+
 }
+
+#contact .schemeclass{
+	background-color: white; 
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 #contact .label-radio ~div {
   margin-right: 10px;
   display: inline;

@@ -45,21 +45,24 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(4)
 	var Vue = __webpack_require__(17)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(5)
 	module.exports.template = __webpack_require__(16)
 
 
 /***/ },
-/* 2 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -207,31 +210,31 @@
 		},
 		components:{
 		// skin1vue:require('../component/skin1/skin1.vue'),
-		skin2vue:__webpack_require__(3)
+		skin2vue:__webpack_require__(6)
 
 		}
 	}
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(4)
+	__webpack_require__(7)
 	module.exports = __webpack_require__(11)
 	module.exports.template = __webpack_require__(15)
 
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(5);
+	var content = __webpack_require__(8);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(10)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -248,22 +251,22 @@
 	}
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(9)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-text-error{\n\tdisplay: block;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n}\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
+	exports.push([module.id, "#contact .contact-title h2{\n  text-align: center;\n}\n#contact .contact-title{\n  margin-bottom: 30px;\n  color:white;\n}\n\n#contact {\n    padding-top: 30px;\n}\n\n#contact .has-error .form-control{\n  border-color: #A72585;\n  border-width: 3px;\n}\n\n#contact{\n /* background: url('{{background}}');*/\n  background-size: cover !important;\n  background-position-y: 40% !important;\n}\n\n#contact .contact-title h3{\n  font-size: 3em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h2{\n  font-size: 5em;\n  margin-bottom: 20px;\n}\n\n#contact .contact-title h6{\n  margin-top: 0px;\n}\n\n#contact .conference-form,#contact .contents{\n  background-color: rgba(255, 255, 255, 0.35);\n  color:black;\n}\n/*#contact .container{\n  max-width: 600px;\n}*/\n#contact row{}\n#contact .btn{\n  margin-bottom: 0px;\n}\n#contact label{\n  width: 100%;\n  margin: 13px auto;\n  margin-top:0px;\n  margin-bottom: 10px;\n  padding-top:0px;\n  color: white;\n  display: none;\n}\n\n#contact .label-text-error{\n\tdisplay: block;\n}\n\n#contact .label-source {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-checkboxes{\n  display: block;\n}\n\n#contact .label-checkboxes ~ div{\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact .label-radio {\n  display: block;\n}\n#contact .mid-form{\n\tmargin-top: 10px;\n\n}\n\n#contact .schemeclass{\n\tbackground-color: white; \n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n#contact .label-radio ~div {\n  margin-right: 10px;\n  display: inline;\n}\n\n#contact input[type=\"radio\"]{\n\tmargin-bottom:10px; \n}\n\n#contact input[type=\"checkbox\"]{\n\tmargin-bottom:10px; \n}\n#contact .required{\n\tcolor:red;\n}\n\n#contact .submit-button{\n\tmargin:15px 0px 18px 0px;\n}\n\n#contact .submit-button .btn {\n    background: #F52B2B;\n    width: 250px;\n}\n\n#contact .logo {\n  width: 200px;\n  margin-bottom: 10px;\n}\n\n#contact select {\n  /*margin-top: 10px;*/\n  margin-bottom: 10px;\n}\n\n#contact textarea {\n  resize:none;\n}\n\n@media (max-width: 700px) {\n  #contact .logo {\n    width: 100px;\n  }\n\n  #contact .contact-title{\n    margin-bottom: 30px;\n    color:white;\n  }\n\n  #contact .submit-button .btn {\n    background: #F52B2B;\n    width: 180px;\n  }\n\n  #contact .contact-title h3 {\n    font-size: 1.8em;\n    margin-top: 0px;\n    margin-bottom: 0px;\n  }\n\n  #contact .contact-title h2 {\n    font-size: 2em;\n  }\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/* 9 */
+/***/ function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -318,7 +321,7 @@
 
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -543,9 +546,6 @@
 
 
 /***/ },
-/* 8 */,
-/* 9 */,
-/* 10 */,
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -615,6 +615,7 @@
 			methods:{
 				onsubmit:function(e){
 					e.preventDefault()
+					e.target.disabled="disabled"
 					console.log("on submit")
 				    var errnum=0;
 					var errid=""
@@ -803,7 +804,7 @@
 
 /***/ },
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -863,19 +864,19 @@
 
 /***/ },
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div v-for=\"item in scheme\" class=\"row\">\n\t<div v-if=\"item.field_type=='text'||item.field_type=='email'||item.field_type=='phone'||item.field_type=='idcard'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<label class=\"label-text-error\" for=\"\"><span style=\"color:red;\">{{item.error}}</span></label></label>\n\t<input type=\"text\" class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\">\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='textarea'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='paragraph'\" class=\"col-xs-12 {{item.status}}\">\n\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t<textarea class=\"form-control\" name=\"{{item.name}}\" placeholder=\"{{item.placeholder}}\" id=\"{{item.name}}\" required data-validation-required-message=\"Please enter your name.\" v-model=\"item.data\"></textarea>\n    <p class=\"help-block text-danger\"></p>\n\t</div>\n\t<div v-if=\"item.field_type=='dropdown'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-source\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='select'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<select name=\"{{item.name}}\" id=\"{{item.name}}\" v-model=\"item.data\">\n\t\t\t<option v-for=\"op in item.field_options.options\" selected>\n\t\t\t\t{{op.label}}\n\t\t\t</option>\n\t\t</select>\n\t</div>\n\t<div v-if=\"item.field_type=='radio-inline'\" class=\"col-xs-12 \">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t\n\t\t<div v-for=\"op in item.field_options.options\" class=\"radio-inline\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\" v-model=\"item.data\" :value=\"op.label\" >\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\n\t<div v-if=\"item.field_type=='radio'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-radio\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<div v-for=\"op in item.field_options.options\" class=\"\">\n\t\t\t<input type=\"radio\" name=\"{{item.name}}\"  v-model=\"item.data\" :value=\"op.label\" checked>\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t<div v-if=\"item.field_type=='checkboxes'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-checkboxes\">{{item.label}}<span v-if=\"item.required==true\" style=\"color:red;\">*</span><span style=\"color:red;\">{{item.error}}</span></label>\n\t\t<!-- <label for=\"\">{{item.data}}</label> -->\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.datas\" :true-value=\"op.label\" value=\"{{op.label}}\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n\t\n\t<div v-if=\"item.field_type=='checkbox'\" class=\"col-xs-12 \" id=\"{{item.name}}\">\n\t\t<label class=\"label-{{item.name}}\">{{item.label}}</label>\n\t\t<label for=\"\">{{item.data}}</label>\n\t\t<div v-for=\"op in item.field_options.options\">\n\t\t\t<input type=\"checkbox\" name=\"{{item.name}}\" v-model=\"item.data\" :true-value=\"op.label\">\n\t\t\t<span>{{op.label}}</span>\n\t\t</div>\n\t</div>\n</div>\n\t\t\t\t\n\n<!-- <div>This is component smartform</div>\n -->\n <!-- <button v-on:click=\"sendurl()\">ClickMe</button> -->";
 
 /***/ },
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = "<section id=\"contact\" style=\"background:url('{{scheme.bgimg}}');\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\n\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<div v-html=\"scheme.code\">\n\t\t\t\t\t\t<!-- {{scheme.code}}</pre> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t<a href=\"http://www.futureforum.org.cn\" @click=\"jumpToWebsite|prevent\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
+	module.exports = "<section id=\"contact\" style=\"background:url('{{scheme.bgimg}}');\">\n\t<div class=\"container\">\n\t\t<div class=\"row contact-title\">\n\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t<h3>{{scheme.name}} </h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"row conference-form\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 \">\n\t\t\t\t<form method=\"POST\" action=\"/apply\" id=\"contactForm\" novalidate>\n\t\t\t\t\t<div class=\"mid-form\">\n\t\t\t\t\t<component is=\"smartformvue\" :scheme=\"scheme.fields\" v-ref=\"smarttable\"/>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<!-- <div class=\"col-lg-12\">\n\t\t\t\t\t\t<textarea rows=\"3\" cols=\"20\">\n\t\t\t\t\t\t\txxxxx\n\t\t\t\t\t\t</textarea>\n\t\t\t\t\t</div> -->\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col-lg-12 text-center submit-button\">\n\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-success btn-lg\" @click=\"onsubmit\">点击报名</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row mid-form\">\n\t\t\t\t\t<div class=\"schemeclass\" v-html=\"scheme.code\">\n\t\t\t\t\t\t<!-- {{scheme.code}}</pre> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-8 col-lg-offset-2 text-center\">\n\t\t\t<a href=\"http://www.futureforum.org.cn\" @click=\"jumpToWebsite|prevent\">\n\t\t\t\t<img class=\"logo\" src=\"{{logo}}\">\n\t\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t</div>\n</section>";
 
 /***/ },
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div >\n\t<component :is=\"skin\" :scheme=\"scheme\"  v-ref=\"skin\"/>\n</div>";
 
@@ -10189,7 +10190,7 @@
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -10223,7 +10224,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -10275,7 +10278,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');
