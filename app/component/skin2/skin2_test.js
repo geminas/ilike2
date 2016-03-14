@@ -485,7 +485,6 @@
 					var phoneerr=false
 					var self=this
 					e.preventDefault()
-					e.target.disabled="disabled"
 					console.log("on submit")
 				    var errnum=0;
 					var errid=""
@@ -573,6 +572,7 @@
 					}catch(e){
 						console.log(e)
 					}
+					e.target.disabled="disabled"
 					console.log(res)
 					res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
 					if(errnum==0){
