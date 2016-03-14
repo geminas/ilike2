@@ -160,12 +160,11 @@
 				}catch(e){
 					console.log(e)
 				}
-				if (errnum>0) {
-					e.target.disabled="disabled"
-				}
+				
 				console.log(res)
 				res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
 				if(errnum==0){
+					e.target.disabled="disabled"
 				console.log("ok to submit")
 				
 			$.ajax({
