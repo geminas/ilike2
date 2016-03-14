@@ -201,6 +201,7 @@
 
 	                }else{
 	                	alert("电话号码已经存在");
+	                	e.target.disabled="enable"
 	                }
 	              	//alert(data)
 	            },
