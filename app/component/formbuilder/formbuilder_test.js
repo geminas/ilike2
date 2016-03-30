@@ -45,13 +45,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(3)
 	var Vue = __webpack_require__(9)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(4)
@@ -59,8 +61,6 @@
 
 
 /***/ },
-/* 2 */,
-/* 3 */,
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -87,7 +87,7 @@
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports={
 			data:function(){
@@ -190,13 +190,13 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div id='formbuilder'></div>";
 
 /***/ },
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div><h1>Test--{{target}} is below</h1></div>\n<component is=\"formbuildervue\" />\n</template>";
 
@@ -9510,7 +9510,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -9544,7 +9544,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9596,7 +9598,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');

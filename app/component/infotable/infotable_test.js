@@ -45,21 +45,23 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var app=__webpack_require__(1)
+	var app=__webpack_require__(3)
 	var Vue = __webpack_require__(9)
 	var vm=new Vue(app)
 	console.log(vm)
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
+	module.exports = __webpack_require__(4)
 	module.exports.template = __webpack_require__(8)
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={
@@ -80,13 +82,12 @@
 		console.log("The infotable test main is loaded")
 		},
 		components:{
-		'infotablevue':__webpack_require__(4)
+		'infotablevue':__webpack_require__(5)
 		}
 	}
 
 /***/ },
-/* 3 */,
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(6)
@@ -94,18 +95,31 @@
 
 
 /***/ },
-/* 5 */,
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports={
+	function dataCom(a, b) {
+			if (a["timestamp"] > b["timestamp"]) {
+				return -1;
+			}
+			else {
+				return 1;
+			}
+		}
+
+		module.exports={
 			data:function(){
 				return {
 					//hello:"world"
-					data:[]
+					scheme:{},
+					data:[],
+					xlsx:[],
+					pagesize:100,
+					page:[],
+					index:0
 				}
 			},
-			props:["data"],
+			props:["data","scheme"],
 			/////////////Life Span/////////////////////
 			// created:function(){
 			// 	console.log("infotable has been created");
@@ -116,9 +130,52 @@
 			// compiled:function(){
 			// 	console.log("infotable has been compiled");
 			// },
-			// ready:function(){
-			// 	console.log("infotable has been ready");
-			// },
+			ready:function(){
+				console.log("infotable has been ready");
+				var fs=[]
+				this.data.reverse()
+
+				this.data.sort(dataCom)
+
+				console.log("data")
+				console.log(this.data)
+				for(var i in this.scheme.fields){
+					fs.push(this.scheme.fields[i].label)
+				}
+				fs.push("提交时间")
+				this.xlsx.push(fs)
+
+				for(var d in this.data){
+					var f=[]
+					for(var i in this.scheme.fields){
+						f.push( this.data[d][this.scheme.fields[i].cid])
+					}
+					f.push(this.data[d]["timestamp"])
+					this.xlsx.push(f)
+				}
+				var tmp;
+				for( var dd in this.data){
+					if(dd%this.pagesize==0){
+						tmp=[];
+						tmp.push(this.data[dd])
+						continue;
+					}
+					if(dd%this.pagesize==this.pagesize-1){
+						tmp.push(this.data[dd])
+						this.page.push(tmp)
+						tmp=[];
+						continue;
+					}
+					tmp.push(this.data[dd])
+				}
+				if(tmp.length!==0){
+					this.page.push(tmp)
+				}
+				console.log("page")
+				console.log(this.page)
+				console.log("xlsx")
+				console.log(this.xlsx)
+			},
 			// attached:function(){
 			// 	console.log("infotable has been attached");
 			// },
@@ -132,6 +189,103 @@
 			// 	console.log("infotable has been destoryed");
 			// },
 			methods:{
+				onsave:function(){
+					this.savexls(this.data)
+				},
+				pageto:function(i){
+					this.index=i;
+				},
+				savexls:function(objArray){
+			        // var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+			        // var str = '';
+
+			        // for (var i = 0; i < array.length; i++) {
+			        //     var line = '';
+
+			        //     for (var index in array[i]) {
+			        //         line += array[i][index] + ',';
+			        //     }
+
+			        //     // Here is an example where you would wrap the values in double quotes
+			        //     // for (var index in array[i]) {
+			        //     //    line += '"' + array[i][index] + '",';
+			        //     // }
+
+			        //     line.slice(0,line.Length-1); 
+
+			        //     str += line + '\r\n';
+			        // }
+			        // window.open( "data:text/csv;charset=utf-8," + escape(str))
+			        //console.log(window)
+			        // var t=Date.now()
+			        // window.tableExport('data-table', t, 'xls');
+			        // 
+			        // 
+			        // 
+			        // 
+			        // ////////////////////////////////////
+			        function datenum(v, date1904) {
+						if(date1904) v+=1462;
+						var epoch = Date.parse(v);
+						return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
+					}
+					 
+					function sheet_from_array_of_arrays(data, opts) {
+						var ws = {};
+						var range = {s: {c:10000000, r:10000000}, e: {c:0, r:0 }};
+						for(var R = 0; R != data.length; ++R) {
+							for(var C = 0; C != data[R].length; ++C) {
+								if(range.s.r > R) range.s.r = R;
+								if(range.s.c > C) range.s.c = C;
+								if(range.e.r < R) range.e.r = R;
+								if(range.e.c < C) range.e.c = C;
+								var cell = {v: data[R][C] };
+								if(cell.v == null) continue;
+								var cell_ref = XLSX.utils.encode_cell({c:C,r:R});
+								
+								if(typeof cell.v === 'number') cell.t = 'n';
+								else if(typeof cell.v === 'boolean') cell.t = 'b';
+								else if(cell.v instanceof Date) {
+									cell.t = 'n'; cell.z = XLSX.SSF._table[14];
+									cell.v = datenum(cell.v);
+								}
+								else cell.t = 's';
+								
+								ws[cell_ref] = cell;
+							}
+						}
+						if(range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range);
+						return ws;
+					}
+					 
+					/* original data */
+					var data = this.xlsx
+					var ws_name = "SheetJS";
+					 
+					function Workbook() {
+						if(!(this instanceof Workbook)) return new Workbook();
+						this.SheetNames = [];
+						this.Sheets = {};
+					}
+					 
+					var wb = new Workbook(), ws = sheet_from_array_of_arrays(data);
+					 
+					/* add worksheet to workbook */
+					wb.SheetNames.push(ws_name);
+					wb.Sheets[ws_name] = ws;
+					var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+
+					function s2ab(s) {
+						var buf = new ArrayBuffer(s.length);
+						var view = new Uint8Array(buf);
+						for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+						return buf;
+					}
+					var t=Date.now()
+
+					saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), ""+t+".xlsx")
+			    }
 				// sayHello:function(){
 				// 	console.log("Hello,This is the infotable component");
 				// }
@@ -184,13 +338,13 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <table>\n \t<thead>\n \t\t<th v-for=\"(key,val) in data[0]\">{{key}}</th>\n \t</thead>\n \t<tbody>\n \t\t<tr v-for=\"d in data\">\n \t\t\t<td v-for=\"(k,v) in d\">{{v}}</td>\n \t\t</tr>\n \t</tbody>\n </table>\n <button v-on:click=\"sendurl()\">ClickMe</button>";
+	module.exports = "<!-- <div>This is component infotable</div>\n -->\n <div class=\"container-fluid\">\n\n \t<!-- <div v-for=\"p in page\" id=\"tagle-{{$index}}\" style=\"display:none;\"> -->\n\t <table class=\"table\" id=\"data-table\">\n\t \t<thead>\n\t \t\t<th>number</th>\n\t \t\t<th v-for=\"f in scheme.fields\">{{f.label}}</th>\n\t \t\t<th>time</th>\n\t \t</thead>\n\t \t<tbody>\n\t \t\t<tr v-for=\"d in page[index]\">\n\t \t\t\t<td>{{index*pagesize+$index+1}}</td>\n\t \t\t\t<td v-for=\"f in scheme.fields\">{{d[f.cid]}}</td>\n\t \t\t\t<td>{{d[\"timestamp\"]}}</td>\n\t \t\t</tr>\n\t \t</tbody>\n\t </table>\n\t </div>\n\t <div class=\"row text-center\">\n\t \t<ul class=\"pagination\">\n\t\t  <li v-for=\"i in page\"><a href=\"#\" @click=\"pageto($index)\">{{$index+1}}</a></li>\n\t\t</ul>\n\t </div>\n\t \n<!-- </div> -->\n<button type=\"button\" @click=\"onsave\">保存成xls</button>";
 
 /***/ },
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = "<div><h1>Test--{{target}} is below</h1></div>\n<component is=\"infotablevue\" :data=\"d\"/>\n</template>";
 
@@ -9504,7 +9658,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// shim for using process in browser
 
@@ -9538,7 +9692,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -9590,7 +9746,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');

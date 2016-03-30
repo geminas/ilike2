@@ -623,7 +623,8 @@
 					var phoneerr=false
 					var self=this
 					e.preventDefault()
-					e.target.disabled="disabled"
+					e.target.disabled=true;
+
 					console.log("on submit")
 				    var errnum=0;
 					var errid=""
@@ -711,9 +712,11 @@
 					}catch(e){
 						console.log(e)
 					}
+					
 					console.log(res)
 					res["timestamp"]=new Date().format('yyyy-MM-dd hh:mm:ss')
 					if(errnum==0){
+						e.target.disabled="disable"
 					console.log("ok to submit")
 					
 				$.ajax({
@@ -738,6 +741,7 @@
 				                	window.location.href="/thankyou";
 				                }else{
 				                	alert(data.msg);
+				                	e.target.disabled=false;
 				                }
 				              	//alert(data)
 				            },
@@ -745,11 +749,13 @@
 				                console.log("error");
 				                console.log(data);
 				               alert("error: "+data)
+				               e.target.disabled=false;
 				            }
 						});
 
 		                }else{
 		                	alert("电话号码已经存在");
+		                	e.target.disabled=false;
 		                }
 		              	//alert(data)
 		            },
@@ -757,11 +763,13 @@
 		                console.log("error");
 		                console.log(data);
 		               alert("error: "+data)
+		               e.target.disabled=false;
 		            }
 				});
 
 										
 					}else{
+						e.target.disabled=false;
 						e.preventDefault()
 						console.log(errid)
 						alert("请完成没有填完的必填选项,或按照提示修改错误")
