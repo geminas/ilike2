@@ -13,6 +13,7 @@ var (
 	DB     *bolt.DB
 	DBNAME = "AttendeeInfo"
 	DBPATH = ""
+	//PHONEMAP = make(map[string]bool)
 )
 
 type JsonResp struct {

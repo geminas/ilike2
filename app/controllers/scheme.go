@@ -238,9 +238,9 @@ func (c Scheme) GetSetPhone(name string, phone string) revel.Result {
 
 func (c Scheme) PhoneExist(name string, phone string) revel.Result {
 	p := c.check(phone, name+"-phone")
-	println(p)
-	println(name)
-	println(phone)
+	// println(p)
+	// println(name)
+	// println(phone)
 	if len(p) == 0 {
 		return c.RenderJson(app.JsonResp{
 			0,
@@ -261,11 +261,27 @@ func (c Scheme) PostTaskData(name string) revel.Result {
 	p := c.Request.URL.Query().Get("phone")
 	//println("phone")
 	//println(p)
+
 	if p != "" {
+		if d := c.check(p, name+"-phone"); string(d) == "true" {
+			return c.RenderJson(app.JsonResp{
+				1,
+				"exist",
+				"",
+				"",
+			})
+		}
 		err := c.SetPhone(name, p)
 		if err != nil {
 			log.Println(err.Error())
 		}
+	} else {
+		return c.RenderJson(app.JsonResp{
+			1,
+			"Phone Should Not Null",
+			"",
+			"",
+		})
 	}
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
