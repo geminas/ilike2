@@ -275,14 +275,15 @@ func (c Scheme) PostTaskData(name string) revel.Result {
 		if err != nil {
 			log.Println(err.Error())
 		}
-	} else {
-		return c.RenderJson(app.JsonResp{
-			1,
-			"Phone Should Not Null",
-			"",
-			"",
-		})
 	}
+	// else {
+	// 	return c.RenderJson(app.JsonResp{
+	// 		1,
+	// 		"Phone Should Not Null",
+	// 		"",
+	// 		"",
+	// 	})
+	// }
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		return c.RenderJson(app.JsonResp{
