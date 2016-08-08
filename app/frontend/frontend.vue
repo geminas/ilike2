@@ -80,7 +80,7 @@ module.exports={
 	    			}
 				}
 				if(this.scheme[i].validator==="phone"){
-					var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+					var re = /^(13[0-9]|15[012356789]|17[012678]|18[0-9]|14[57])[0-9]{8}$/;
     				if(re.test(this.scheme[i].data)==false){
 	    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
 	    				this.scheme[i].status = "has-error"
@@ -112,7 +112,7 @@ module.exports={
 				}
 
 				if(this.scheme[i].validator==="phone"){
-					var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+					var re = /^(13[0-9]|15[012356789]|17[012678]|18[0-9]|14[57])[0-9]{8}$/;
     				if(re.test(this.scheme[i].data)==false){
 	    				this.scheme[i].error="电话输入有误,请按照真实的电话号码输入"
 	    				this.scheme[i].status = "has-error"
